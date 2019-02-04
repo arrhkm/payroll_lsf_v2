@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once ('connections/conn_mysqli.php');
+require_once ('connections/conn_mysqli_procedural.php');
 
 //$koneksi = mysql_pconnect($hostname_koneksi, $username_koneksi, $password_koneksi);
 
@@ -19,12 +19,12 @@ if (isset($_POST['login']))
 	$sql_cek="SELECT * FROM user_admin WHERE user_name='$_POST[txt_username]' AND user_password=md5('$_POST[txt_password]')";
 	
 	//$rs_cek= $con->query($sql_cek);
-        $rs_cek = $conn->query($sql_cek);
+        $rs_cek = nysqli_query($link, $sql_cek);
 
         if ($rs_cek->num_rows > 0 )
 	//if ($rs_cek->num_rows > 0)
 	{
-		$dt_cek=$rs_cek->fetch_assoc();
+		$dt_cek=mysqli_fetch_assoc($rs_cek);
 		//while ($dt_cek = $rs_cek->fetch_assoc()){
 			$_SESSION['user_name']=$dt_cek['user_name'];
 			$_SESSION['user_pasword']=md5($_POST['txt_password']);

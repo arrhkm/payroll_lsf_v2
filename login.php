@@ -19,9 +19,9 @@
 		<tr>
 		  <td colspan="2" align="center">
 		  <?php 
-		  if ($_REQUEST[msg]==0) echo "Username dan password yang anda input salah !! "; 
-		  if ($_REQUEST[msg]==1) echo "Username Kosong !! "; 
-		  if ($_REQUEST[msg]==1) echo "Password Kosong !! "; 		  
+		  if ($_REQUEST['msg']==0) echo "Username dan password yang anda input salah !! "; 
+		  if ($_REQUEST['msg']==1) echo "Username Kosong !! "; 
+		  if ($_REQUEST['msg']==1) echo "Password Kosong !! "; 		  
 		  ?>
 		  </td>
           </tr>
