@@ -1,16 +1,11 @@
 <?php 
 include('cek_login.php');
-# Koneksi 
-//require_once('connections/koneksi.php');
-require_once 'connections/conn_mysqli.php';
-# select DB 
-//$koneksi = mysql_pconnect('localhost', 'root','');
-//mysql_select_db($database_koneksi, $koneksi);
-//mysql_select_db($database_koneksi, $koneksi);
+require_once 'connections/conn_mysqli_procedural.php';
+
 
 $SQL_periode = "SELECT * FROM periode  Order BY tgl_awal DESC";
 //$rs_periode = mysql_query($SQL_periode, $koneksi) or die(mysql_error());
-$rs_periode = $conn->query($SQL_periode);
+$rs_periode = mysqli_query($link, $SQL_periode);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -65,7 +60,7 @@ ddsmoothmenu.init({
 		<th colspan = "6" align=center><a href="insert_m_periode.php" >
 		<img src="./button/create.png" alt="" width=30 height=30>Insert</a></th>		
 		</tr>
-		<?php while($row_rsperiode = $rs_periode->fetch_assoc()) { ?>
+		<?php while($row_rsperiode = mysqli_fetch_assoc($rs_periode)) { ?>
 		<tr align="center">
 		<td><?=$row_rsperiode['kd_periode']?></td>
 		<td><?=$row_rsperiode['nama_periode']?></td>
