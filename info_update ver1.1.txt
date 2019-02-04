@@ -1,0 +1,17 @@
+Perubahan Payroll Lintech Versi 1.1 2013-08-16 15:23 PM
+1. Format calendar --> Manual --> ke DatePicker
+   - insert_m_periode.php
+   - insert_create_kasbon.php
+   - insert_safetytalk.php
+   
+2. Format jam In Out absensi 
+   dari --> jam in_out : 07:00:20, 19:00:31 --> 2013-07-01 07:00:20, 2013-07-01 19:00:31
+3. Penambahan status Perjalanan Dinas pada "Ijin Khusus"
+4. Tambah kartu Mesin --> Masih belum selesai undercontruction
+5. Update (perbaikan Safety Talk) tidak memotong saat gantungan.
+6. ABSEN --> termasuk In = 0 or Out=1
+7. Database --> tabel employee ada penambahan field "start work"(date)
+8. Gantungan (tgl = periode awal) jika SK, CT, PD --> maka GP dan UM tetap ada, seharus nya tdk ada --> sudah teratasi.
+9. Jamsostek Tidak memotong Jika Minus
+10. Jika jam masuk kurang dari jam 6 pagi , maka absensi tidak bisa mendeteksi kehadiran ( sudah teratasi).
+

@@ -1,0 +1,6 @@
+SELECT Id, Fid, in_out, DateTime, SUBSTR(DateTime FROM 11 FOR 18) as jam  
+from ta_log
+WHERE Fid= 62 AND 
+DATE(DateTime) BETWEEN '2013-10-01'AND '2013-10-02'
+AND in_out !=0 
+ORDER BY DateTime ASC LIMIT 1

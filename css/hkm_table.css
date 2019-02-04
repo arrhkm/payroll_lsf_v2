@@ -1,0 +1,35 @@
+.hkm-table 
+{
+	font-family: sans-serif;
+	/*table-layout:fixed;*/
+	
+	font-size: 100%;
+	width: 100%;
+	overflow: auto;
+	display: block;
+}
+.hkm-table th {
+	background-color: rgb(112, 196, 105);
+	font-weight: normal;
+	color: white;
+	padding: 5px 10px;
+	text-align: center;
+}
+.hkm-table td {
+	background-color: rgb(238, 238, 238);
+	padding: 5px 10px;
+	color: rgb(111, 111, 111);
+}
+.hkm_td td{
+	bgcolor : black;
+	background : black;
+	background-color:black;
+	font-weight: normal;
+	color: white;		
+}
+.hkm_td_libur td{	
+	
+	background-color:red;
+	font-weight: normal;
+	color: white;		
+}
