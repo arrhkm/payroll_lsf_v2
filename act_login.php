@@ -7,7 +7,7 @@ if (isset($_POST['login']))
 {
 	$sql_cek="SELECT * FROM user_admin WHERE user_name='$_POST[txt_username]' AND user_password=md5('$_POST[txt_password]')";
 	
-        $rs_cek = nysqli_query($link, $sql_cek);
+        $rs_cek = mysqli_query($link, $sql_cek);
 
         if (mysqli_num_rows($rs_cek) > 0 )
 	{
