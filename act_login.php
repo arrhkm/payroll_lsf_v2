@@ -37,12 +37,12 @@ if (isset($_POST['login']))
 		
 	}
 	else
-	//$conn->close();
+	
 	header("location:login.php?msg=0");
 }
 else if (empty($_POST['txt_username'])) 
 header("location:login.php?mslog=1");
 else if (empty($_POST['txt_password'])) 
 header("location:login.php?msg=2");
-$conn->close();
+mysqli_close($link);
 ?>
