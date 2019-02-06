@@ -61,8 +61,8 @@ ddsmoothmenu.init({
 		</thead>
 		<?php while($row_periode = mysqli_fetch_assoc($rs_periode)) { ?>
 		<tr>
-		<td><?php echo $row_periode[kd_periode];?></td>
-		<td> <a href="cekinout.php?kd_periode=<?php echo $row_periode['kd_periode'];?>"><?php echo $row_periode['tgl_awal']." s/d ".$row_periode[tgl_akhir];?></a> </td>
+		<td><?php echo $row_periode['kd_periode'];?></td>
+		<td> <a href="cekinout.php?kd_periode=<?php echo $row_periode['kd_periode'];?>"><?php echo $row_periode['tgl_awal']." s/d ".$row_periode['tgl_akhir'];?></a> </td>
 		<td> ::. </td>
 		</tr>
 		<?php } ?>		
