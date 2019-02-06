@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/include_class/employee/Employee.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/include_class/gaji/Gaji.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/include_class/integrasi/IntegrasiClass.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/saveinsert_m_employee.php</file>
+            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/act_login.php</file>
+            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/periode2.php</file>
+            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/login.php</file>
             <file>file:/home/itlintech/Data/htdocs/payroll_lsf/periode.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/saveinsert_plusmin.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/coba/coba_poiner.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/integrasi/integrasi_linux_log.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/integrasi/from_linux_machine.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/upload_file_absen.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/baca_data.php</file>
-            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/connections/conn_mysqli_procedural.php</file>
+            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/m_periode.php</file>
+            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/insert_m_periode.php</file>
+            <file>file:/home/itlintech/Data/htdocs/payroll_lsf/saveinsert_m_periode.php</file>
         </group>
     </open-files>
 </project-private>

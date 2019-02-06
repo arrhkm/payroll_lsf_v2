@@ -221,8 +221,7 @@ ddsmoothmenu.init({
 			//---- Safety Talk -----
 			$sql_safety="select * from safety_talk where emp_id='$Emp->emp_id' AND  tgl_safety='$tgl_ini'";
 			$Emp->Safety->setdb($db, $sql_safety, $Emp->DayPeriode->logika_periode);
-			//---- End afety -----
-				
+			//---- End afety -----				
 			
 			if ( $Emp->DayPeriode->logika_periode=="sabtu") {
 				$gp=$Emp->gaji_pokok/5;
@@ -230,8 +229,7 @@ ddsmoothmenu.init({
 			} else {
 				$gp=$Emp->gaji_pokok/7;
 				//$gp=$Emp->gaji_pokok;
-			}
-			
+			}			
 			//SET GRAND TOTAL 
 			$Emp->Grandtotal->setGrandtotal($Emp->Gaji->gajiPokok(),$Emp->Gaji->gajiLembur(), $Emp->Tjam->getTunjangan(), $Emp->Tunjangan->getTmasakerja(), $Emp->Gaji->gajiTelat(), $Emp->Safety->getPotongan(),$row_absensi['ket_absen'], $Emp->gaji_pokok, $Emp->DayPeriode->logika_periode);
 			
@@ -246,28 +244,25 @@ ddsmoothmenu.init({
 			$SUM_SAFETY=$SUM_SAFETY+$Emp->Safety->getPotongan();
 			?>		
 			<tr class="<?php if ($Emp->DayPeriode->logika_periode=="libur" OR $Emp->DayPeriode->logika_periode=="minggu") echo "hkm_td_libur";?>">
-				<td><?php echo $Emp->Periode->tgl_ini[$i];?></td> 
-				<td><?php echo $Emp->DayPeriode->getDay();?></td>
-				<td><?php echo $Emp->DayPeriode->logika_periode;?></td> 
-				<td><?php echo "Rp.".number_format($gp, 2, '.', ',');?></td> 
-				<td><?php echo $row_absensi['jam_in'];?></td> 
-				<td><?php echo $row_absensi['jam_out'];?></td>
-				<td><?php echo $office_in;//$Emp->Durasi->must_in;?></td> 
-				<td><?php echo $office_out;//$Emp->Durasi->must_out;?></td> 
-				<td><?php echo $Emp->Durasi->getEvectiveHour();?></td>
-				<td>
-					<?php echo $Emp->Durasi->getOverTime();?>				
-				</td>
-				<td><?php echo number_format($Emp->Gaji->gajiPokok(), 2, ',','.');?></td>
-				<td><?php echo number_format($Emp->Gaji->gajiLembur(), 2, ',','.');?></td>
-				<td><?php echo $Emp->Durasi->getTolate();?></td>
-				<td><?php echo number_format($Emp->Gaji->gajiTelat(), 2, ',', '.');?></td>
-				<td><?php echo number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.');?></td>
-				<td><?php echo number_format($Emp->Tjam->getTunjangan(), 2, ',', '.'); //Tunajangan Jam 12?></td> 
-				<td><?php echo number_format($Emp->Safety->getPotongan(), 2, ',', '.');?></td>
-				
-					
-				<td><?php if ($row_absensi['ket_absen']) echo $row_absensi['ket_absen']." - "; echo number_format($GT, 2, ',', '.');?></td>	
+                            <td><?php echo $Emp->Periode->tgl_ini[$i];?></td> 
+                            <td><?php echo $Emp->DayPeriode->getDay();?></td>
+                            <td><?php echo $Emp->DayPeriode->logika_periode;?></td> 
+                            <td><?php echo "Rp.".number_format($gp, 2, '.', ',');?></td> 
+                            <td><?php echo $row_absensi['jam_in'];?></td> 
+                            <td><?php echo $row_absensi['jam_out'];?></td>
+                            <td><?php echo $office_in;//$Emp->Durasi->must_in;?></td> 
+                            <td><?php echo $office_out;//$Emp->Durasi->must_out;?></td> 
+                            <td><?php echo $Emp->Durasi->getEvectiveHour();?></td>
+                            <td><?php echo $Emp->Durasi->getOverTime();?></td>
+                            <td><?php echo number_format($Emp->Gaji->gajiPokok(), 2, ',','.');?></td>
+                            <td><?php echo number_format($Emp->Gaji->gajiLembur(), 2, ',','.');?></td>
+                            <td><?php echo $Emp->Durasi->getTolate();?></td>
+                            <td><?php echo number_format($Emp->Gaji->gajiTelat(), 2, ',', '.');?></td>
+                            <td><?php echo number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.');?></td>
+                            <td><?php echo number_format($Emp->Tjam->getTunjangan(), 2, ',', '.'); //Tunajangan Jam 12?></td> 
+                            <td><?php echo number_format($Emp->Safety->getPotongan(), 2, ',', '.');?></td>
+
+                            <td><?php if ($row_absensi['ket_absen']) echo $row_absensi['ket_absen']." - "; echo number_format($GT, 2, ',', '.');?></td>	
 			</tr>		
 			<?php
 			
