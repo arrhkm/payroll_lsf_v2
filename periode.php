@@ -220,14 +220,10 @@ ddsmoothmenu.init({
 			
 			//---- Safety Talk -----
 			$sql_safety="select * from safety_talk where emp_id='$Emp->emp_id' AND  tgl_safety='$tgl_ini'";
-<<<<<<< HEAD
-			$Emp->Safety->setdb($db, $sql_safety, $Emp->DayPeriode->logika_periode);
-			//---- End afety -----				
-=======
+
 			$Emp->Safety->setdb($link, $sql_safety, $Emp->DayPeriode->logika_periode);
 			//---- End afety -----
 				
->>>>>>> c66c5f0ea9391c07a2f295381e8fb2b2d070e0b3
 			
 			if ( $Emp->DayPeriode->logika_periode=="sabtu") {
 				$gp=$Emp->gaji_pokok/5;
