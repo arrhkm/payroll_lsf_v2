@@ -6,8 +6,8 @@ class Gaji {
 	public $logika;
 	public $tolate;
 	public $ket_absen;
-        public $ms_kerja;//untuk LSF
-        public $pot_telat;//LSF
+    public $ms_kerja;//untuk LSF
+    public $pot_telat;//LSF
 	
 	private $const_workday_of_month = 26;//untuk LSF 
         //untuk LDP --> //private $const_workday_of_month = 25;
@@ -20,8 +20,8 @@ class Gaji {
 		$this->tolate=$vtolate;
 		$this->logika=$vlogika;
 		$this->ket_absen=$vket_absen;
-                $this->ms_kerja=$vms_kerja;
-                $this->pot_telat = $vpot_telat;
+        $this->ms_kerja=$vms_kerja;
+        $this->pot_telat = $vpot_telat;
 	}
 	
 	
@@ -99,58 +99,35 @@ class Gaji {
 		return $gaji_ot;
 	}
 	public function gajiTelat() {
-		/*
-		if ($this->logika=="awal") {
-			$telat=0;
-		}else {
-			if ($this->tolate>=1 and $this->tolate <=25) {
-				$telat = 1*($this->gaji/7);
-			} 
-			else if ($this->tolate >=26 ){
-				$telat=2*($this->gaji/7);
-			} else {
-				$telat=0;
-			}
-		}
-*/
-		//update 2018
-                /*
-		if ($this->tolate>=1 and $this->tolate <=25) {
-                //if ($this->tolate>=1 and $this->tolate <=5) {
-				$telat = 1*($this->gaji/7);
-                                //$telat = 0; for LSF
-			} 
-			else if ($this->tolate >=26 ){
-				$telat=2*($this->gaji/7);
-			} else {
-				$telat=0;
-                                //$telat = $gaji_telat_nya; for LSF 
-			}
-
-
-		return round($telat);                 
-                */
-                //if ($this->tolate>=1 and $this->tolate <=25) {
-                if ($this->ev < 7){
-                    if ($this->logika =="sabtu"){
-                        if ($this->ev ==5){
-                            $telat=$this->pot_telat;
-                        }else                  
-                        $telat=0;
-                    }
-                    
-                }elseif ($this->tolate>=1 and $this->tolate <5) {
+		//if ($this->tolate>=1 and $this->tolate <=25) {
+        if ($this->ev < 7){
+            if ($this->logika =="sabtu"){
+                if ($this->ev ==5){
+                    $telat=$this->pot_telat;
+                    return round($telat);
+                }else {                 
+                	$telat=0;
+                	return round($telat);
+            	}
+            }
+            
+        }else
+        {
+        	if ($this->tolate>=1 and $this->tolate <5) {
 				//$telat = 1*($this->gaji/7);
-                                $telat = 0; //for LSF
+	            $telat = 0; //for LSF
+	            return round($telat);
 			} 
 			
 			else {
 				//$telat=0;
-                                $telat = $this->pot_telat; //for LSF 
+	            $telat = $this->pot_telat; //for LSF 
+	            return round($telat);
 			}
+		}
 
 
-		return round($telat);
+		//return round($telat);
 	}
 }
 ?>

@@ -128,7 +128,7 @@ if(isset($_POST["download"]))
     $query_inout="SELECT a.id, a.timestamp, a.verifikasi, a.status
     FROM hs_hr_emp_absensi as a
     WHERE DATE(timestamp) BETWEEN '$_POST[awal]' AND '$_POST[akhir]'";
-    $rs_inout= mysqli_query($link, $query_inout,$koneksi);
+    $rs_inout= mysqli_query($link, $query_inout);
     $my_log = array();
     while ($dt_zsoft=mysqli_fetch_assoc($rs_inout)) 
     {
@@ -149,7 +149,7 @@ if(isset($_POST["download"]))
     $SQL_jedah="SELECT DATEDIFF('$_POST[akhir]','$_POST[awal]') as jedah";
     $rs_jedah=mysqli_query($link, $SQL_jedah);
     $row_jedah=mysqli_fetch_assoc($rs_jedah);
-    $jedah=$row_jedah[jedah];
+    $jedah=$row_jedah['jedah'];
     
     // looping on the hs_hr_emp_absensi (group by on date)
     $range_date=array();
