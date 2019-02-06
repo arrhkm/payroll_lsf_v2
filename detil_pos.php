@@ -1,6 +1,4 @@
 <?php 
-include('cek_login.php');
-# Koneksi 
 require_once('connections/conn_mysqli_procedural.php');
 
 $sql_archive="SELECT * FROM pos_archive WHERE kd_periode='$_REQUEST[kd_periode]' AND kd_project='$_REQUEST[kd_project]'";

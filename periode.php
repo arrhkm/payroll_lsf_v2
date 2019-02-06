@@ -58,7 +58,18 @@ ddsmoothmenu.init({
 		$GAJI_ALL=0;
 		While ($row_emp=mysqli_fetch_assoc($rs_emp)) {		
 		//SET EMPLOYEE		
-		$Emp->setEmp($row_emp['emp_id'], $row_emp['emp_name'], $row_emp['pot_jamsos'], $row_emp['gaji_pokok'], $row_emp['t_insentif'], $row_emp['t_masakerja'], $row_emp['nama_jabatan'], $row_emp['no_rekening'], $row_emp['emp_group'], $row_emp['pot_telat']);
+		$Emp->setEmp(
+                    $row_emp['emp_id'], 
+                    $row_emp['emp_name'], 
+                    $row_emp['pot_jamsos'], 
+                    $row_emp['gaji_pokok'], 
+                    $row_emp['t_insentif'], 
+                    $row_emp['t_masakerja'], 
+                    $row_emp['nama_jabatan'], 
+                    $row_emp['no_rekening'], 
+                    $row_emp['emp_group'], 
+                    $row_emp['pot_telat']
+                );
 		$Emp->Periode->setId($kd_periode);
 		$rs_periode=mysqli_query($link, $Emp->Periode->sql_periode);
 		$row_periode=mysqli_fetch_assoc($rs_periode);
@@ -175,13 +186,18 @@ ddsmoothmenu.init({
 				$Emp->Durasi->getTolate(), 
 				$Emp->DayPeriode->logika_periode, 
 				$row_absensi['ket_absen'], 
-                $Emp->tmasakerja,
-                $Emp->pot_telat
+                                $Emp->tmasakerja,
+                                $Emp->pot_telat
 			); 
 			$jam_kerja_ev = $Emp->Durasi->getEvectiveHour();
 			//-------------------- SET TUNJANGAN -----------------------
 			//SET TMSKER
-			$Emp->Tunjangan->setTmasakerja($Emp->Durasi->getEvectiveHour(), $Emp->Durasi->getOverTime(), $Emp->tmasakerja, $Emp->DayPeriode->logika_periode);
+			$Emp->Tunjangan->setTmasakerja(
+                                $Emp->Durasi->getEvectiveHour(), 
+                                $Emp->Durasi->getOverTime(), 
+                                $Emp->tmasakerja, 
+                                $Emp->DayPeriode->logika_periode
+                        );
 			
 			//SET TJAM12
 			$emp_ijam=$Emp->emp_id;
@@ -211,11 +227,16 @@ ddsmoothmenu.init({
                         $rs_kasbon_sisa = mysqli_query($link, $sql_kasbon_sisa);
                         $row_kasbon_sisa = mysqli_fetch_assoc($rs_kasbon_sisa);
 			
-			
-			//$sql_cicil="SELECT * FROM cicilan_kasbon WHERE kd_kasbon='$row_kasbon[kd_kasbon]' AND kd_periode='$kd_periode'";
-			//$rs_cicil=mysqli_query($link, $sql_cicil);
-			//$row_cicil=mysqli_fetch_assoc($rs_cicil);		
-			$Emp->Kasbon->setKasbon($row_kasbon['kd_kasbon'], $row_kasbon['emp_id'], $row_kasbon['tgl'], $row_kasbon['jml_kasbon'], $row_kasbon['status'], $row_kasbon_sisa['sisa'], $row_kasbon_sisa['jml_cicilan']);
+			$Emp->Kasbon->setKasbon(
+                                $row_kasbon['kd_kasbon'], 
+                                $row_kasbon['emp_id'], 
+                                $row_kasbon['tgl'], 
+                                $row_kasbon['keterangan'],
+                                $row_kasbon['jml_kasbon'], 
+                                $row_kasbon['status'], 
+                                $row_kasbon_sisa['sisa'], 
+                                $row_kasbon_sisa['jml_cicilan']
+                        );
 			//---- end Kasbon----------
 			
 			//---- Safety Talk -----
@@ -223,8 +244,7 @@ ddsmoothmenu.init({
 
 			$Emp->Safety->setdb($link, $sql_safety, $Emp->DayPeriode->logika_periode);
 			//---- End afety -----
-				
-			
+
 			if ( $Emp->DayPeriode->logika_periode=="sabtu") {
 				$gp=$Emp->gaji_pokok/5;
 				//$gp=$Emp->gaji_pokok;
@@ -233,7 +253,17 @@ ddsmoothmenu.init({
 				//$gp=$Emp->gaji_pokok;
 			}			
 			//SET GRAND TOTAL 
-			$Emp->Grandtotal->setGrandtotal($Emp->Gaji->gajiPokok(),$Emp->Gaji->gajiLembur(), $Emp->Tjam->getTunjangan(), $Emp->Tunjangan->getTmasakerja(), $Emp->Gaji->gajiTelat(), $Emp->Safety->getPotongan(),$row_absensi['ket_absen'], $Emp->gaji_pokok, $Emp->DayPeriode->logika_periode);
+			$Emp->Grandtotal->setGrandtotal(
+                            $Emp->Gaji->gajiPokok(),
+                            $Emp->Gaji->gajiLembur(), 
+                            $Emp->Tjam->getTunjangan(), 
+                            $Emp->Tunjangan->getTmasakerja(), 
+                            $Emp->Gaji->gajiTelat(), 
+                            $Emp->Safety->getPotongan(),
+                            $row_absensi['ket_absen'], 
+                            $Emp->gaji_pokok, 
+                            $Emp->DayPeriode->logika_periode
+                        );
 			
 			$GT=$Emp->Grandtotal->getGrandtotal();
 			$SUM_GT=$SUM_GT+$GT;
