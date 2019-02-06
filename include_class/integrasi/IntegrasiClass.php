@@ -40,7 +40,7 @@ class IntegrasiClass {
         $DayNext = $this->timeInToDateTime($dn);
         
         $DayNextTime = strtotime($DayNext);
-        
+        $vlog = array();
         $log_emp_day = array();//declare variable
         foreach ($this->log as $vlog){
            if (($vlog['id']==$this->card_id)){
@@ -50,9 +50,9 @@ class IntegrasiClass {
                 $dtime3 = $this->timeInToDateTime($dtime2);
                 if ($x==$this->date_integration){
                     if (strtotime($vlog['timestamp'])>=$DayStartTime && (strtotime($vlog['timestamp'])< $DayNextTime)){
-                        if (count($vlog['timestamp'])!=0){
+                        //if (count($vlog['timestamp'])!=0){
                             array_push($log_emp_day, strtotime($vlog['timestamp']));
-                        }
+                        //}
                         
                     }
                 }

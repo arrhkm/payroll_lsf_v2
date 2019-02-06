@@ -9,7 +9,7 @@ class Safety{
 	//public $db;
 	
 	//public function setdb($db, $query, $vlogika) {
-        public function setdb($query, $vlogika) {
+        public function setdb($link, $query, $vlogika) {
 		$this->logika=$vlogika;
 		//$this->db=$db;
 		//$rs_safety=$this->db->query($query);

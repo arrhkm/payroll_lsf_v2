@@ -175,8 +175,8 @@ ddsmoothmenu.init({
 				$Emp->Durasi->getTolate(), 
 				$Emp->DayPeriode->logika_periode, 
 				$row_absensi['ket_absen'], 
-                                $Emp->tmasakerja,
-                                $Emp->pot_telat
+                $Emp->tmasakerja,
+                $Emp->pot_telat
 			); 
 			$jam_kerja_ev = $Emp->Durasi->getEvectiveHour();
 			//-------------------- SET TUNJANGAN -----------------------
@@ -220,7 +220,7 @@ ddsmoothmenu.init({
 			
 			//---- Safety Talk -----
 			$sql_safety="select * from safety_talk where emp_id='$Emp->emp_id' AND  tgl_safety='$tgl_ini'";
-			$Emp->Safety->setdb($db, $sql_safety, $Emp->DayPeriode->logika_periode);
+			$Emp->Safety->setdb($link, $sql_safety, $Emp->DayPeriode->logika_periode);
 			//---- End afety -----
 				
 			
