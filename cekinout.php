@@ -86,8 +86,8 @@ ddsmoothmenu.init({
 				
 		?>
 		<tr>
-		<td><?php echo $row_emp[emp_id];?></td>
-		<td colspan=3><?php echo $row_emp[emp_name];?></td>		
+		<td><?php echo $row_emp['emp_id'];?></td>
+		<td colspan=3><?php echo $row_emp['emp_name'];?></td>		
 		</tr>
 		<?php 
 				while($row_inout=mysqli_fetch_assoc($rs_inout)) {

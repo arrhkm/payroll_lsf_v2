@@ -2,8 +2,8 @@
 
  $host = "localhost";
  $database = "lsf_payroll";
- $user = "hkm";
- $password = "hkm";
+ $user = "root";
+ $password = "Lintech32#";
  $port = 3306;
  $socket = 1226;
  //-----------------------------
