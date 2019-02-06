@@ -59,7 +59,11 @@ ddsmoothmenu.init({
 		While ($row_emp=mysqli_fetch_assoc($rs_emp)) {		
 		//SET EMPLOYEE		
 		$Emp->setEmp($row_emp['emp_id'], $row_emp['emp_name'], $row_emp['pot_jamsos'], $row_emp['gaji_pokok'], $row_emp['t_insentif'], $row_emp['t_masakerja'], $row_emp['nama_jabatan'], $row_emp['no_rekening'], $row_emp['emp_group'], $row_emp['pot_telat']);
-		
+		$Emp->Periode->setId($kd_periode);
+		$rs_periode=mysqli_query($link, $Emp->Periode->sql_periode);
+		$row_periode=mysqli_fetch_assoc($rs_periode);
+		$Emp->Periode->setPeriode($row_periode['tgl_awal'], $row_periode['tgl_akhir'], $row_periode['nama_periode'], 
+		$row_periode['potongan_jamsos']);
 		?>	
 		<tr bgcolor="">	
 			<th colspan=18>
@@ -101,11 +105,7 @@ ddsmoothmenu.init({
 		</tr>
 		<?php
 				
-		$Emp->Periode->setId($kd_periode);
-		$rs_periode=mysqli_query($link, $Emp->Periode->sql_periode);
-		$row_periode=mysqli_fetch_assoc($rs_periode);
-		$Emp->Periode->setPeriode($row_periode['tgl_awal'], $row_periode['tgl_akhir'], $row_periode['nama_periode'], 
-		$row_periode['potongan_jamsos']);
+		
 		
 		//Menghitung Selisih hari periode 	
 		$selisih=$Emp->Periode->SetSelisih();
