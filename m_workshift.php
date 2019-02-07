@@ -10,7 +10,7 @@ $rs_workshift = mysqli_query($link, $qry_workshift);
 $SQLmax="SELECT MAX(id_workshift) as NMAX FROM workshift";
 $rsMax= mysqli_query($link, $SQLmax);
 $row_rsMax= mysqli_fetch_assoc($rsMax);
-$max=$row_rsMax[NMAX]+1;
+$max=$row_rsMax['NMAX']+1;
 
 if ($_REQUEST['edit']==1) {
 $qry_editworkshift = "SELECT * FROM workshift WHERE id_workshift = '$_REQUEST[id_workshift]' ";
@@ -100,11 +100,11 @@ ddsmoothmenu.init({
 		  <td align=center> <?php echo $row_rs_workshift['id_workshift'];?></td>
 		  <td align=left> <?php echo $row_rs_workshift['name_shift'];?></td>
 		  <td align=center> 
-				<a href="m_workshift.php?edit=1&id_workshift=<?php echo $row_rs_workshift[id_workshift];?>">Edit</a> | 
-				<a href="save_workshift.php?delete=1&id_workshift=<?php echo $row_rs_workshift[id_workshift];?>">Delete</a> |
-				<a href="workshift_detil.php?id_workshift=<?php echo $row_rs_workshift[id_workshift];?>">Detil</a> |
-				<a href="set_workshift.php?id_workshift=<?php echo $row_rs_workshift[id_workshift];?>">Set Workshift</a> |
-				<a href="set_workshift_insert.php?id_workshift=<?php echo $row_rs_workshift[id_workshift];?>">Anggota workshift</a>
+				<a href="m_workshift.php?edit=1&id_workshift=<?php echo $row_rs_workshift['id_workshift'];?>">Edit</a> | 
+				<a href="save_workshift.php?delete=1&id_workshift=<?php echo $row_rs_workshift['id_workshift'];?>">Delete</a> |
+				<a href="workshift_detil.php?id_workshift=<?php echo $row_rs_workshift['id_workshift'];?>">Detil</a> |
+				<a href="set_workshift.php?id_workshift=<?php echo $row_rs_workshift['id_workshift'];?>">Set Workshift</a> |
+				<a href="set_workshift_insert.php?id_workshift=<?php echo $row_rs_workshift['id_workshift'];?>">Anggota workshift</a>
 		  </td>
 		 
 		  </tr>		 
