@@ -70,18 +70,18 @@ ddsmoothmenu.init({
 			<tr>
 			  <td width="111">Id. workshift. </td>
 			  
-			  <td width="325"><input name="id_workshift"  id="" value="<?php if ($_REQUEST['edit']==1) echo $row_editworkshift['id_workshift']; else echo $max;?>"></td>
+                          <td width="325"><input name="id_workshift"  id="" value="<?php if(isset($_REQUEST['edit']) && $_REQUEST['edit']==1) {echo $row_editworkshift['id_workshift'];} else echo $max;?>"></td>
 			</tr>
 			<tr>
 			  <td>Nama workshift </td>
 			 
-			  <td><input name="name_shift" type="text" id="name_shift" value="<?php if ($_REQUEST['edit']==1) echo $row_editworkshift['name_shift'];?>"></td>
+                          <td><input name="name_shift" type="text" id="name_shift" value="<?php if(isset($_REQUEST['edit']) && $_REQUEST['edit']==1){ echo $row_editworkshift['name_shift'];}?>"></td>
 			</tr>
 			
 			<tr>
 			  
 			  <td>&nbsp;</td>
-			  <td><input name ="<?php if ($_REQUEST['edit']==1) echo "btn_edit"; else echo "btn_save";?>" type="submit" id="<?php if ($_REQUEST['edit']==1) echo "btn_edit"; else echo "btn_save";?>" value="<?php if ($_REQUEST['edit']==1) echo "btn_edit"; else echo "btn_save";?>">
+                          <td><input name ="<?php if(isset($_REQUEST['edit']) && $_REQUEST['edit']==1) { echo "btn_edit";} else echo "btn_save";?>" type="submit" id="<?php if ($_REQUEST['edit']==1) { echo "btn_edit"; } else echo "btn_save";?>" value="<?php if ($_REQUEST['edit']==1) { echo "btn_edit";} else echo "btn_save";?>">
 			  <input name = "btn_back" type="button" value= "Back"  id="btn_back" Onclick="location='m_workshift.php'">
 			  
 			  </td>
