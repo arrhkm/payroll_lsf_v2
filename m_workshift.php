@@ -12,7 +12,7 @@ $rsMax= mysqli_query($link, $SQLmax);
 $row_rsMax= mysqli_fetch_assoc($rsMax);
 $max=$row_rsMax['NMAX']+1;
 
-if ($_REQUEST['edit']==1) {
+if (isset($_REQUEST['edit']) && $_REQUEST['edit']==1) {
 $qry_editworkshift = "SELECT * FROM workshift WHERE id_workshift = '$_REQUEST[id_workshift]' ";
 $rs_editworkshift = mysqli_query($link, $qry_editworkshift);
 $row_editworkshift = mysqli_fetch_assoc($rs_editworkshift);
