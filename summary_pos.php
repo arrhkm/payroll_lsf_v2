@@ -1,8 +1,6 @@
 <?php 
 # Koneksi 
 require_once('connections/conn_mysqli_procedural.php');
-# select DB 
-mysql_select_db($database_koneksi);
 
 //SEELCT ARCHIVE
 $sql_periode="SELECT * FROM pos_archive WHERE kd_periode='$_REQUEST[kd_periode]' AND kd_project='$_REQUEST[kd_project]'";
@@ -84,7 +82,7 @@ ddsmoothmenu.init({
 		while ($row_emp=mysqli_fetch_assoc($rs_emp)) { 				
 		//::::::::::::::::::::::::::::::::::::::::::::::  PERULANGAN WAKTU DALAM SATU PERODE :::::::::::::::::::::::::::::::::::::::::::::::::
 		$sql_wtpt="SELECT SUM(jam_ev) as WT, SUM(ot) as OT FROM pos_payroll_day
-		WHERE emp_id='$row_emp[emp_id]' AND kd_periode=$row_periode[kd_periode] AND kd_project=$row_periode[kd_project]";
+		WHERE emp_id='$row_emp[emp_id]' AND kd_periode='$row_periode[kd_periode]' AND kd_project='$row_periode[kd_project]'";
 		$rs_wt_pt=mysqli_query($link, $sql_wtpt);
 		$row_wtpt=mysqli_fetch_assoc($rs_wt_pt);
 		$PT=$row_wtpt[WT] + $row_wtpt[OT];

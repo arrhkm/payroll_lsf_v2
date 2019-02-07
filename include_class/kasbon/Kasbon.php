@@ -9,7 +9,7 @@ class Kasbon {
 	public $sisa_cicil;
 	public $jml_cicil;
 	
-	public function setKasbon ($vkd_kasbon, $vemp_id, $vtgl, /*$vket,*/ $vjml_kasbon, $vstatus, $vsisa_cicil, $vjml_cicil) {		
+	public function setKasbon ($vkd_kasbon, $vemp_id, $vtgl, $vket, $vjml_kasbon, $vstatus, $vsisa_cicil, $vjml_cicil) {		
 		$this->kd_kasbon = $vkd_kasbon; 
 		$this->emp_id=$vemp_id;		 
 		$this->tgl=$vtgl;		 

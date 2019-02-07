@@ -1,10 +1,10 @@
 <div class="searchbox">		
     <!-- a href="download_zsoft.php">Download DB zsofttadb (MySQL) |</a-->
-    <a href="from_ms_access.php">Download DB Access |</a>
+    <!-- a href="from_ms_access.php">Download DB Access |</a-->
     <a href="from_linux_machine.php">Download att from linux |</a>
     <a href="integrasi_linux_log.php">Integrasi Machine by linux |</a>            
     <!-- a href="integrasi_zsoft_log.php">Integrasi dari Zsoft |</a-->
-    <a href="integrasi_access_log.php">Integrasi dari access_log |</a>
+    <!-- a href="integrasi_access_log.php">Integrasi dari access_log |</a-->
     <!-- a href="from_zsoft.php">Download Data From Zsoft DB |</a-->
     <!--a href="clear_log.php" >Hapus Data Absensi |</a-->
     <!--a href="../upload_absensi.php">Upload Data Absensi |</a-->
@@ -14,7 +14,7 @@
     <a href="list_rpt_day.php">Lihat Download Absensi |</a>
     <a href="list_rpt_day2.php">Lihat Download Absensi2 |</a>
     <a href="list_rpt_day3.php">Lihat Download Absensi3 |</a>
-    <a href="setup_pulang.php">Set Pulang jam "15:00" |</a >
+    <!-- a href="setup_pulang.php">Set Pulang jam "15:00" |</a -->
     <a href="absensi_periode.php">Absensi Periode |</a>
     <a href="../index.php">Back Home</a>
 </div>
