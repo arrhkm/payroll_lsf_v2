@@ -81,8 +81,9 @@ ddsmoothmenu.init({
 			<tr>
 			  
 			  <td>&nbsp;</td>
-                          <td><input name ="<?php if(isset($_REQUEST['edit']) && $_REQUEST['edit']==1) { echo "btn_edit";} else echo "btn_save";?>" type="submit" id="<?php if ($_REQUEST['edit']==1) { echo "btn_edit"; } else echo "btn_save";?>" value="<?php if ($_REQUEST['edit']==1) { echo "btn_edit";} else echo "btn_save";?>">
-			  <input name = "btn_back" type="button" value= "Back"  id="btn_back" Onclick="location='m_workshift.php'">
+                          <td>
+                                <input name ="<?php if(isset($_REQUEST['edit']) && $_REQUEST['edit']==1) { echo "btn_edit";} else echo "btn_save";?>" type="submit"  value="<?php if(isset($_REQUEST['edit']) && $_REQUEST['edit']==1) { echo "btn_edit";} else echo "btn_save";?>">
+                                <input name = "btn_back" type="button" value= "Back"  id="btn_back" Onclick="location='m_workshift.php'">
 			  
 			  </td>
 			</tr>
