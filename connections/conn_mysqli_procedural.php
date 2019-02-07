@@ -25,12 +25,12 @@ class DbAutoIncrement
     public $table_name;
     public function setDb($link, $table){
         $this->link = $link;
-        $this->table_name = table;
+        $this->table_name = $table;
     }
     
-    public function getlastId($field_name, $id_machine)
+    public function getlastId($field_name)
     {
-        $sql = "SELECT MAX('".$field_name."')as nmax FROM '".$this->table_name."' WHERE machine_id='".id_machine."'";
+        $sql = "SELECT MAX($field_name)as nmax FROM $this->table_name";
         $rs = mysqli_query($this->link, $sql);
         $dt = mysqli_fetch_assoc($rs);
         if ($dt['nmax']>0){
@@ -40,6 +40,17 @@ class DbAutoIncrement
         }
         return $this->id;
     }
+    /*{
+        $sql = "SELECT MAX('".$field_name."')as nmax FROM '".$this->table_name."' WHERE machine_id='".id_machine."'";
+        $rs = mysqli_query($this->link, $sql);
+        $dt = mysqli_fetch_assoc($rs);
+        if ($dt['nmax']>0){
+            $this->id = $dt['nmax']+1;
+        } else {
+            $this->id = 1;
+        }
+        return $this->id;
+    }*/
     
     public function maxValue($field_name)
     {

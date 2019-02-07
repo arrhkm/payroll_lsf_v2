@@ -58,12 +58,12 @@ ddsmoothmenu.init({
 		<table class="bordered">
 		<tr>
 		<td><a href="periode.php?kd_periode=<?php echo $_POST['kd_periode'];?>&kd_project=<?php echo $_POST['kd_project'];?>">Payroll</a></td>
-		<td><a href="periode_class.php?kd_periode=<?php echo $_POST['kd_periode'];?>&kd_project=<?php echo $_POST['kd_project'];?>">Dulinan Class</a></td>
-		<td><a href="periode_pos.php?kd_periode=<?php echo $_POST['kd_periode'];?>&kd_project=<?php echo $_POST['kd_project'];?>">Payroll_pos</a></td>
-		<!-- td><a href="periode2.php?kd_periode=<?php echo $_POST[kd_periode];?>&kd_project=<?php echo $_POST['kd_project'];?>">Payroll 2</td -->
-		<td><a href="report_pdf.php?kd_periode=<?php echo $_POST['kd_periode'];?>&kd_project=<?php echo $_POST['kd_project'];?>">Report PDF</td>
-		<td><a href="summary.php?kd_periode=<?php echo $_POST['kd_periode'];?>&kd_project=<?php echo $_POST['kd_project'];?>">summary</a></td>
-		<td><a href="summary_pdf.php?kd_periode=<?php echo $_POST['kd_periode'];?>&kd_project=<?php echo $_POST['kd_project'];?>">summary_pdf</a></td>
+                <td><a href="summary.php?kd_periode=<?php echo $_POST['kd_periode'];?>&kd_project=<?php echo $_POST['kd_project'];?>">summary</a></td>
+                <td><a href="periode_pos.php?kd_periode=<?php echo $_POST['kd_periode'];?>&kd_project=<?php echo $_POST['kd_project'];?>">Payroll_pos</a></td>
+		<!--td><a href="periode_class.php?kd_periode=<?php //echo $_POST['kd_periode'];?>&kd_project=<?php //echo $_POST['kd_project'];?>">Dulinan Class</a></td -->
+		<!-- td><a href="periode2.php?kd_periode=<?php //echo $_POST[kd_periode];?>&kd_project=<?php //echo $_POST['kd_project'];?>">Payroll 2</td -->
+		<!-- td><a href="report_pdf.php?kd_periode=<?php //echo $_POST['kd_periode'];?>&kd_project=<?php //echo $_POST['kd_project'];?>">Report PDF</td -->
+		<!--td><a href="summary_pdf.php?kd_periode=<?php //echo $_POST['kd_periode'];?>&kd_project=<?php //echo $_POST['kd_project'];?>">summary_pdf</a></td -->
 		<tr>
 		</table>
 		</div>
