@@ -63,7 +63,7 @@
     }
     else if (isset($_POST["btn_edit"])) {
 
-        $updateSQL= sprintf("UPDATE employee SET emp_name=%s, no_rekening=%s, kd_jabatan=%s, gaji_pokok=%s, gaji_lembur=%s, 
+        /*$updateSQL= sprintf("UPDATE employee SET emp_name=%s, no_rekening=%s, kd_jabatan=%s, gaji_pokok=%s, gaji_lembur=%s, 
         pot_jamsos=%s, t_jabatan=%s, t_masakerja=%s, t_insentif=%s, pot_telat=%s, uang_makan=%s, start_work=%s, emp_group=%s WHERE emp_id=%s", 						
             GetSQLValueString($_POST['emp_name'], "text"),
             GetSQLValueString($_POST['no_rekening'], "text"),
@@ -80,7 +80,23 @@
             GetSQLValueString($_POST['emp_group'], "text"),
             GetSQLValueString($_POST['emp_id'], "text"));            
 
-        
+        */
+        $updateSQL = "
+            UPATE enployee SET emp_name = '$_POST[emp_name]', 
+            no_rekening = '$_POST[no_rekening]',
+            kd_jabatan = '$_POST[kd_jabatan]',
+            gaji_pokok = '$_POST[gaji_pokok]', 
+            gaji_lembur = '$_POST[gaji_lembur]',
+            pot_jamsos = '$_POST[pot_jamsos]',
+            t_jabatan = '$_POST[t_jabatan]',
+            t_masakerja = '$_POST[t_masakerja]',
+            t_insentif = '$_POST[t_insentif]',
+            pot_telat = '$_POST[pot_telat]',
+            uang_makan = '$_POST[uang_makan]',
+            start_work = '$_POST[start_work]', 
+            emp_group = '$_POST[emp_group]'
+            WHERE emp_id = '$_POST[emp_id]'
+        ";
         //$result1= 
         mysqli_query($link, $updateSQL);
         $updateGoTo .= "m_employee.php";
