@@ -11,6 +11,7 @@ ON (b.emp_id = a.emp_id) WHERE a.emp_id IS NULL";
 $qry_emp="
 SELECT a.emp_id, a.emp_name, a.pot_jamsos
 FROM employee a 
+WHERE emp_id like 'LSF%'
 ";
 
 

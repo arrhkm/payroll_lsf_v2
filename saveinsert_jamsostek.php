@@ -87,7 +87,17 @@ if (isset($_POST['btn_tambah'])) {
         <?php
     }
         
-} else {
-    echo "bukan Tambah ";
+} else if (isset($_REQUEST['delete']) && $_REQUEST['delete']==1) {
+		$qry_del="DELETE FROM jamsostek WHERE kd_periode='$_REQUEST[kd_periode]' AND emp_id='$_REQUEST[emp_id]'";
+		if (mysqli_query($link, $qry_del)){
+		header("location:jamsostek.php?kd_periode=$_REQUEST[kd_periode]");
+		}
+	
+}
+else if (isset($_REQUEST['del_all'])&& $_REQUEST['del_all']==1) {
+	$qry_del="DELETE FROM jamsostek WHERE kd_periode=$_REQUEST[kd_periode]";
+		if (mysqli_query($link, $qry_del)){
+		header("location:jamsostek.php?kd_periode=$_REQUEST[kd_periode]");
+		}
 }
 ?>

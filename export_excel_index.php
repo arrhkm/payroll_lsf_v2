@@ -15,7 +15,7 @@ require_once('connections/conn_mysqli_procedural.php');
     $filename = "data_cost".".xls";		 
     header("Content-Type: application/vnd.ms-excel");
     header("Content-Disposition: attachment; filename=\"$filename\"");
-    echo 'emp_id' . "\t" . 'tgl' . "\t" . 'jam_in' . "\t". 'jam_out' . "\t". 'jam_ev' . "\t". 'gp' 
+    echo 'emp_id' . "\t" . 'tgl' . "\t" . 'jam_in' . "\t". 'jam_out' . "\t". 'jam_ev' . "\t". 'ot'. "\t". 'gp' 
         . "\t". 'gl' . "\t". 'premi' . "\t". 't_jam12' . "\t". 't_msker' . "\t". 'gt' . "\t". 'cicil_kasbon'
         . "\t". 'jamsos'. "\t". 'over_gaji'. "\t". 'def_gaji'
         . "\n";
@@ -26,12 +26,6 @@ require_once('connections/conn_mysqli_procedural.php');
             . "AND emp_id='$dt_pos[emp_id]'";    
         $rs_exp_det= mysqli_query($link, $sql_exp_det) or die(mysqli_error($link));
 
-        /*array_push($data_excel,[
-            'jamsos'=>$dt_pos['jamsos'], 
-            'cicil_kasbon'=>$dt_pos['cicil_kasbon'],
-            'over_gaji'=>$dt_pos['over_gaji'], 
-            'def_gaji'=>$dt_pos['def_gaji']
-        ]);*/
         
         while($dt_det= mysqli_fetch_assoc($rs_exp_det)){
             array_push($data_excel, [
@@ -48,25 +42,14 @@ require_once('connections/conn_mysqli_procedural.php');
                 'tg'=>$dt_det['tg']            
             ]);
             echo $dt_det['emp_id']."\t" .$dt_det['tgl']."\t" .$dt_det['jam_in']."\t" .$dt_det['jam_out']."\t" 
-                .$dt_det['jam_ev']."\t" .$dt_det['gp']."\t" .$dt_det['gl']."\t" .$dt_det['pot_tel']."\t" 
+                .$dt_det['jam_ev']."\t" .$dt_det['ot']."\t" .$dt_det['gp']."\t" .$dt_det['gl']."\t" .$dt_det['pot_tel']."\t" 
                 .$dt_det['t_jam12']."\t" .$dt_det['t_msker']."\t" .$dt_det['tg']."\t".'0'."\t"
                 .'0'."\t".'0'."\t".'0'
                 ."\n";
         }
         echo $dt_pos['emp_id']."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'
-                ."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t"
+                ."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t".'0'."\t"
                 .$dt_pos['cicil_kasbon']."\t".$dt_pos['jamsos']."\t".$dt_pos['over_gaji']."\t".$dt_pos['def_gaji']
                 ."\n";
         
     }
-//var_dump($data_excel);
-/*
-$filename = "data_cost".".xls";		 
-header("Content-Type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=\"$filename\"");
-echo 'emp_id' . "\t" . 'tgl' . "\t" . 'jam_in' . "\t". 'jam_out' . "\t". 'jam_ev' . "\t". 'gp' . "\t". 'gl' . "\t". 'premi' . "\t". 't_jam12' . "\t". 't_msker' . "\t". 'gt' . "\n";
-foreach ($data_excel as $key=>$value){    
-    echo $value['emp_id']."\t" .$value['tgl']."\t" .$value['jam_in']."\t" .$value['jam_out']."\t" .$value['jam_ev']."\t" .$value['gp']."\t" .$value['gl']."\t" .$value['premi']."\t" .$value['t_jam12']."\t" .$value['t_msker']."\t" .$value['tg']."\n";   
-}
- 
-*/
