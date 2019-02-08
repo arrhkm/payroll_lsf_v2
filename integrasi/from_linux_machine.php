@@ -13,17 +13,13 @@ $rs_machine = mysqli_query($link, $machine_qry);
 <title>Manajemen Kartu</title>
 
 <link href="../themes/orange/css/style.css" rel="stylesheet" type="text/css" />  
-<script type="text/javascript">
-			
-	
-</script>
 
 </head>
 <body>
 <div class="outerbox">
 <?php include ("menu.txt"); ?>
 <div id="isinya">
-<div class="mainHeading"><h2>DOWNLOAD CHEKINOUT (Linux Machine Zsoft) </h2></div>
+<div class="mainHeading"><h2>DOWNLOAD CHEKINOUT (Linux Machine Hkm Lib) </h2></div>
 
 
 <form action="from_linux_machine.php" method="POST">
@@ -98,9 +94,9 @@ if (isset($_POST['download'])&& isset($_POST['machine']))
 {
     $rs_machine_set = mysqli_query($link, "SELECT * FROM machine_att WHERE id = '$_POST[machine]'");
     $machine_set = mysqli_fetch_assoc($rs_machine_set);
-//$ip = "192.168.1.209";
+    //$ip = "192.168.1.209";
     
-    var_dump($machine_set);
+    //var_dump($machine_set);
     $ip = $machine_set['ip'];//'192.168.4.138';
     $port = $machine_set['port'];//"80";
     $com = $machine_set['com'];//"0";
