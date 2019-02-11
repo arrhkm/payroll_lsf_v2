@@ -31,7 +31,7 @@ if (!empty($_FILES["filecsv"]["tmp_name"]))
         //ini_set("auto_detect_line_endings", 1);
         $jml=0;
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {                                
-            echo $data[0]." - ".$emp_id." - ".$data[2]." - ". $data[3]."<br>";           
+            echo $data[0]." - ".$data[1]." - ".$data[2]." - ". $data[3]."<br>";           
             $qry_input = "REPLACE INTO absensi (tgl, emp_id, jam_in, jam_out)
                 VALUES ('$data[0]','$data[1]', '$data[2]', '$data[3]')";
             mysqli_query($link, $qry_input);            
