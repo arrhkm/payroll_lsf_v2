@@ -198,7 +198,7 @@ if(isset($_POST["download"]))
         //----------------------------------------------------------------
 
         //echo "Date : ".$punchDate;
-        echo "emp_id : ".$emp_emp_id. "  Nama : ".$emp_emp_name. " No. Card : ".$emp_no_kartu." <br>";
+        echo "<br>emp_id : ".$emp_emp_id. "  Nama : ".$emp_emp_name. " No. Card : ".$emp_no_kartu." <br>";
         echo "----------------------------------------------------------------------------------<br>";
         //echo "IN : ".substr($punchStart, -9,18);
         //echo "Out: ".substr($punchEnd,-9,18);				
@@ -228,14 +228,16 @@ if(isset($_POST["download"]))
                     $jam_out = date("H:i:s", $it->out);
                     //echo "Tanggal : ".$dt_date['date_now']." -  IN : ".$in. " Out : ".$out."<br>";
                 }
-                echo "Tanggal : ".$dt_date['date_now']." emp id : ".$emp_emp_id." jam in : ".$jam_in." jam out : ".$jam_out."<br>";
+                echo "Tanggal : ".$dt_date['date_now']." emp id : ".$emp_emp_id." jam in : ".$jam_in." jam out : ".$jam_out."<br><br>";
                 //$qry_ins = "INSERT IGNORE absensi (tgl, emp_id, jam_in, jam_out) VALUES ('$dt_date[date_now]', '$emp_emp_id', '$jam_in', '$jam_out')";
                 $qry_ins = "REPLACE INTO absensi (tgl, emp_id, jam_in, jam_out) VALUES ('$dt_date[date_now]', '$emp_emp_id', '$jam_in', '$jam_out')";
-                if (mysqli_query($link, $qry_ins)){
-                    echo "masuk pak eko";
-                } else echo "gagal";
+                mysqli_query($link, $qry_ins);
+                //if (mysqli_query($link, $qry_ins)){
+                    //echo "masuk pak eko";
+                //} else 
+                //    echo "gagal";
                         
-                //mysqli_query($link, "REPLACE INTO absensi (tgl, emp_id, jam_in, jam_out) VALUES ('$dt_date[date_now]', '$emp_emp_id', '$jam_in', '$jam_out')");
+                
             }
             
         } //end of loop date range

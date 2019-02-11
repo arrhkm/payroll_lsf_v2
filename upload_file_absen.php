@@ -53,7 +53,7 @@ ddsmoothmenu.init({
 		<h5> Format file example : 2013-07-31, KSP001, 07:00:00, 19:00:00 </h5><br>
 		<h5>Ketik dulu di Open Office / Ms. excel seperti berikut :</h5><br>
 		<?php $image="images/upload_absen_true.jpg";?>
-		<img src="images/upload_absen_true.jpg" Style=width:800px;height:150px;>
+		<img src="images/upload_absen_true.jpg" width:800px height:150px >
 		
 		<h5> <br><br><hr> Lalu simpan dalam format *.CSV dengan splitter ", "</h5>
 		<br>Tekan Browse dan pilih File yang sudah anda simpan dalam format CSV tadi,

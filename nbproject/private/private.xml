@@ -3,11 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/home/itlintech/Data/htdocs/payroll_lsf/upload_file_absen.php</file>
             <file>file:/home/itlintech/Data/htdocs/payroll_lsf/export_excel_index.php</file>
             <file>file:/home/itlintech/Data/htdocs/payroll_lsf/baca_data.php</file>
             <file>file:/home/itlintech/Data/htdocs/payroll_lsf/saveinsert_jamsostek.php</file>
             <file>file:/home/itlintech/Data/htdocs/payroll_lsf/insert_jamsostek.php</file>
+=======
+            <file>file:/home/hkm/Data/htdocs/payroll_lsf/upload_file_absen.php</file>
+            <file>file:/home/hkm/Data/htdocs/payroll_lsf/delete_absen.php</file>
+            <file>file:/home/hkm/Data/htdocs/payroll_lsf/integrasi/integrasi_linux_log.php</file>
+            <file>file:/home/hkm/Data/htdocs/payroll_lsf/baca_data.php</file>
+            <file>file:/home/hkm/Data/htdocs/payroll_lsf/include_class/integrasi/IntegrasiClass.php</file>
+>>>>>>> 77668d9a301a7c3c2227410c5eedddd5dcb48d72
         </group>
     </open-files>
 </project-private>
