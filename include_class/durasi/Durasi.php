@@ -188,22 +188,22 @@ class Durasi
 						$tolate=0;
 					}
 					*/
-					if ($tolate == 5) {	//tolate in minut											
+					if ($tolate == 6) {	//tolate in minut											
 						if ($person_in[2]>=1){
 							$tolate=1;
 						}
 						else {
 							$tolate = 0;
 						}
-					} elseif ($tolate>5) {
-						$tolate = $tolate -5;
+					} elseif ($tolate>6) {
+						$tolate = $tolate -6;
 					}else {
 						$tolate = 0;
 					}
 				} else {
 					$tl1=($person_in[0]-$office_in[0])*60;
 					$tl2=$person_in[1];
-					$tolate=($tl1+$tl2) -5; //potongan telat ketika masuk 5 menit
+					$tolate=($tl1+$tl2) -6; //potongan telat ketika masuk 6 menit
 				}
 				
 			}
