@@ -2,6 +2,7 @@
 # Koneksi 
 
 require_once('connections/conn_mysqli_procedural.php');
+
 ?>
 <html>
 <head>
@@ -42,6 +43,40 @@ ddsmoothmenu.init({
 <body>
 <!-- Header Menu -->
 <?php require_once('header.inc'); ?>
+<?php 
+    $sql_emp1 = "SELECT distinct(b.emp_id)as id FROM  absensi as b JOIN employee as c ON (b.emp_id = c.emp_id)";
+    $record_emp = mysqli_query($link, $sql_emp1);
+    $employee = array();
+    while ($x = mysqli_fetch_assoc($record_emp)){
+        array_push($employee, $x['id']);
+    }
+    //var_dump($employee);
+    
+    if (!empty($_POST) && $_POST['btn_del']==TRUE)
+    {
+        if (!empty($_POST['emp_id'])){
+            if (!empty($_POST['tgl']))
+            {
+                //echo "Data ada isi nya : <br>";
+                $dt_emp = array();
+                $dt_emp=explode(",", $_POST['emp_id']); 
+                         
+                for($i = 0; $i<count($dt_emp);$i++){
+                   
+                    $SQLdel="DELETE from absensi WHERE emp_id='$dt_emp[$i]' AND tgl ='$_POST[tgl]'";
+                    mysqli_query($link, $sql_del);
+                }
+                $message = "Ada ".count($dt_emp)." data dihapus.";
+            }else {
+                $message = "Tanggal 1 dan Tanggal 2 belum di isi";
+            }    
+        } else {
+            $message = "emp id Belum di isi";
+        }
+    }else {
+        echo $message = "kosong";
+    }
+?>
 
 <div id="templatemo_main" class="wrapper">	
 <!-- Tempat Menaruh Tabel ISI -->
@@ -69,8 +104,8 @@ ddsmoothmenu.init({
           <img name="popcal" align="absmiddle" style="border:none" src="calender/calender.jpeg" width="34" height="29" border="0"alt="">
           </a>	
 
-                <input name="tgl2" type="text" size="10" maxlength="10" id="tgl2" value=""
-          onClick="if(self.gfPop)gfPop.fPopCalendar(document.form1.tgl2);return false;"/>
+                <!-- input name="tgl2" type="text" size="10" maxlength="10" id="tgl2" value=""
+          onClick="if(self.gfPop)gfPop.fPopCalendar(document.form1.tgl2);return false;"/ -->
           <a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.form1.tgl2);return false;">
           <img name="popcal" align="absmiddle" style="border:none" src="calender/calender.jpeg" width="34" height="29" border="0"alt="">
           </a>		
@@ -82,7 +117,17 @@ ddsmoothmenu.init({
               <input type="submit" name="btn_del" >
           <input name = "btn_back" type="button" value= "Back"  id="btn_back" Onclick="location='delete_absen.php'">
           </td>
-          <td></td>
+          <td>
+               
+              <?php 
+                echo "Message : ".$message;  
+               
+               
+              
+               
+              
+              ?>
+          </td>
 
         </tr>
         <tr>
@@ -100,42 +145,3 @@ ddsmoothmenu.init({
 <!--Footer-->
 </body>
 </html>
-<?php 
-    if (isset($_POST['btn_del'])) 
-    {
-        echo "Data : <br>";
-        $dt_emp=explode(",", $_POST[emp_id]);
-        
-        var_dump($_POST);
-        /*
-        foreach ($dt_emp as $emp) 
-        {
-            
-             $SQLdel="DELETE from absensi WHERE emp_id='$emp' "
-             
-                    . "AND tgl BETWEEN '$_POST[tgl]' AND '$_POST[tgl2]'";
-            $SQL_emp="
-            SELECT a.emp_id, a.emp_name, b. tgl, b.jam_in, b.jam_out from employee a, absensi b 
-            WHERE b.emp_id=a.emp_id 
-            AND b.tgl='$_POST[tgl]'
-            AND a.emp_id='$emp'										
-            ";
-            $RS_emp=mysqli_query($link, $SQL_emp);
-            
-            $ROW_emp= mysqli_fetch_assoc($RS_emp);
-            if (mysqli_num_rows($RS_emp)>0)
-            {
-                    mysqli_query($SQLdel);					
-                    echo "<br> Employee :  ".$ROW_emp['emp_id']."  -  ".$ROW_emp['emp_name']." - tanggal : ".$_POST['tgl']."  berhasil dihapus";
-            }
-            else  
-            {
-                    echo "record absensi emp_id : ".$emp[] tidak ditemukan";
-            }
-              
-             
-        }*/
-    }else {
-        echo "GATEL";
-    }
-?>

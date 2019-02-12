@@ -1,21 +1,23 @@
 <?php 
 
-require_once('../connections/CConnect.php'); 
+require_once('../connections/conn_mysqli_procedural.php'); 
 require_once('calendar/tc_calendar.php');
-$db= New Database();
+
 
 $SQL_jedah="SELECT DATEDIFF('$_POST[akhir]','$_POST[awal]') as jedah";
-$rs_jedah=$db->query($SQL_jedah);
-$row_jedah=$db->fetch_array($rs_jedah);
-$jedah=$row_jedah[jedah];
+$rs_jedah=mysqli_query($link, $SQL_jedah);
+$row_jedah=mysqli_fetch_assoc($rs_jedah);
+$jedah=$row_jedah['jedah'];
 //SELECT Employee
 $sql_emp= "SELECT b.`emp_id`, c.no_kartu, b.emp_name  
-FROM employee b Join hs_hr_emp_kartu c on (c.emp_number_kartu=b.emp_id)
+FROM employee b 
+Join hs_hr_emp_kartu c on (c.emp_number_kartu=b.emp_id)
+where emp_id like 'LSF%'
 order by c.no_kartu";
-$rs_emp= $db->query($sql_emp) or die (mysql_error());
+$rs_emp= mysqli_query($link, $sql_emp) or die (mysqli_error($link));
 
 $sql_periode="SELECT * FROM periode ";
-$rs_periode=$db->query($sql_periode);
+$rs_periode=mysqli_query($link, $sql_periode);
 function dino($dino) {
 	if ($dino=="Saturday") 
 		$dinoku="Sabtu";
@@ -96,7 +98,7 @@ function dino($dino) {
 	} 
 	?>
   </tr>
-  <?php while ($row_emp = $db->fetch_array($rs_emp)) { 
+  <?php while ($row_emp = mysqli_fetch_assoc($rs_emp)) { 
   ?>
   <tr align="center" bgcolor="">
     <td><div align="center"><?php echo $row_emp[emp_id]; ?></div></td>
@@ -105,15 +107,15 @@ function dino($dino) {
   <?php $alfa=0; $liburan=0;
 	for ($i=0;$i<=$jedah;$i++) 
 	{ 
-		$tgl_ini = strtotime("+$i day" ,strtotime($_POST[awal]));
+		$tgl_ini = strtotime("+$i day" ,strtotime($_POST['awal']));
 		$tgl_ini = date('Y-m-d', $tgl_ini); 
 	
 		$query_rs_view_harian ="
 		SELECT * FROM absensi 
 		WHERE emp_id = '$row_emp[emp_id]' AND tgl='$tgl_ini'
 		";
-		$rs_view_harian = $db->query($query_rs_view_harian) or die(mysql_error()); 
-		$row_view_harian=$db->fetch_array($rs_view_harian);
+		$rs_view_harian = mysqli_query($link, $query_rs_view_harian) or die(mysqli_error($link)); 
+		$row_view_harian=mysqli_fetch_assoc($rs_view_harian);
 		if(date("l", strtotime($tgl_ini))=="Sunday"|| $libur>=1){
 			$liburan=1;
 		}
