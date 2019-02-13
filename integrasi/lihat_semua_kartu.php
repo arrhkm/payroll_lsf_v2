@@ -149,29 +149,7 @@ if(isset($_POST['btn_lokasi'])) {
                 
     </table>
     </form> 
-<form name="set_lokasi" method="POST"> 
-<table>
-<tr>
-<td colspan=3> Set All employee to Lokasi : </td>
-</tr>
-<tr>
-<td> Lokasi </td>
-<td>
-	<select name="lokasi">
-		<?php 
-		$sql_lokasi="SELECT * FROM hs_hr_location";
-		$rs_lokasi = mysqli_query($link, $sql_lokasi);
-		while($row_lokasi = mysqli_fetch_assoc($rs_lokasi))	{
-		
-		?>
-		<option value="<?php echo $row_lokasi['loc_code'];?>"><?php echo $row_lokasi['loc_name'];?></option>
-		<?php } ?>
-	</select>
-</td>
-<td><input name="btn_lokasi" type="submit" class="button" value="Set Lokasi all"></td>
-</tr>
-</table>
-</form> 
+
 
 
 </div>
