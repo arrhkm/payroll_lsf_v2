@@ -43,8 +43,8 @@
 						<li><a href="insert_cuti.php">Ijin Khusus</a></li>
 						<li><a href="periode_cekinout.php">Cek IN & OUT</a></li>
 						<li><a href="./integrasi/index.php">Download Machine</a></li>
-						<li><a href="delete_absen.php">Delete Absen</a></li>
-						<li><a href="delete_absen.php">Delete Absen</a></li>  						
+						<!-- li><a href="delete_absen.php">Delete Absen</a></li -->
+											
 					</ul>
 				</li>
 								
