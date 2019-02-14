@@ -82,7 +82,7 @@
 
         */
         $updateSQL = "
-            UPATE enployee SET emp_name = '$_POST[emp_name]', 
+            UPDATE employee SET emp_name = '$_POST[emp_name]', 
             no_rekening = '$_POST[no_rekening]',
             kd_jabatan = '$_POST[kd_jabatan]',
             gaji_pokok = '$_POST[gaji_pokok]', 
@@ -96,8 +96,8 @@
             start_work = '$_POST[start_work]', 
             emp_group = '$_POST[emp_group]'
             WHERE emp_id = '$_POST[emp_id]'
-        ";
-        //$result1= 
+        ";       
+        
         mysqli_query($link, $updateSQL);
         $updateGoTo .= "m_employee.php";
         if (isset($_SERVER['QUERY_STRING'])) {
@@ -105,7 +105,7 @@
                 $updateGoTo .= $_SERVER['QUERY_STRING'];
         }
         header(sprintf("Location:%s", $updateGoTo));
-        //echo $_POST['emp_group'];
+       
 
     }
     else if ($_REQUEST["delete"]==1) {

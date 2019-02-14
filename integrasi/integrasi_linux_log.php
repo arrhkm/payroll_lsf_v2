@@ -115,7 +115,7 @@ function triggered() { // put data returned by requested URL to selected DIV
 	<tr>
 	<td>
 	<td colspan="3" valign="top" >
-            <input name="download" type="Submit" value="Download">
+            <input name="download" type="Submit" value="Inegrate Log">
         </td>
 	</tr>
 	</table>
@@ -196,15 +196,10 @@ if(isset($_POST["download"]))
 
         // select first data on punch-in
         //----------------------------------------------------------------
-
         //echo "Date : ".$punchDate;
         echo "<br>emp_id : ".$emp_emp_id. "  Nama : ".$emp_emp_name. " No. Card : ".$emp_no_kartu." <br>";
         echo "----------------------------------------------------------------------------------<br>";
-        //echo "IN : ".substr($punchStart, -9,18);
-        //echo "Out: ".substr($punchEnd,-9,18);				
 
-        //var_dump($range_date);
-        
         foreach ($range_date as $dt_date)
         {
                     
@@ -232,12 +227,7 @@ if(isset($_POST["download"]))
                 //$qry_ins = "INSERT IGNORE absensi (tgl, emp_id, jam_in, jam_out) VALUES ('$dt_date[date_now]', '$emp_emp_id', '$jam_in', '$jam_out')";
                 $qry_ins = "REPLACE INTO absensi (tgl, emp_id, jam_in, jam_out) VALUES ('$dt_date[date_now]', '$emp_emp_id', '$jam_in', '$jam_out')";
                 mysqli_query($link, $qry_ins);
-                //if (mysqli_query($link, $qry_ins)){
-                    //echo "masuk pak eko";
-                //} else 
-                //    echo "gagal";
-                        
-                
+
             }
             
         } //end of loop date range
@@ -248,10 +238,6 @@ if(isset($_POST["download"]))
 echo "import to hs_hr_emp_absensi done!<br/>";	
 echo "import to table absensi done!<br/>";
         
-        	
-	?>
-	<?php
-	
 ?> 
 <br/>
 </div> <!-- end of wrapper -->

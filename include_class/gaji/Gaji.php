@@ -100,34 +100,37 @@ class Gaji {
 	}
 	public function gajiTelat() {
 		//if ($this->tolate>=1 and $this->tolate <=25) {
-        if ($this->ev < 7){
-            if ($this->logika =="sabtu"){
-                if ($this->ev ==5){
-                    $telat=$this->pot_telat;
+            if ($this->ev < 7){
+                if ($this->logika =="sabtu"){
+
+                    if ($this->ev ==5){
+                         if ($this->tolate>=1){
+                             $telat=0;
+                        }else {
+                            $telat=$this->pot_telat;
+                        }
+                        return round($telat);
+                    }else {                 
+                        $telat=0;
+                        return round($telat);
+                    }
+                }
+
+            }else
+            {
+                if ($this->tolate>=1) {
+                                //$telat = 1*($this->gaji/7);
+                    $telat = 0; //for LSF
+                    return $telat;
+                } 
+                else {              
+                    $telat = $this->pot_telat; //for LSF 
                     return round($telat);
-                }else {                 
-                	$telat=0;
-                	return round($telat);
-            	}
+                }
             }
-            
-        }else
-        {
-        	if ($this->tolate>=1 and $this->tolate <5) {
-				//$telat = 1*($this->gaji/7);
-	            $telat = 0; //for LSF
-	            return round($telat);
-			} 
-			
-			else {
-				//$telat=0;
-	            $telat = $this->pot_telat; //for LSF 
-	            return round($telat);
-			}
-		}
 
 
 		//return round($telat);
-	}
+        }
 }
 ?>
