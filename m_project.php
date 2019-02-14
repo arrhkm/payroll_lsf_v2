@@ -72,10 +72,10 @@ ddsmoothmenu.init({
 		<td align="left"><?php if ($row_rsproject['luar_pulau']) echo "Yes"; else echo "No";?></td>
 		<td align="left"><?php echo $row_rsproject['penanggungjawab'];?></td>
 		<td align="left"><?php echo $row_rsproject['jabatan'];?></td>
-		<td><a href="ikut_project.php?kd_project=<?php echo $row_rsproject[kd_project];?>">Detil</a></td>		
+		<td><a href="ikut_project.php?kd_project=<?php echo $row_rsproject['kd_project'];?>">Detil</a></td>		
 		<td>
-		<a href="insert_m_project.php?edit=1&kd_project=<?php echo $row_rsproject[kd_project];?>">Edit</a> | 
-		<a href="saveinsert_m_project.php?delete=1&kd_project=<?php echo $row_rsproject[kd_project];?>">Delete</a>
+		<a href="insert_m_project.php?edit=1&kd_project=<?php echo $row_rsproject['kd_project'];?>">Edit</a> | 
+		<a href="saveinsert_m_project.php?delete=1&kd_project=<?php echo $row_rsproject['kd_project'];?>">Delete</a>
 		</td>		
 		</tr>
 		<?php } ?>

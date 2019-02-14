@@ -39,22 +39,24 @@ class Durasi
 		{			
 			$ht_in_array=explode (":", $this->time_in);
 			//JAM IN dan OUT PEKERJA
-			$person_in=$ht_in_array[0];
+			$person_in=(int)$ht_in_array[0];
 			$ht_out_array=explode (":", $this->time_out);
-			if($ht_out_array[0] < 6) { $person_out=$ht_out_array[0]+24;} 
-			else { $person_out=$ht_out_array[0];}
+			if((int)$ht_out_array[0] < 6) { $person_out=(int)$ht_out_array[0]+24;} 
+			else { $person_out=(int)$ht_out_array[0];}
 			
 			//JAM IN dan OUT OFFICE
 			$hm_in_array=explode (":", $this->must_in);
-			$office_in=$hm_in_array[0];
+			$office_in=(int)$hm_in_array[0];
 			
 			$hm_out_array=explode (":", $this->must_out);
-			$office_out=$hm_out_array[0];
+			$office_out=(int)$hm_out_array[0];
 			
 			
 			if ($this->logika=="normal" OR $this->logika=="akhir" OR $this->logika=="sabtu") { //logika normal /akhir /sabtu
 				
-				$fsi=$office_in - $person_in; //SELISIH IN			
+				$fsi=$office_in - $person_in; //SELISIH IN		
+				//var_dump($office_in);
+				//var_dump($office_out);	
 				if(($person_out - $office_out)<0) {
 					$so=0;
 				}
@@ -94,21 +96,21 @@ class Durasi
 			$person_out= explode (":", $this->time_out);
 			$office_out= explode (":", $this->must_out);
 			
-			$sio=$person_out[0]-$person_in[0];
-			if ($office_in[0]>$person_in[0]) {
-				$si=$office_in[0]-$person_in[0];
+			$sio=(int)$person_out[0]-(int)$person_in[0];
+			if ((int)$office_in[0]>(int)$person_in[0]) {
+				$si=(int)$office_in[0]-(int)$person_in[0];
 			}
 			else {
-				$si=$person_in[0]-$office_in[0];
+				$si=(int)$person_in[0]-(int)$office_in[0];
 			}
-			$so=$person_out[0]-$office_out[0];
+			$so=(int)$person_out[0]-(int)$office_out[0];
 			
 			if ($logikaku=="normal") {
-				$ot=$person_out[0]-$office_out[0];
+				$ot=(int)$person_out[0]-(int)$office_out[0];
 				if ($ot<0) $ot=0;
 			}
 			elseif ($logikaku=="libur" OR $logikaku=="minggu") {
-				if ($person_out[0]>=13) {
+				if ((int)$person_out[0]>=13) {
 					$ot=$sio-($si+1);// 1 jam istirahat jam 12:00
 					if ($ot<0) $ot=0;
 				}else {//lembur sampai di bawah jam 13:00
@@ -117,15 +119,15 @@ class Durasi
 				}
 			}
 			elseif ($logikaku=="sabtu") {
-				if ($person_out[0]>=13) {
-					$ot=$person_out[0]-$office_out[0]-1;//(-1 = istirahat 1 jam)
+				if ((int)$person_out[0]>=13) {
+					$ot=(int)$person_out[0]-(int)$office_out[0]-1;//(-1 = istirahat 1 jam)
 					if ($ot<0) $ot=0;
 				} else {
 					$ot=0;
 				}
 			}
 			elseif ($logikaku=="awal") {
-				$ot=$person_out[0]-$office_out[0];
+				$ot=(int)$person_out[0]-(int)$office_out[0];
 				if ($ot<0) $ot=0;
 			}
 			else{
@@ -143,7 +145,7 @@ class Durasi
 		{
 			$person_in= explode (":", $this->time_in);
 			$person_out= explode (":", $this->time_out);
-			$sio=$person_out[0]-$person_in[0];
+			$sio=(int)$person_out[0]-(int)$person_in[0];
 			return $sio;
 		}	
 	}
@@ -154,7 +156,7 @@ class Durasi
 		}else {
 			$person_in= explode (":", $this->time_in);
 			$office_in= explode (":", $this->must_in);
-			$si=$office_in[0]-$person_in[0];
+			$si=(int)$office_in[0]-(int)$person_in[0];
 			return $si;
 		}
 	}
@@ -164,7 +166,7 @@ class Durasi
 		} else {
 			$person_out= explode (":", $this->time_out);
 			$office_out= explode (":", $this->must_out);
-			$so=$person_out[0]-$office_out[0];
+			$so=(int)$person_out[0]-(int)$office_out[0];
 			return $so;
 		}
 	}
@@ -175,12 +177,12 @@ class Durasi
 		} else {
 			$person_in= explode (":", $this->time_in);
 			$office_in= explode (":", $this->must_in);
-			if ($person_in[0]<$office_in[0]) {
+			if ((int)$person_in[0]<(int)$office_in[0]) {
 				$tolate=0;
 			}
 			else{			
-				if ($person_in[0]==$office_in[0]) { //Jika jam in emp = jam masuk kantor  maka diuji menit nya
-					$tolate=$person_in[1]-$office_in[1];				
+				if ((int)$person_in[0]==(int)$office_in[0]) { //Jika jam in emp = jam masuk kantor  maka diuji menit nya
+					$tolate=(int)$person_in[1]-(int)$office_in[1];				
 					/*if ($tolate>5) {
 						//$tolate=$tolate-5; //telat adalah 5 menit 
 						$tolate=$tolate-4; //Potongan telat ketika masuk 5 menit
@@ -189,7 +191,7 @@ class Durasi
 					}
 					*/
 					if ($tolate == 6) {	//tolate in minut											
-						if ($person_in[2]>=1){
+						if ((int)$person_in[2]>=1){
 							$tolate=1;
 						}
 						else {
@@ -201,8 +203,8 @@ class Durasi
 						$tolate = 0;
 					}
 				} else {
-					$tl1=($person_in[0]-$office_in[0])*60;
-					$tl2=$person_in[1];
+					$tl1=((int)$person_in[0]-(int)$office_in[0])*60;
+					$tl2=(int)$person_in[1];
 					$tolate=($tl1+$tl2) -6; //potongan telat ketika masuk 6 menit
 				}
 				
