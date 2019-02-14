@@ -60,24 +60,24 @@ ddsmoothmenu.init({
 
 <div id="templatemo_main" class="wrapper">
 	<!-- Tempat Menaruh Tabel ISI -->
-	    <h2>Group Project <?php echo "No ($row_project[kd_project]) $row_project[nama_project]";?></h2>        		
+	    <h2>Group Project <?php echo "No. (".$row_project['kd_project']." ) ".$row_project['nama_project'];?></h2>        		
 		<!-- Awal tabel -->
 		<table class="bordered" width="700px">
 		<tr align="center">
 		<th>EMP ID</th>
 		<th>Nama Emp</th>		
-		<th colspan = "3" align=center><a href="insert_ikutproject.php?kd_project=<?php echo $_REQUEST[kd_project];?>" >Insert</a> | 
+		<th colspan = "3" align=center><a href="insert_ikutproject.php?kd_project=<?=$_REQUEST['kd_project']?>" >Insert</a> | 
 		<a href="m_project.php"> <-Back </a> 
 		</th>		
 		</tr>
 		<?php while($row_rsproject = mysqli_fetch_assoc($rs_project)) { ?>
 		<tr align="center">
-		<td><?php echo $row_rsproject[emp_id];?></td>
-		<td align="left"><?php echo $row_rsproject[emp_name];?></td>	
+		<td><?php echo $row_rsproject['emp_id'];?></td>
+		<td align="left"><?php echo $row_rsproject['emp_name'];?></td>	
 		
 		<td>
-		<!--<a href="saveinsert_ikutproject.php?edit=1&kd_project=<?php echo $row_rsproject[kd_project];?>&emp_id=<?php echo $row_rsproject[emp_id];?>">Edit</a> |--> 
-		<a href="saveinsert_ikutproject.php?delete=1&kd_project=<?php echo $row_rsproject[kd_project];?>&emp_id=<?php echo $row_rsproject[emp_id];?>">Delete</a>
+		
+		<a href="saveinsert_ikutproject.php?delete=1&kd_project=<?php echo $row_rsproject['kd_project'];?>&emp_id=<?php echo $row_rsproject['emp_id'];?>">Delete</a>
 		</td>		
 		</tr>
 		<?php } ?>

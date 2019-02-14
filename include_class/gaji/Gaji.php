@@ -100,7 +100,15 @@ class Gaji {
 	}
 	public function gajiTelat() {
 		//if ($this->tolate>=1 and $this->tolate <=25) {
-            if ($this->ev < 7){
+			//if ($this->logika == "minggu" OR $this->logika=="libur"){
+			if ($this->logika=="libur" OR $this->logika=="minggu") {
+				if ($this->tolate>=1){
+					$telat = 0;
+				}else {
+					$telat = $this->pot_telat;
+				}
+			}
+            elseif ($this->ev < 7){
                 if ($this->logika =="sabtu"){
 
                     if ($this->ev ==5){
