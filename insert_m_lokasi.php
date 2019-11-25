@@ -7,16 +7,19 @@ $query_rslokasi = "SELECT * FROM hs_hr_location ORDER BY loc_code ASC";
 $rslokasi = mysqli_query($link, $query_rslokasi);
 
 
-$SQLmax="SELECT MAX(loc_code) as NMAX FROM hs_hr_location";
+/*$SQLmax="SELECT MAX(loc_code) as NMAX FROM hs_hr_location";
 $rsMax= mysqli_query($link, $SQLmax);
 $row_rsMax= mysqli_fetch_assoc($rsMax);
-$max=$row_rsMax[NMAX]+1;
+$max=$row_rsMax['NMAX'] + 1;
+*/
 
 if ($_REQUEST['edit']==1) {
-$query_rsEditlokasi = "SELECT * FROM hs_hr_location WHERE loc_code = '$_REQUEST[loc_code]'  ORDER BY loc_code ASC";
-$rsEditlokasi = mysqli_query($link, $query_rsEditlokasi);
-$totalRows_rsEditlokasi = mysqli_num_rows($rsEditlokasi);
+$query_edit_lokasi = "SELECT * FROM hs_hr_location WHERE loc_code = '$_REQUEST[loc_code]'";
+$rsEdit = mysqli_query($link, $query_edit_lokasi);
+$rsEditLokasi = mysqli_fetch_assoc($rsEdit);
+$totalRows = mysqli_num_rows($rsEdit);
 }
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -65,52 +68,53 @@ ddsmoothmenu.init({
 	            <h2>lokasi</h2>
 		<!-- Awal tabel -->
 		<form name="form1" method="POST" action="saveinsert_m_lokasi.php">
-		  <table width="600" border="0" align="center">
+		  <table width="600" border="0" align="">
 			<tr>
 			  <td width="111">loc_code. </td>
 			  <td width="18">&nbsp;</td>
-			  <td width="325"><input name="loc_code" type="text" id="loc_code" value="<?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_code']; else echo $max;?>"><?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_code']; else echo $max;?></td>
+			  <td width="325"><input name="loc_code" type="text" id="loc_code" value="<?php if ($_REQUEST['edit']==1) echo $rsEditLokasi['loc_code'];?>">
+			  </td>
 			</tr>
 			<tr>
 			  <td>loc_name </td>
 			  <td>&nbsp;</td>
-			  <td><input name="loc_name" type="text" id="loc_name" value="<?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_name'];?>"></td>
+			  <td><input name="loc_name" type="text" id="loc_name" value="<?php if ($_REQUEST['edit']==1) echo $rsEditLokasi['loc_name'];?>"></td>
 			</tr>
 			
 			<tr>
 			  <td>loc_state</td>
 			  <td>&nbsp;</td>
-			  <td><input name="loc_state" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_state'];?>"> </td>
+			  <td><input name="loc_state" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $rsEditLokasi['loc_state'];?>"> </td>
 			</tr>
 			<tr>
 			  <td>loc_city</td>
 			  <td>&nbsp;</td>
-			  <td><input name="loc_city" type="text" id="" value="<?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_city'];?>"></td>
+			  <td><input name="loc_city" type="text" id="" value="<?php if ($_REQUEST['edit']==1) echo $rsEditLokasi['loc_city'];?>"></td>
 			</tr>
 			<tr>
 			  <td>loc_add</td>
 			  <td>&nbsp;</td>
-			  <td><input name="loc_add" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_add'];?>"></td>
+			  <td><input name="loc_add" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $rsEditLokasi['loc_add'];?>"></td>
 			</tr>
 			<tr>
 			  <td>loc_zip</td>
 			  <td>&nbsp;</td>
-			  <td><input name="loc_zip" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_zip'];?>"></td>
+			  <td><input name="loc_zip" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $rsEditLokasi['loc_zip'];?>"></td>
 			</tr>
 			<tr>
 			  <td>loc_phone</td>
 			  <td>&nbsp;</td>
-			  <td><input name="loc_phone" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_phone'];?>"></td>
+			  <td><input name="loc_phone" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $rsEditLokasi['loc_phone'];?>"></td>
 			</tr>
 			<tr>
 			  <td>loc_fax</td>
 			  <td>&nbsp;</td>
-			  <td><input name="loc_fax" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_fax'];?>"></td>
+			  <td><input name="loc_fax" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $rsEditLokasi['loc_fax'];?>"></td>
 			</tr>
 			<tr>
 			  <td>loc_comments</td>
 			  <td>&nbsp;</td>
-			  <td><input name="loc_comments" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $row_rsEditlokasi['loc_comments'];?>"></td>
+			  <td><input name="loc_comments" type="text"  id="" value="<?php if ($_REQUEST['edit']==1) echo $rsEditLokasi['loc_comments'];?>"></td>
 			</tr>
 			<tr>
 			  <td>&nbsp;</td>
@@ -136,16 +140,16 @@ ddsmoothmenu.init({
 		  </tr>
 		  <?php while ($row_rslokasi = mysqli_fetch_assoc($rslokasi)) { ?>
 		  <tr>
-			<td><?php echo $row_rslokasi[loc_code];?></td>
-			<td><?php echo $row_rslokasi[loc_name];?></td>
-			<td><?php echo $row_rslokasi[loc_state];?></td>
-			<td><?php echo $row_rslokasi[loc_city];?></td>
-			<td><?php echo $row_rslokasi[loc_add];?></td>
-			<td><?php echo $row_rslokasi[loc_zip];?></td>
-			<td><?php echo $row_rslokasi[loc_phone];?></td>
-			<td><?php echo $row_rslokasi[loc_fax];?></td>
-			<td><?php echo $row_rslokasi[loc_comments];?></td>
-			<td><a href="insert_m_lokasi.php?edit=1&loc_code=<?php echo $row_rslokasi[loc_code];?>">Edit</a></td>
+			<td><?php echo $row_rslokasi['loc_code'];?></td>
+			<td><?php echo $row_rslokasi['loc_name'];?></td>
+			<td><?php echo $row_rslokasi['loc_state'];?></td>
+			<td><?php echo $row_rslokasi['loc_city'];?></td>
+			<td><?php echo $row_rslokasi['loc_add'];?></td>
+			<td><?php echo $row_rslokasi['loc_zip'];?></td>
+			<td><?php echo $row_rslokasi['loc_phone'];?></td>
+			<td><?php echo $row_rslokasi['loc_fax'];?></td>
+			<td><?php echo $row_rslokasi['loc_comments'];?></td>
+			<td><a href="insert_m_lokasi.php?edit=1&loc_code=<?php echo $row_rslokasi['loc_code'];?>">Edit</a></td>
 		  </tr>		 
 		  <?php } ?> 
 		  </table>

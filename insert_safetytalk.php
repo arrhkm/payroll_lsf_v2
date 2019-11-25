@@ -5,7 +5,7 @@ require_once('connections/conn_mysqli_procedural.php');
 $SQLmax="SELECT MAX(kd_safety) as NMAX FROM safety_talk";
 $rsMax= mysqli_query($link, $SQLmax) or die (mysqli_error($link));
 $row_rsMax= mysqli_fetch_assoc($rsMax);
-$max=$row_rsMax[NMAX]+1;
+$max=$row_rsMax['NMAX']+1;
 
 //Mengambil jumlah safty talk
 $sql_jlmsafetytalk="
@@ -83,7 +83,7 @@ ddsmoothmenu.init({
 					<input name="kd_safety" type="hidden" value="<?php if ($_REQUEST['edit']==1) echo $row_editsafety['kd_safety']; else echo $max;?>">
 					<select name="emp_id">
 					<?php while($row_emp=mysqli_fetch_array($rs_emp)) {?>
-					<option value="<?php echo $row_emp[emp_id];?>" <?php if ($row_emp[emp_id]==$row_editsafety[emp_id]) echo 'selected="selected"';?>><?php echo $row_emp[emp_id].", ".$row_emp[emp_name]; ?></options>
+					<option value="<?php echo $row_emp['emp_id'];?>" <?php if ($row_emp['emp_id']==$row_editsafety['emp_id']) echo 'selected="selected"';?>><?php echo $row_emp['emp_id'].", ".$row_emp['emp_name']; ?></options>
 					<?php } ?>
 					</select>					
 			</tr>
@@ -98,7 +98,7 @@ ddsmoothmenu.init({
 			  </a>
 			  
 			  <!--input name="tgl_safety" size="10" maxlength="10"  type="text" id="" value="<?php if ($_REQUEST['edit']==1) echo $row_editsafety['tgl_safety'];?>"--> yyyy-mm-dd
-			  <input name="jml_safety" type="hidden"  value="<?php echo $row_jmlsafety_talk[safety_talk];?>">
+			  <input name="jml_safety" type="hidden"  value="<?php echo $row_jmlsafety_talk['safety_talk'];?>">
 			  </td>
 			</tr>			
 			<tr>

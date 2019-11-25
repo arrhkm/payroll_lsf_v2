@@ -90,7 +90,7 @@ function dino($dino) {
 	<?php 
 	for ($i=0;$i<=$jedah;$i++) 
 	{ 
-		$tgl_ini = strtotime("+$i day" ,strtotime($_POST[awal]));
+		$tgl_ini = strtotime("+$i day" ,strtotime($_POST['awal']));
 		$tgl_ini = date('Y-m-d', $tgl_ini);
 		$hari_ini = date("l", strtotime($tgl_ini));
 	
@@ -101,9 +101,9 @@ function dino($dino) {
   <?php while ($row_emp = mysqli_fetch_assoc($rs_emp)) { 
   ?>
   <tr align="center" bgcolor="">
-    <td><div align="center"><?php echo $row_emp[emp_id]; ?></div></td>
-	<td><div align="right"><?php echo $row_emp[no_kartu]; ?></div>	</td>
-    <td><div align="left"><?php echo $row_emp[emp_name]; ?></div></td>   
+    <td><div align="center"><?php echo $row_emp['emp_id']; ?></div></td>
+	<td><div align="right"><?php echo $row_emp['no_kartu']; ?></div>	</td>
+    <td><div align="left"><?php echo $row_emp['emp_name']; ?></div></td>   
   <?php $alfa=0; $liburan=0;
 	for ($i=0;$i<=$jedah;$i++) 
 	{ 

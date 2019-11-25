@@ -70,18 +70,18 @@ ddsmoothmenu.init({
 		</tr>
 		<?php while($row_rslokasi = mysqli_fetch_assoc($rs_lokasi)) { ?>
 		<tr align="center">
-		<td><?php echo $row_rslokasi[loc_code];?></td>
-		<td><?php echo $row_rslokasi[loc_name];?></td>
-		<td><?php echo $row_rslokasi[loc_state];?></td>
-		<td><?php echo $row_rslokasi[loc_city];?></td>
-		<td><?php echo $row_rslokasi[loc_add];?></td>
-		<td><?php echo $row_rslokasi[loc_zip];?></td>
-		<td><?php echo $row_rslokasi[loc_phone];?></td>
-		<td><?php echo $row_rslokasi[loc_fax];?></td>
-		<td><?php echo $row_rslokasi[loc_comments];?></td>
+		<td><?php echo $row_rslokasi['loc_code'];?></td>
+		<td><?php echo $row_rslokasi['loc_name'];?></td>
+		<td><?php echo $row_rslokasi['loc_state'];?></td>
+		<td><?php echo $row_rslokasi['loc_city'];?></td>
+		<td><?php echo $row_rslokasi['loc_add'];?></td>
+		<td><?php echo $row_rslokasi['loc_zip'];?></td>
+		<td><?php echo $row_rslokasi['loc_phone'];?></td>
+		<td><?php echo $row_rslokasi['loc_fax'];?></td>
+		<td><?php echo $row_rslokasi['loc_comments'];?></td>
 		<td>
-		<a href="insert_m_lokasi.php?edit=1&loc_code=<?php echo $row_rslokasi[loc_code];?>">Edit</a> | 
-		<a href="saveinsert_m_lokasi.php?delete=1&loc_code=<?php echo $row_rslokasi[loc_code];?>">Delete</a>
+		<a href="insert_m_lokasi.php?edit=1&loc_code=<?php echo $row_rslokasi['loc_code'];?>">Edit</a> | 
+		<a href="saveinsert_m_lokasi.php?delete=1&loc_code=<?php echo $row_rslokasi['loc_code'];?>">Delete</a>
 		</td>	
 		</tr>
 		<?php } ?>

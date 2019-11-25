@@ -72,12 +72,12 @@ ddsmoothmenu.init({
 		</tr>
 		<?php while($row_emp = mysqli_fetch_assoc($rs_emp)) { ?>
 		<tr align="center">
-		<td><?php echo $row_emp[emp_id];?></td>
-		<td align="left"><?php echo $row_emp[emp_name];?></td>	
+		<td><?php echo $row_emp['emp_id'];?></td>
+		<td align="left"><?php echo $row_emp['emp_name'];?></td>	
 		
 		<td>
-		<!--<a href="saveinsert_jamsostek.php?edit=1&kd_periode=<?php echo $row_emp[kd_periode];?>&emp_id=<?php echo $row_rsproject[emp_id];?>">Edit</a> |--> 
-		<a href="saveinsert_jamsostek.php?delete=1&kd_periode=<?php echo $row_emp[kd_periode];?>&emp_id=<?php echo $row_emp[emp_id];?>">Delete</a>
+		<!--<a href="saveinsert_jamsostek.php?edit=1&kd_periode=<?php echo $row_emp['kd_periode'];?>&emp_id=<?php echo $row_rsproject['emp_id'];?>">Edit</a> |--> 
+		<a href="saveinsert_jamsostek.php?delete=1&kd_periode=<?php echo $row_emp['kd_periode'];?>&emp_id=<?php echo $row_emp['emp_id'];?>">Delete</a>
 		</td>		
 		</tr>
 		<?php } ?>

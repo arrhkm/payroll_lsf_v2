@@ -4,14 +4,17 @@ include('cek_login.php');
 # Koneksi 
 require_once('connections/conn_mysqli_procedural.php');
 
-if ($_REQUEST[delete]==1) {
-$del_archive= "DELETE FROM pos_archive WHERE kd_project='$_REQUEST[kd_project]' AND kd_periode='$_REQUEST[kd_periode]'";
-$sql_del1="DELETE FROM pos_payroll WHERE kd_project='$_REQUEST[kd_project]' AND kd_periode='$_REQUEST[kd_periode]'";
-$sql_del2= "DELETE FROM pos_payroll_day WHERE kd_project='$_REQUEST[kd_project]' AND kd_periode='$_REQUEST[kd_periode]'";
-mysqli_query($link, $del_archive) or die(mysqli_error($link));
-mysqli_query($link, $sql_del1) or die(mysqli_error($link));
-mysqli_query($link, $sql_del2) or die(mysqli_error($link));
+if (isset($_REQUEST['delete'])){
+	if ($_REQUEST['delete']==1) {
+		$del_archive= "DELETE FROM pos_archive WHERE kd_project='$_REQUEST[kd_project]' AND kd_periode='$_REQUEST[kd_periode]'";
+		$sql_del1="DELETE FROM pos_payroll WHERE kd_project='$_REQUEST[kd_project]' AND kd_periode='$_REQUEST[kd_periode]'";
+		$sql_del2= "DELETE FROM pos_payroll_day WHERE kd_project='$_REQUEST[kd_project]' AND kd_periode='$_REQUEST[kd_periode]'";
+		mysqli_query($link, $del_archive) or die(mysqli_error($link));
+		mysqli_query($link, $sql_del1) or die(mysqli_error($link));
+		mysqli_query($link, $sql_del2) or die(mysqli_error($link));
+	}
 }
+
 
 $sql_pos="SELECT * FROM pos_archive ORDER BY tgl_akhir DESC";
 $rs_pos=mysqli_query($link, $sql_pos) or die(mysqli_error($link));

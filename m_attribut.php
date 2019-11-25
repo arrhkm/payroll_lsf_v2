@@ -65,16 +65,16 @@ ddsmoothmenu.init({
 		</tr>
 		<?php while($row_attribut = mysqli_fetch_assoc($rs_attribut)) { ?>
 		<tr align="center">
-		<td><?php echo $row_attribut[nama_project];?></td>
-		<td align="left"><?php echo $row_attribut[nama_staff];?></td>
+		<td><?php echo $row_attribut['nama_project'];?></td>
+		<td align="left"><?php echo $row_attribut['nama_staff'];?></td>
 		<td align="left"><?php echo "Rp. ".number_format($row_attribut['safety_talk'], 2, ',', '.');?></td>
-		<td align="left"><?php echo $row_attribut[hrd_manager];?></td>
-		<td align="left"><?php echo $row_attribut[deputi];?></td>
-		<td align="left"><?php echo $row_attribut[director];?></td>
-		<td align="left"><?php echo $row_attribut[mng_operasional];?></td>
+		<td align="left"><?php echo $row_attribut['hrd_manager'];?></td>
+		<td align="left"><?php echo $row_attribut['deputi'];?></td>
+		<td align="left"><?php echo $row_attribut['director'];?></td>
+		<td align="left"><?php echo $row_attribut['mng_operasional'];?></td>
 		<td>
-		<a href="insert_m_attribut.php?edit=1&kd_attribut=<?php echo $row_attribut[kd_attribut];?>">Edit</a> | 
-		<a href="saveinsert_m_attribut.php?delete=1&kd_attribut=<?php echo $row_attribut[kd_attribut];?>">Delete</a>
+		<a href="insert_m_attribut.php?edit=1&kd_attribut=<?php echo $row_attribut['kd_attribut'];?>">Edit</a> | 
+		<a href="saveinsert_m_attribut.php?delete=1&kd_attribut=<?php echo $row_attribut['kd_attribut'];?>">Delete</a>
 		</td>		
 		</tr>
 		<?php } ?>

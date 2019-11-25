@@ -8,9 +8,10 @@ class Grandtotal{
 	public $potsafety;
 	public $ket_absen;
 	public $gaji_dasar;
+	public $t_resiko;
 	public $logika;
 	
-	public function setGrandtotal($vgp, $vgl, $vtmasakerja, $vtjam12, $vpottelat, $vpotsafety, $vket_absen, $vgaji_dasar, $vlogika) {
+	public function setGrandtotal($vgp, $vgl, $vtmasakerja, $vtjam12, $vpottelat, $vpotsafety, $vket_absen, $vgaji_dasar, $vresiko, $vlogika) {
 		$this->gp=$vgp;
 		$this->gl=$vgl;
 		$this->tmasakerja=$vtmasakerja;	
@@ -20,6 +21,7 @@ class Grandtotal{
 		$this->ket_absen=$vket_absen;
 		$this->gaji_dasar=$vgaji_dasar;
 		$this->logika=$vlogika;
+		$this->t_resiko = $vresiko;
 		
 	}
 	public function getGrandtotal() {
@@ -35,7 +37,7 @@ class Grandtotal{
 		} else {		
                     //LDP //$grand_total=($this->gp+$this->gl+$this->tmasakerja+$this->tjam12) -($this->pottelat+$this->potsafety);
 		
-                    $grand_total=($this->gp+$this->gl+$this->tmasakerja+$this->tjam12 +$this->pottelat) -($this->potsafety);//LDP
+                    $grand_total=($this->gp+$this->gl+$this->tmasakerja+$this->tjam12 +$this->pottelat +$this->t_resiko) -($this->potsafety);//LSF
                 }       
 		
 		return round($grand_total);

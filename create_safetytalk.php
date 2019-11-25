@@ -65,13 +65,13 @@ ddsmoothmenu.init({
 		</tr>
 		<?php while($row_rssafety = mysqli_fetch_assoc($rs_safety)) { ?>
 		<tr align="center">
-		<td align="rigt"><?php echo $row_rssafety[emp_id];?></td>
-		<td align="left"><?php echo $row_rssafety[emp_name];?></td>
-		<td align="left"><?php echo $row_rssafety[tgl_safety];?></td>
-		<td align="right"><?php echo "Rp ".number_format($row_rssafety[jml_safety],2,',','.');?></td>		
+		<td align="rigt"><?php echo $row_rssafety['emp_id'];?></td>
+		<td align="left"><?php echo $row_rssafety['emp_name'];?></td>
+		<td align="left"><?php echo $row_rssafety['tgl_safety'];?></td>
+		<td align="right"><?php echo "Rp ".number_format($row_rssafety['jml_safety'],2,',','.');?></td>		
 		<td>
-		<a href="insert_safetytalk.php?edit=1&kd_safety=<?php echo $row_rssafety[kd_safety];?>">Edit</a> | 
-		<a href="saveinsert_safetytalk.php?delete=1&kd_safety=<?php echo $row_rssafety[kd_safety];?>">Delete</a>
+		<a href="insert_safetytalk.php?edit=1&kd_safety=<?php echo $row_rssafety['kd_safety'];?>">Edit</a> | 
+		<a href="saveinsert_safetytalk.php?delete=1&kd_safety=<?php echo $row_rssafety['kd_safety'];?>">Delete</a>
 		</td>		
 		</tr>
 		<?php } ?>

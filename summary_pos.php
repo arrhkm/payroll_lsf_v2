@@ -85,22 +85,22 @@ ddsmoothmenu.init({
 		WHERE emp_id='$row_emp[emp_id]' AND kd_periode='$row_periode[kd_periode]' AND kd_project='$row_periode[kd_project]'";
 		$rs_wt_pt=mysqli_query($link, $sql_wtpt);
 		$row_wtpt=mysqli_fetch_assoc($rs_wt_pt);
-		$PT=$row_wtpt[WT] + $row_wtpt[OT];
+		$PT=$row_wtpt['WT'] + $row_wtpt['OT'];
 		?>			
 		<tr align="center">		
-		<td width=100 align="left"><?php echo $row_emp[emp_id];?>
-		<td width=250 align="left"><?php echo $row_emp[emp_name];?>
-		<td width=200 align="left"><?php echo $row_emp[jabatan];?>		
-		<td width="200" align="right"><?php echo "Rp ".number_format($row_emp[tg_all],2,',','.');?></td>
-		<td width="50" align="right"><?php echo $row_wtpt[WT];?></td>
+		<td width=100 align="left"><?php echo $row_emp['emp_id'];?>
+		<td width=250 align="left"><?php echo $row_emp['emp_name'];?>
+		<td width=200 align="left"><?php echo $row_emp['jabatan'];?>		
+		<td width="200" align="right"><?php echo "Rp ".number_format($row_emp['tg_all'],2,',','.');?></td>
+		<td width="50" align="right"><?php echo $row_wtpt['WT'];?></td>
 		<td width="50" align="right"><?php echo $PT;?></td>
-		<td width=150><?php echo $row_emp[no_rekening];?></td>
-		<td width=50><?php echo $row_emp[emp_group];?></td>
+		<td width=150><?php echo $row_emp['no_rekening'];?></td>
+		<td width=50><?php echo $row_emp['emp_group'];?></td>
 		</tr >
 		
 		<?php
-		$GAJI_ALL=$GAJI_ALL + $row_emp[tg_all]; 
-		$WT_ALL=$WT_ALL + $row_wtpt[WT]; 
+		$GAJI_ALL=$GAJI_ALL + $row_emp['tg_all']; 
+		$WT_ALL=$WT_ALL + $row_wtpt['WT']; 
 		$PT_ALL= $PT_ALL + $PT;
 		} 		
 		//::::::::::::::::::::::::::::::::::::::::::::: END OF PERULANGAN KARYAWAN :::::::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -7,7 +7,7 @@ require_once('calendar/tc_calendar.php');
 $SQL_jedah="SELECT DATEDIFF('$_POST[akhir]','$_POST[awal]') as jedah";
 $rs_jedah=mysqli_query($link, $SQL_jedah);
 $row_jedah=mysqli_fetch_assoc($rs_jedah);
-$jedah=$row_jedah[jedah];
+$jedah=$row_jedah['jedah'];
 //SELECT Employee
 $sql_emp= "SELECT b.`emp_id`, c.no_kartu, b.emp_name  
 FROM employee b Join hs_hr_emp_kartu c on (c.emp_number_kartu=b.emp_id)
@@ -114,14 +114,14 @@ $rs_periode=mysqli_query($link, $sql_periode);
   ?>
   
             <tr align="center" bgcolor="<?=$bgcolor?>">
-              <td><div align="center"><?php echo $row_emp[emp_id]; ?></div></td>
-                  <td><div align="right"><?php echo $row_emp[no_kartu]; ?></div>	</td>
-                  <td><div align="right"><?php echo $row_emp[emp_name]; ?></div>	</td>
+              <td><div align="center"><?php echo $row_emp['emp_id']; ?></div></td>
+                  <td><div align="right"><?php echo $row_emp['no_kartu']; ?></div>	</td>
+                  <td><div align="right"><?php echo $row_emp['emp_name']; ?></div>	</td>
               <td><div align="left"><?php echo date("l", strtotime($tgl_ini)); ?></div></td>
               <td><div align="center"><?php echo $tgl_ini; ?></div></td>
               <td><div align="center"><?php echo $row_view_harian['jam_in']; ?></div></td>
               <td><div align="center"><?php echo $row_view_harian['jam_out']; ?></div></td>	
-                  <td><div align="center"><?php echo $row_view_harian[ket_absen]; ?></div></td>
+                  <td><div align="center"><?php echo $row_view_harian['ket_absen']; ?></div></td>
                   <td><div align="center"><?php echo "$liburan"; ?></div></td>
               <td><div align="center"><?php echo "x"; ?></div></td>
                   <td><div align="center"><?php echo "x"; ?></div></td>

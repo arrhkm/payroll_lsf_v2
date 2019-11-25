@@ -10,7 +10,7 @@ $rsgroup = mysqli_query($link, $query_rsgroup) or die(mysqli_error($link));
 $SQLmax="SELECT MAX(id) as NMAX FROM group_employee";
 $rsMax= mysqli_query($link, $SQLmax) or die (mysqli_error($link));
 $row_rsMax= mysqli_fetch_assoc($rsMax);
-$max=$row_rsMax[NMAX]+1;
+$max=$row_rsMax['NMAX']+1;
 
 if ($_REQUEST['edit']==1) {
 $query_rsEditgroup = "SELECT * FROM group_employee WHERE id = '$_REQUEST[id]'  ORDER BY id ASC";
@@ -93,9 +93,9 @@ ddsmoothmenu.init({
 		  </tr>
 		  <?php while ($row_rsgroup = mysqli_fetch_assoc($rsgroup)) { ?>
 		  <tr>
-			<td><?php echo $row_rsgroup[id];?></td>
-			<td><?php echo $row_rsgroup[group_name];?></td>			
-			<td><a href="insert_m_group.php?edit=1&id=<?php echo $row_rsgroup[id];?>">Edit</a></td>
+			<td><?php echo $row_rsgroup['id'];?></td>
+			<td><?php echo $row_rsgroup['group_name'];?></td>			
+			<td><a href="insert_m_group.php?edit=1&id=<?php echo $row_rsgroup['id'];?>">Edit</a></td>
 		  </tr>		 
 		  <?php } ?> 
 		  </table>

@@ -77,17 +77,26 @@ ddsmoothmenu.init({
 		$row_periode['potongan_jamsos']);
 		?>	
 		<tr bgcolor="">	
-			<th colspan=18>
+			<th colspan=19>
 			<table border="0" width="100%" bgcolor="" color="Green" class="" align="center"  >
-				<tr >
-				<td align="left" width=20%><?php echo $Emp->emp_name."<br>".$Emp->jabatan;?></td>
-				<td align="center" width=60%><?php echo $row_emp['nama_project'];?></td>
-				<td align="left" width="20%"><?php echo $Emp->emp_id."<br>".$Emp->Periode->nama_periode;?>
-				
-				<a href="#"
-				onclick="javascript:void window.open('cek_absen.php?<?php echo "emp_id=".$Emp->emp_id."&tgl_start=".$Emp->Periode->tgl_awal."&tgl_end=".$Emp->Periode->tgl_akhir;?>','1395882331015','width=500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=500,top=300');return false;">
-				CEK </a>
-				</td>
+				<tr>
+				<td align="center" width=100% colspan="3"><?=$row_emp['nama_project']?></td>
+				</tr>
+				<tr>
+					
+					<td align="left" width="1/3%"">
+						<?="EMP : ".$Emp->emp_name." : ".$Emp->emp_id." <br> F-MAN : ". $Emp->getForeman($link, $Emp->emp_id)?>
+						
+					</td align = "lef" width=1/3%>
+					<td align="left" width=""><?="JAB. : ".$Emp->jabatan."<br> PERIOD : ".$Emp->Periode->nama_periode?>	</td>
+					<td align="left" width=1/3%>								
+						<?="CONTRACT : START - END"?>
+						<?="<br> PROJ.:"?>
+						<a href="#"
+						onclick="javascript:void window.open('cek_absen.php?<?php echo "emp_id=".$Emp->emp_id."&tgl_start=".$Emp->Periode->tgl_awal."&tgl_end=".$Emp->Periode->tgl_akhir;?>','1395882331015','width=500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=500,top=300');return false;">
+						CEK LOG 
+						</a>
+					</td>
 				</tr>
 			</table>
 			
@@ -110,9 +119,9 @@ ddsmoothmenu.init({
 			<th>Premi Hadir</th>
 			<th>T. Mskerja</th>
 			<th>T. Jam 12</th>
+			<th>T. Resiko</th>
 			<th>Pot.Safety</th>		
 			<th>Total</th>
-			
 		</tr>
 		<?php
 				
@@ -133,7 +142,13 @@ ddsmoothmenu.init({
 		for ($i=0;$i<=$selisih;$i++) { 
 			//setting tanggal ini 
 			$tgl_ini=$Emp->Periode->tgl_ini[$i];
-			//-------------------end----------------
+			
+			
+			//--------Tunjangan Resiko--------------- 
+			$Emp->TunjanganResiko->setTunjanganResiko($link, $Emp->emp_id, $Emp->Periode->tgl_awal, $Emp->Periode->tgl_akhir);		
+			//------end tunjangan resiko-----------	
+
+
 			//-----------Tgl Libur -----------------
 			$sql_libur="SELECT * FROM tanggal_libur WHERE kd_periode=$kd_periode AND tgl_libur='$tgl_ini'";
 			$rs_libur=mysqli_query($link, $sql_libur);
@@ -261,7 +276,8 @@ ddsmoothmenu.init({
                             $Emp->Gaji->gajiTelat(), 
                             $Emp->Safety->getPotongan(),
                             $row_absensi['ket_absen'], 
-                            $Emp->gaji_pokok, 
+							$Emp->gaji_pokok, 
+							$Emp->TunjanganResiko->getTunjanganResiko($tgl_ini),
                             $Emp->DayPeriode->logika_periode
                         );
 			
@@ -292,6 +308,7 @@ ddsmoothmenu.init({
                             <td><?php echo number_format($Emp->Gaji->gajiTelat(), 2, ',', '.');?></td>
                             <td><?php echo number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.');?></td>
                             <td><?php echo number_format($Emp->Tjam->getTunjangan(), 2, ',', '.'); //Tunajangan Jam 12?></td> 
+                            <td><?php echo number_format($Emp->TunjanganResiko->getTunjanganResiko($tgl_ini), 2, ',', '.'); ?></td> 
                             <td><?php echo number_format($Emp->Safety->getPotongan(), 2, ',', '.');?></td>
 
                             <td><?php if ($row_absensi['ket_absen']) echo $row_absensi['ket_absen']." - "; echo number_format($GT, 2, ',', '.');?></td>	
@@ -308,7 +325,7 @@ ddsmoothmenu.init({
 		$sql_plusmin="SELECT SUM(jml_plus) as jml_plus, sum(jml_min) as jml_min FROM plusmin_gaji WHERE emp_id='$Emp->emp_id' AND kd_periode='$kd_periode'";
 		$Emp->Plusmin->setdbPlusmin($link, $sql_plusmin);
 		//----- End Plusmin -----
-		
+		$SUM_GT = $SUM_GT;
 		$GAJI_BERSIH=($SUM_GT + $Emp->Plusmin->getPlus())-($Emp->Kasbon->jml_cicil + $Emp->Jamsostek->getPotongan() + $Emp->Plusmin->getMin());
 		?>
 		<tr class="hkm_td">
@@ -322,39 +339,40 @@ ddsmoothmenu.init({
 			<td colspan=0><?php ?> </td>
 			<td colspan=0><?php echo number_format($SUM_TMSKER,2, ',','.');?> </td>
 			<td colspan=0><?php echo number_format($SUM_TJAM12,2, ',','.');?> </td>
+			<td colspan=0><?=number_format($Emp->TunjanganResiko->getTunjanganResikoPeriod(), 2, ',','.')?> </td>
 			<td colspan=0><?php echo number_format($SUM_SAFETY,2, ',','.');?> </td>
 			<td><?php echo number_format($SUM_GT, 2, ',', '.');?> </td>
 		</tr>
 		<tr>
-			<td colspan=14><?php echo " Kasbon : ". number_format($Emp->Kasbon->jml_kasbon,2,',','.').
+			<td colspan=15><?php echo " Kasbon : ". number_format($Emp->Kasbon->jml_kasbon,2,',','.').
 									  " Sisa kasbon : ".number_format($Emp->Kasbon->sisa_cicil,2, ',', '.');?>
 			</td>
 			<td colspan=3>Cicil Kasbon</td>
 			<td><?php echo number_format($Emp->Kasbon->jml_cicil,2, ',', '.');?></td>
 		</tr>
 		<tr>
-			<td colspan=14></td>
+			<td colspan=15></td>
 			<td colspan=3>Potongan Jamsostek </td>
 			<td colspan=0>
 				<?php echo "Rp. ".number_format($Emp->Jamsostek->getPotongan(), 2, '.', '.');// echo $Emp->Jamsostek->getPotongan();?>
 			</td>
 		</tr>
 		<tr>
-			<td colspan=14></td>
+			<td colspan=15></td>
 			<td colspan=3>Gaji dikurangi </td>
 			<td colspan=0>
 				<?php echo "Rp. ".number_format($Emp->Plusmin->getMin(), 2, ',','.');?>
 			</td>
 		</tr>
 		<tr>
-			<td colspan=14></td>
+			<td colspan=15></td>
 			<td colspan=3>Gaji ditambahi </td>
 			<td colspan=0>
 				<?php echo "Rp. ".number_format($Emp->Plusmin->getPlus(), 2, ',','.');?>
 			</td>
 		</tr>
 		<tr>
-			<td colspan=14></td>
+			<td colspan=15></td>
 			<td colspan=3>TOTAL </td>
 			<td colspan=0>
 				<?php echo "Rp. ".number_format($GAJI_BERSIH,2, ',', '.');?>

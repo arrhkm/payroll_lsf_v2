@@ -56,8 +56,8 @@ $rs_machine = mysqli_query($link, $machine_qry);
         . "<td>".$machine[$i]['com']."</td>";
         ?>
         <td>
-            <a href="_form_machine.php?id=<?=$machine[$i][id]?>">Edit</a> | 
-            <a href="_form_machine.php?delete=TRUE&id=<?=$machine[$i][id]?>">Delete</a>
+            <a href="_form_machine.php?id=<?=$machine[$i]['id']?>">Edit</a> | 
+            <a href="_form_machine.php?delete=TRUE&id=<?=$machine[$i]['id']?>">Delete</a>
         </td>
         
         <?php

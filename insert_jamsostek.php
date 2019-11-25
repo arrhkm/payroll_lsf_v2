@@ -2,7 +2,7 @@
 # Koneksi 
 require_once('connections/conn_mysqli_procedural.php');
 
-$kd_periode=$_REQUEST[kd_periode];
+$kd_periode=$_REQUEST['kd_periode'];
 /*
 $qry_emp="SELECT b.emp_id, b.emp_name, b.pot_jamsos
 FROM jamsostek a RIGHT JOIN employee b 
@@ -11,8 +11,8 @@ ON (b.emp_id = a.emp_id) WHERE a.emp_id IS NULL";
 $qry_emp="
 SELECT a.emp_id, a.emp_name, a.pot_jamsos
 FROM employee a 
-WHERE emp_id like 'LSF%'
 ";
+//-- WHERE emp_id like 'LSF%'
 
 
 $rs_emp=mysqli_query($link, $qry_emp);
@@ -106,8 +106,8 @@ ddsmoothmenu.init({
 			<tr>
 			<td>
 				<!-- input type='submit' value='Tambah' name='btn_tambah' class='bordered' onClick='return confirm("Anda yakin ingin menambah data yang terpilih???")' -->
-                                <input type="submit" value="Tambah" name="btn_tambah">
-                                <input type='button' value='Back' name='btn_back' class='bordered' onClick="location='jamsostek.php?kd_periode=<?php echo $_REQUEST[kd_periode];?>'">
+				<input type="submit" value="Tambah" name="btn_tambah">
+				<input type='button' value='Back' name='btn_back' class='bordered' onClick="location='jamsostek.php?kd_periode=<?=$_REQUEST['kd_periode']?>'">
 			</td>
 			</tr>
 				  

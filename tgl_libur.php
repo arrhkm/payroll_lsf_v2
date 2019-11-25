@@ -9,7 +9,7 @@ $rs_libur = mysqli_query($link, $query_libur);
 $SQLmax="select MAX(kd_libur) as NMAX FROM tanggal_libur ";
 $rsMax= mysqli_query($link, $SQLmax) ;
 $row_rsMax= mysqli_fetch_assoc($rsMax);
-$max=$row_rsMax[NMAX]+1;
+$max=$row_rsMax['NMAX']+1;
 
 
 if ($_REQUEST['edit']==1) {
@@ -85,7 +85,7 @@ ddsmoothmenu.init({
 			<tr>
 			  <td>kd_periode </td>
 			  <td>&nbsp;</td>
-			  <td><input name="kd_periode" type="text" id="" value="<?php echo $_REQUEST[kd_periode];?>"></td>
+			  <td><input name="kd_periode" type="text" id="" value="<?php echo $_REQUEST['kd_periode'];?>"></td>
 			</tr>
 			<tr>
 			  <td>tgl Libur</td>

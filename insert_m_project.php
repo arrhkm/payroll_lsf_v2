@@ -10,7 +10,7 @@ $rs_project = mysqli_query($link, $qry_project);
 $SQLmax="SELECT MAX(kd_project) as NMAX FROM project";
 $rsMax= mysqli_query($link, $SQLmax);
 $row_rsMax= mysqli_fetch_assoc($rsMax);
-$max=$row_rsMax[NMAX]+1;
+$max=$row_rsMax['NMAX']+1;
 
 if ($_REQUEST['edit']==1) {
 $qry_editproject = "SELECT * FROM project WHERE kd_project = '$_REQUEST[kd_project]' ";

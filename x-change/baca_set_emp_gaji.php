@@ -1,8 +1,8 @@
 <?php 
 # Koneksi 
-require_once('../connections/CConnect.php');
-$db=New Database();
-$db->connect();
+require_once('../connections/conn_mysqli_procedural.php');
+//$db=New Database();
+//$db->connect();
 ?>
 <html>
 <body>
@@ -36,8 +36,8 @@ if (!empty($_FILES["filecsv"]["tmp_name"]))
 		$jml++;
 	   // proses data seperti biasa, data berupa array kolom per baris
 	   //echo "$data[0] / $data[1] / $data[2] / $data[3]<br>";
-	   $qry_input = "UPDATE employee SET gaji_pokok = '$data[1]' WHERE emp_id='$data[0]'";
-	   $db->query($qry_input) or die(mysql_error());
+	   $qry_input = "UPDATE employee SET gaji_pokok = '$data";
+	   mysqli_query($link, $qry);
 	}
 fclose($datacsv);
 //echo "<SCRIPT>alert onclick ='myFunction()' ('".$jml." baris data berhasil dibaca');</SCRIPT>";

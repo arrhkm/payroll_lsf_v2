@@ -63,11 +63,11 @@ ddsmoothmenu.init({
 		</tr>
 		<?php while($row_rsgroup = mysqli_fetch_assoc($rs_group)) { ?>
 		<tr align="center">
-		<td><?php echo $row_rsgroup[id];?></td>
-		<td><?php echo $row_rsgroup[group_name];?></td>		
+		<td><?php echo $row_rsgroup['id'];?></td>
+		<td><?php echo $row_rsgroup['group_name'];?></td>		
 		<td>
-		<a href="insert_m_group.php?edit=1&loc_code=<?php echo $row_rsgroup[id];?>">Edit</a> | 
-		<a href="saveinsert_m_group.php?delete=1&loc_code=<?php echo $row_rsgroup[id];?>">Delete</a>
+		<a href="insert_m_group.php?edit=1&loc_code=<?php echo $row_rsgroup['id'];?>">Edit</a> | 
+		<a href="saveinsert_m_group.php?delete=1&loc_code=<?php echo $row_rsgroup['id'];?>">Delete</a>
 		</td>	
 		</tr>
 		<?php } ?>

@@ -4,7 +4,11 @@
     	<div id="site_title"><a href="#">Lintech.co.id</a></div>		
         <div id="templatemo_menu" class="ddsmoothmenu">
             <ul>                
-                <li><a href="#" class="<?php if ($_GET[sel]==1) echo "selected";?>">Master</a>
+                <li>
+                	<a href="../payroll_dw_yii/web/index.php" class="<?php if ($_GET['sel']==1) echo "selected";?>">app yii</a>
+                </li>
+                <li>
+                	<a href="#" class="<?php if ($_GET['sel']==1) echo "selected";?>">Master</a>
                     <ul>
                         <li><a href="m_periode.php">Periode</a></li>
                         <li><a href="m_employee.php">Employee</a></li>

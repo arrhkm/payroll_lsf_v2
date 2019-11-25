@@ -67,7 +67,7 @@ ddsmoothmenu.init({
 
 <div id="templatemo_main" class="wrapper">
 	<!-- Tempat Menaruh Tabel ISI -->
-	<h2>Insert insentif gaji employee <?php echo $row_emp[emp_id].", ".$row_emp[emp_name];?></h2>     
+	<h2>Insert insentif gaji employee <?php echo $row_emp['emp_id'].", ".$row_emp['emp_name'];?></h2>     
 	    
 		<table class="bordered">
 		<tr>
@@ -83,9 +83,9 @@ ddsmoothmenu.init({
 				<table border=0>
 				<tr>
 				<td><?php echo $no;?>
-				<input type=checkbox name=cek[] value="<?php echo $row[tgl];?>" id=<?php echo "id-".$no;?>> 
+				<input type=checkbox name=cek[] value="<?php echo $row['tgl'];?>" id=<?php echo "id-".$no;?>> 
 				</td>
-				<td><?php echo $row[tgl].", ".$row[jam_in]."-".$row[jam_out]; if ($row[jam_out]>24) echo ".:";?></td>
+				<td><?php echo $row['tgl'].", ".$row['jam_in']."-".$row['jam_out']; if ($row['jam_out']>24) echo ".:";?></td>
 				</tr></table> <?php
 				$no++;
 				}	
@@ -95,7 +95,7 @@ ddsmoothmenu.init({
 				<input type= hidden name= "emp_id" value="<?php echo $_REQUEST['emp_id'];?>">
 				<input type= hidden name= "kd_periode" value="<?php echo $_REQUEST['kd_periode'];?>">
 				<input type='submit' value='Tambah' name='btn_tambah' class='bordered' onClick='return confirm("Anda yakin ingin menambah data yang terpilih???")'>
-				<input type='button' value='Back' name='btn_back' class='bordered' onClick="location='emp_insentif.php?kd_periode=<?php echo $_REQUEST[kd_periode];?>'">
+				<input type='button' value='Back' name='btn_back' class='bordered' onClick="location='emp_insentif.php?kd_periode=<?php echo $_REQUEST['kd_periode'];?>'">
 		</form>
 		</td>
 		</tr>

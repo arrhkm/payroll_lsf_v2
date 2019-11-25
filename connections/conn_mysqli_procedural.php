@@ -1,22 +1,20 @@
 <?php
 
  $host = "localhost";
- $database = "lsf_payroll";
+ /*$database = "lsf_payroll";
  $user = "lsf";
  $password = "Payrolllsf32#";
+*/
+$database = "lsf_payroll";
+ $user = "superhakam";
+ $password = "superhakam";
  $port = 3306;
  $socket = 1226;
  //-----------------------------
+
 $link = mysqli_connect($host, $user, $password);
-//$link = mysqli_connect($host, $user, $password, $database, $port, $socket);
 mysqli_select_db($link, $database);
-/*
-$query_rsPeriode = "SELECT * FROM periode ORDER BY kd_periode DESC";
-$result = mysqli_query($link, $query_rsPeriode);
-while ($dt = mysqli_fetch_assoc($result)){
-    echo $dt['kd_periode']." - ".$dt['nama_periode']." <br>";
-}
-*/
+
 
 class DbAutoIncrement
 {
@@ -40,17 +38,7 @@ class DbAutoIncrement
         }
         return $this->id;
     }
-    /*{
-        $sql = "SELECT MAX('".$field_name."')as nmax FROM '".$this->table_name."' WHERE machine_id='".id_machine."'";
-        $rs = mysqli_query($this->link, $sql);
-        $dt = mysqli_fetch_assoc($rs);
-        if ($dt['nmax']>0){
-            $this->id = $dt['nmax']+1;
-        } else {
-            $this->id = 1;
-        }
-        return $this->id;
-    }*/
+    
     
     public function maxValue($field_name)
     {

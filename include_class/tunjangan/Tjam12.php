@@ -20,3 +20,4 @@ class Tjam12 {
 		return $nilai_tunjangan;
 	}
 }
+

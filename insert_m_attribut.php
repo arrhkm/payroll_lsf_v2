@@ -10,7 +10,7 @@ $rs_attribut = mysqli_query($link, $qry_attribut);
 $SQLmax="SELECT MAX(kd_attribut) as NMAX FROM attribut_payroll";
 $rsMax= mysqli_query($link, $SQLmax);
 $row_rsMax= mysqli_fetch_assoc($rsMax);
-$max=$row_rsMax[NMAX]+1;
+$max=$row_rsMax['NMAX']+1;
 
 if ($_REQUEST['edit']==1) {
 $qry_editattribut = "SELECT * FROM attribut_payroll WHERE kd_attribut = '$_REQUEST[kd_attribut]' ";

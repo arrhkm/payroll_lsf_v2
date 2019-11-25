@@ -51,20 +51,20 @@ while ($row_emp=mysqli_fetch_assoc($rs_emp))
 	WHERE emp_id='$row_emp[emp_id]' AND kd_periode=$row_archive[kd_periode] AND kd_project=$row_archive[kd_project]";
 	$rs_wt_pt=mysqli_query($link, $sql_wtpt);
 	$row_wtpt=mysqli_fetch_assoc($rs_wt_pt);
-	$PT=$row_wtpt[WT] + $row_wtpt[OT];
-	$GAJI=number_format($row_emp[tg_all],2,',','.');
+	$PT=$row_wtpt['WT'] + $row_wtpt['OT'];
+	$GAJI=number_format($row_emp['tg_all'],2,',','.');
 			
-			$pdf->Cell($w[0],$t_baris,$row_emp[emp_id],1,0,'C');
-			$pdf->Cell($w[1],$t_baris,$row_emp[emp_name],1,0,'L');
-			$pdf->Cell($w[2],$t_baris,$row_emp[jabatan],1,0,'L');
+			$pdf->Cell($w[0],$t_baris,$row_emp['emp_id'],1,0,'C');
+			$pdf->Cell($w[1],$t_baris,$row_emp['emp_name'],1,0,'L');
+			$pdf->Cell($w[2],$t_baris,$row_emp['jabatan'],1,0,'L');
 			$pdf->Cell($w[3],$t_baris,$GAJI,1,0,'R');
-			$pdf->Cell($w[4],$t_baris,$row_wtpt[WT],1,0,'C');
+			$pdf->Cell($w[4],$t_baris,$row_wtpt['WT'],1,0,'C');
 			$pdf->Cell($w[5],$t_baris,$PT,1,0,'C');
-			$pdf->Cell($w[6],$t_baris,$row_emp[no_rekening],1,0,'C');			
+			$pdf->Cell($w[6],$t_baris,$row_emp['no_rekening'],1,0,'C');			
 			$pdf->Ln();
 				
-	$GAJI_ALL=$GAJI_ALL + $row_emp[tg_all]; 
-	$WT_ALL=$WT_ALL + $row_wtpt[WT]; 
+	$GAJI_ALL=$GAJI_ALL + $row_emp['tg_all']; 
+	$WT_ALL=$WT_ALL + $row_wtpt['WT']; 
 	$PT_ALL= $PT_ALL + $PT;
 } 
 //:::::::::::::::::::::::::END OF PERULANGAN KARYAWAN :::::::::::::::::::::::::::::::::::::::::
@@ -122,16 +122,16 @@ while ($row_emp=mysqli_fetch_assoc($rs_emp))
 		$pdf->Ln();
 		*/
 		$pdf->SetFont('','U','');
-		$pdf->Cell(30,3,$row_archive[deputi],0,0,'C');
+		$pdf->Cell(30,3,$row_archive['deputi'],0,0,'C');
 		$pdf->Cell(5,3,'',0,0,'C');
-		$pdf->Cell(30,3,$row_archive[mng_operasional],0,0,'C');
+		$pdf->Cell(30,3,$row_archive['mng_operasional'],0,0,'C');
 		$pdf->Cell(5,3,'',0,0,'C');
-		$pdf->Cell(30,3,$row_archive[penanggung_jawab],0,0,'C');
+		$pdf->Cell(30,3,$row_archive['penanggung_jawab'],0,0,'C');
 		$pdf->Cell(5,3,'',0,0,'C');
 		
-		$pdf->Cell(30,3,$row_archive[hrd_manager],0,0,'C');
+		$pdf->Cell(30,3,$row_archive['hrd_manager'],0,0,'C');
 		$pdf->Cell(5,3,'',0,0,'C');		
-		$pdf->Cell(30,3,$row_archive[staff],0,0,'C');
+		$pdf->Cell(30,3,$row_archive['staff'],0,0,'C');
 		$pdf->Ln();
 		//----------------------------------------
 		$pdf->SetFont('','','');
@@ -139,7 +139,7 @@ while ($row_emp=mysqli_fetch_assoc($rs_emp))
 		$pdf->Cell(5,3,'',0,0,'C');
 		$pdf->Cell(30,3,'Manager Operasional',0,0,'C');
 		$pdf->Cell(5,3,'',0,0,'C');
-		$pdf->Cell(30,3,$row_archive[jabatan_penanggung],0,0,'C');
+		$pdf->Cell(30,3,$row_archive['jabatan_penanggung'],0,0,'C');
 		$pdf->Cell(5,3,'',0,0,'C');
 		
 		$pdf->Cell(30,3,'Manager HRD',0,0,'C');
@@ -156,7 +156,7 @@ while ($row_emp=mysqli_fetch_assoc($rs_emp))
 		//----------------------------------------
 		$pdf->SetFont('','U','');
 		$pdf->Cell(45,3,'',0,0,'C');
-		$pdf->Cell(80,3,$row_archive[director],0,0,'C');
+		$pdf->Cell(80,3,$row_archive['director'],0,0,'C');
 		$pdf->Cell(45,3,'',0,0,'C');		
 		$pdf->Ln();
 		//----------------------------------------

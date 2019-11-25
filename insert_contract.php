@@ -74,15 +74,15 @@ ddsmoothmenu.init({
 			<tr>
 			  <td width="" colspan=3>
 				<?php echo "$ROW_emp[emp_id] $ROW_emp[emp_name] - $ROW_emp[nama_jabatan]";?>
-				<input type=hidden name=emp_id value=<?php echo $ROW_emp[emp_id];?>>	
+				<input type=hidden name=emp_id value=<?php echo $ROW_emp['emp_id'];?>>	
 			  </td>
 			 
 			</tr>
 			<tr>
 			  <td>id. Contarct</td>
 			  <td>&nbsp;</td>
-			  <td><?php if ($_REQUEST['edit']==1) echo $row_rsEditemp['start_kontrak']; else echo $ROWmax[NMAX]+1;?>
-				<input type=hidden name=id_kontrak value=<?php if ($_REQUEST['edit']==1) echo $ROWedit['id_kontrak']; else echo $ROWmax[NMAX]+1;?>>			  
+			  <td><?php if ($_REQUEST['edit']==1) echo $row_rsEditemp['start_kontrak']; else echo $ROWmax['NMAX']+1;?>
+				<input type=hidden name=id_kontrak value=<?php if ($_REQUEST['edit']==1) echo $ROWedit['id_kontrak']; else echo $ROWmax['NMAX']+1;?>>			  
 			  </td>						  
 			</tr>
 			<tr>

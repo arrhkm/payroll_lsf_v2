@@ -60,6 +60,22 @@ class Periode
 			//echo "<br> tanggal ke- $i | ".$this->tgl_ini[$i]."";
 		}
 	}
+
+	public function getListTgl(){
+		$date1= date_create($this->tgl_awal);
+        $date2 = date_create($this->tgl_akhir);
+        $diff = date_diff($date1, $date2);
+        $range=$diff->days;
+                
+        $result_date = array();
+        $tgl_ini = date_create($this->tgl_awal);
+        for ($i = 0; $i <= $range; $i++) {
+            $_tgl_ini = date_format($tgl_ini, 'Y-m-d');          
+            	array_push($result_date, $_tgl_ini);                          
+            date_add($tgl_ini, date_interval_create_from_date_string("1 days"));            
+		}
+		return $result_date;
+	}
 		
 }
 ?>

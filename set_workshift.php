@@ -77,9 +77,9 @@ ddsmoothmenu.init({
 				<table border=0>
 				<tr>
 				<td><?php echo $no;?>
-				<input type=checkbox name=cek[] value="<?php echo $row[emp_id];?>" id=<?php echo "id-".$no;?>> 
+				<input type=checkbox name=cek[] value="<?php echo $row['emp_id'];?>" id=<?php echo "id-".$no;?>> 
 				</td>
-				<td><?php echo $row[emp_id]."-".$row[emp_name];?></td>
+				<td><?php echo $row['emp_id']."-".$row['emp_name'];?></td>
 				</tr></table> <?php
 				$no++;
 				}	
@@ -90,14 +90,14 @@ ddsmoothmenu.init({
 			<td>
 				<input type=radio name=pilih onClick='for (i=1;i<<?php echo $no; ?>;i++){document.getElementById("id-"+i).checked=true;}'>Centang Semua
 				<input type=radio name=pilih onClick='for (i=1;i<<?php echo $no; ?>;i++){document.getElementById("id-"+i).checked=false;}'> Hapus Semua Centang
-				<input type= hidden name= "emp_id" value="<?php echo $row[emp_id];?>">
-				<input type= hidden name= "id_workshift" value="<?php echo $_REQUEST[id_workshift];?>">
+				<input type= hidden name= "emp_id" value="<?php echo $row['emp_id'];?>">
+				<input type= hidden name= "id_workshift" value="<?php echo $_REQUEST['id_workshift'];?>">
 			</td>
 			</tr>
 			<tr>
 			<td>
 				<input type='submit' value='Tambah' name='btn_tambah' class='bordered' onClick='return confirm("Anda yakin ingin menambah data yang terpilih???")'>
-				<input type='button' value='Back' name='btn_back' class='bordered' onClick="location='m_workshift.php?id_workshift=<?php echo $_REQUEST[id_workshift];?>'">
+				<input type='button' value='Back' name='btn_back' class='bordered' onClick="location='m_workshift.php?id_workshift=<?php echo $_REQUEST['id_workshift'];?>'">
 			</td>
 			</tr>
 				  

@@ -16,7 +16,7 @@ require_once('connections/conn_mysqli_procedural.php');
     header("Content-Type: application/vnd.ms-excel");
     header("Content-Disposition: attachment; filename=\"$filename\"");
     echo 'emp_id' . "\t" . 'tgl' . "\t" . 'jam_in' . "\t". 'jam_out' . "\t". 'jam_ev' . "\t". 'ot'. "\t". 'gp' 
-        . "\t". 'gl' . "\t". 'premi' . "\t". 't_jam12' . "\t". 't_msker' . "\t". 'gt' . "\t". 'cicil_kasbon'
+        . "\t". 'gl' . "\t". 'premi' . "\t". 't_jam12' . "\t". 't_msker' . "\t". 't_resiko' . "\t". 'gt' . "\t". 'cicil_kasbon'
         . "\t". 'jamsos'. "\t". 'over_gaji'. "\t". 'def_gaji'
         . "\n";
     while($dt_pos= mysqli_fetch_assoc($rs_exp_pos)){
@@ -39,16 +39,17 @@ require_once('connections/conn_mysqli_procedural.php');
                 'premi'=>$dt_det['pot_tel'],
                 't_jam12'=>$dt_det['t_jam12'],
                 't_msker'=>$dt_det['t_msker'],
+                't_resiko' =>$dt_det['t_resiko'],
                 'tg'=>$dt_det['tg']            
             ]);
             echo $dt_det['emp_id']."\t" .$dt_det['tgl']."\t" .$dt_det['jam_in']."\t" .$dt_det['jam_out']."\t" 
                 .$dt_det['jam_ev']."\t" .$dt_det['ot']."\t" .$dt_det['gp']."\t" .$dt_det['gl']."\t" .$dt_det['pot_tel']."\t" 
-                .$dt_det['t_jam12']."\t" .$dt_det['t_msker']."\t" .$dt_det['tg']."\t".'0'."\t"
+                .$dt_det['t_jam12']."\t" .$dt_det['t_msker']."\t" .$dt_det['t_resiko']."\t" .$dt_det['tg']."\t".'0'."\t"
                 .'0'."\t".'0'."\t".'0'
                 ."\n";
         }
         echo $dt_pos['emp_id']."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'
-                ."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t".'0'."\t"
+                ."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t" .'0'."\t".'0'."\t".'0'."\t"
                 .$dt_pos['cicil_kasbon']."\t".$dt_pos['jamsos']."\t".$dt_pos['over_gaji']."\t".$dt_pos['def_gaji']
                 ."\n";
         

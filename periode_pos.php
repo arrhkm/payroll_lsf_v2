@@ -6,8 +6,8 @@ require_once('include_class/employee/Employee.php');
 
 
 // Kd Periode & kd_project 
-$kd_periode= $_REQUEST[kd_periode];
-$kd_project= $_REQUEST[kd_project];
+$kd_periode= $_REQUEST['kd_periode'];
+$kd_project= $_REQUEST['kd_project'];
 
 //-----------sql cek archive -------------- 
 $sql_cekarchive="SELECT  * from pos_archive 
@@ -137,6 +137,8 @@ ddsmoothmenu.init({
 			$vlibur=0;
 		}
 		//----------- end Libur ------------------
+
+		
 		
 		//Menentukan nama Hari (SET TGL, AWAL, AKHIR)
 		$Emp->DayPeriode->setDay($tgl_ini, $Emp->Periode->tgl_awal, $Emp->Periode->tgl_akhir, $vlibur);
@@ -154,9 +156,9 @@ ddsmoothmenu.init({
 			AND b.logika='$logika_office'";
 		$rs_office=mysqli_query($link, $qry_office);
 		$row_office=mysqli_fetch_assoc($rs_office);
-		$office_in=$row_office[office_in];
-		$office_out=$row_office[office_out];
-		//-----------e end query offfice start-end ------------
+		$office_in=$row_office['office_in'];
+		$office_out=$row_office['office_out'];
+		//----------- end query offfice start-end ------------
 		
 		//SEELECT ABSENSI per tanggal ini 
 		$sql_absensi="SELECT * FROM absensi WHERE emp_id='$row_emp[emp_id]' AND tgl='$tgl_ini'";
@@ -164,7 +166,7 @@ ddsmoothmenu.init({
 		$row_absensi=mysqli_fetch_assoc($rs_absensi);				
 		
 		//setting durasi
-		$Emp->Durasi->setTime($office_in, $office_out, $row_absensi[jam_in], $row_absensi[jam_out], $Emp->DayPeriode->logika_periode);
+		$Emp->Durasi->setTime($office_in, $office_out, $row_absensi['jam_in'], $row_absensi['jam_out'], $Emp->DayPeriode->logika_periode);
 		
 		
 		//SET VAR GAJI 
@@ -198,9 +200,14 @@ ddsmoothmenu.init({
 		$row_tjam12=mysqli_fetch_assoc($rs_tjam12);
 		$tjam12=mysqli_num_rows($rs_tjam12);
 		$Emp->Tjam->setTunjangan($tjam12, $Emp->tjam12);
+
+		//--------Tunjangan Resiko--------------- 
+		$Emp->TunjanganResiko->setTunjanganResiko($link, $Emp->emp_id, $Emp->Periode->tgl_awal, $Emp->Periode->tgl_akhir);		
+		//------end tunjangan resiko-----------	
+
 		//------------------------END TUNJANGAN ---------------------
 		//Kasbon 
-                $sql_kasbon="
+        $sql_kasbon="
 			SELECT a.*
 			FROM kasbon a
 			WHERE a.emp_id='$Emp->emp_id' AND a.status=1 
@@ -209,23 +216,23 @@ ddsmoothmenu.init({
                 $row_kasbon=mysqli_fetch_assoc($rs_kasbon);
                 
 		$sql_kasbon_sisa = "SELECT a.jml_kasbon - SUM(jml_cicilan) as sisa, sum(b.jml_cicilan) as jml_cicilan, a.keterangan
-                        FROM kasbon as a, cicilan_kasbon b
-                        WHERE  a.emp_id='$Emp->emp_id' AND a.status=1
-                        AND b.kd_kasbon=a.kd_kasbon 
-                        group by a.kd_kasbon";
-                $rs_kasbon_sisa = mysqli_query($link, $sql_kasbon_sisa);
-                $row_kasbon_sisa = mysqli_fetch_assoc($rs_kasbon_sisa);
+			FROM kasbon as a, cicilan_kasbon b
+			WHERE  a.emp_id='$Emp->emp_id' AND a.status=1
+			AND b.kd_kasbon=a.kd_kasbon 
+			group by a.kd_kasbon";
+			$rs_kasbon_sisa = mysqli_query($link, $sql_kasbon_sisa);
+			$row_kasbon_sisa = mysqli_fetch_assoc($rs_kasbon_sisa);
 
-		$Emp->Kasbon->setKasbon(
-                    $row_kasbon['kd_kasbon'], 
-                    $row_kasbon['emp_id'], 
-                    $row_kasbon['tgl'], 
-                    $row_kasbon['keterangan'],
-                    $row_kasbon['jml_kasbon'], 
-                    $row_kasbon['status'], 
-                    $row_kasbon_sisa['sisa'], 
-                    $row_kasbon_sisa['jml_cicilan']
-                );
+			$Emp->Kasbon->setKasbon(
+				$row_kasbon['kd_kasbon'], 
+				$row_kasbon['emp_id'], 
+				$row_kasbon['tgl'], 
+				$row_kasbon['keterangan'],
+				$row_kasbon['jml_kasbon'], 
+				$row_kasbon['status'], 
+				$row_kasbon_sisa['sisa'], 
+				$row_kasbon_sisa['jml_cicilan']
+			);
 		
                 
                 //---- end Kasbon----------
@@ -251,7 +258,8 @@ ddsmoothmenu.init({
                     $Emp->Gaji->gajiTelat(), 
                     $Emp->Safety->getPotongan(),
                     $row_absensi['ket_absen'], 
-                    $Emp->gaji_pokok, 
+					$Emp->gaji_pokok, 
+					$Emp->TunjanganResiko->getTunjanganResiko($tgl_ini),
                     $Emp->DayPeriode->logika_periode
                 );
 		
@@ -267,11 +275,7 @@ ddsmoothmenu.init({
 		
 		//-----------------------------------------------------			
 			
-		//$hari=date("l", strtotime($tgl_ini));
-		//$hari_ini=fx_hari($hari);			
 		
-		//----------------------------------------
-		//if (($libur>=1) OR ($hari_ini == 'Minggu')) { $hr_libur=1; } else { $hr_libur=0; }
 		$GJ_JAM=round($gp,2);
 		$EMP_ID=$Emp->emp_id;
 		$HARI=$Emp->DayPeriode->getDay();
@@ -280,30 +284,26 @@ ddsmoothmenu.init({
 		$P_TELAT=$Emp->Gaji->gajiTelat();
 		$P_SAFETY=$Emp->Safety->getPotongan();
 		$JAM_EV=$Emp->Durasi->getEvectiveHour();
-		/*if ($logika_office=="awal") {
-			$GP=0;
-		} else {
-			$GP=$Emp->Gaji->gajiPokok();
-		}	
-                 * 
-                 */	
-                $GP=$Emp->Gaji->gajiPokok();
+		
+        $GP=$Emp->Gaji->gajiPokok();
 		$T_MSKER=$Emp->Tunjangan->getTmasakerja();
 		$T_JAM12=$Emp->Tjam->getTunjangan();
-		$GRAND_TOT=$Emp->Grandtotal->getGrandtotal();
-		//$LOGIKA=$Emp->DayPeriode->logika_periode;
+		$T_RESIKO = $Emp->TunjanganResiko->getTunjanganResiko($tgl_ini);
+		//$GRAND_TOT=$Emp->Grandtotal->getGrandtotal();
+		
+
 		$LOGIKA= $logika_office;
 		$sql_payroll_day="
 		INSERT IGNORE pos_payroll_day(
 			kd_periode, emp_id, tgl,kd_project, hari,
-                        jam_ev, g_perjam, ot, gp, gl, 
+            jam_ev, g_perjam, ot, gp, gl, 
 			pot_tel, p_safety, t_jam12, t_msker, tg, 
-			logika, jam_in, jam_out, ket_absen ) 
+			logika, jam_in, jam_out, ket_absen, t_resiko) 
 		VALUES (
 			$kd_periode, '$EMP_ID',	'$tgl_ini', $kd_project, '$HARI', 
 			'$JAM_EV', '$GJ_JAM', '$OT', '$GP', '$GL', 
-			'$P_TELAT', '$P_SAFETY', '$T_JAM12', '$T_MSKER', '$GRAND_TOT', 
-			'$LOGIKA', '$row_absensi[jam_in]', '$row_absensi[jam_out]', '$row_absensi[ket_absen]' )";
+			'$P_TELAT', '$P_SAFETY', '$T_JAM12', '$T_MSKER', '$GT', 
+			'$LOGIKA', '$row_absensi[jam_in]', '$row_absensi[jam_out]', '$row_absensi[ket_absen]', '$T_RESIKO')";
 		mysqli_query($link, $sql_payroll_day) or die (mysqli_error($link));
 		
 				

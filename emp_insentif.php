@@ -62,8 +62,8 @@ ddsmoothmenu.init({
 		</tr>
 		<?php while ($row_emp=mysqli_fetch_assoc($rs_emp)) { ?>
 		<tr>
-		<td><?php echo $row_emp[emp_id];?></td><td><?php echo $row_emp[emp_name];?></td>
-		<td><a href="insert_insentifjam.php?emp_id=<?php echo $row_emp[emp_id];?>&kd_periode=<?php echo $row_periode[kd_periode];?>">Next</a></td>
+		<td><?php echo $row_emp['emp_id'];?></td><td><?php echo $row_emp['emp_name'];?></td>
+		<td><a href="insert_insentifjam.php?emp_id=<?php echo $row_emp['emp_id'];?>&kd_periode=<?php echo $row_periode['kd_periode'];?>">Next</a></td>
 		</tr>
 		<?php } ?>
 		</table>		 

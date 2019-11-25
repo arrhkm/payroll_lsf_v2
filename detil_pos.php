@@ -75,14 +75,14 @@ while ($row_posPayroll=mysqli_fetch_assoc($rs_pos_payroll)) {
 <table class="bordered" width="100%">		
 <tr>
     <td colspan="2">
-        <?php echo "Nama : ".$row_posPayroll[emp_name]."<br> Jabatan :".$row_posPayroll[jabatan];?>
+        <?php echo "Nama : ".$row_posPayroll['emp_name']."<br> Jabatan :".$row_posPayroll['jabatan'];?>
     </td>
     <td colspan="9" align="center">
-        <?php echo "SLIP GAJI MANPOWER ".$row_posPayroll[project];?>
+        <?php echo "SLIP GAJI MANPOWER ".$row_posPayroll['project'];?>
     </td>
     <td colspan="2">
         &nbsp;&nbsp;<?php echo "$row_archive[tgl_awal] s/d $row_archive[tgl_akhir] <br>";?>
-        &nbsp;&nbsp;NIP :<?php echo $row_posPayroll[emp_id];?>
+        &nbsp;&nbsp;NIP :<?php echo $row_posPayroll['emp_id'];?>
     </td>
 </tr>
 <tr>
@@ -94,10 +94,11 @@ while ($row_posPayroll=mysqli_fetch_assoc($rs_pos_payroll)) {
     <th>Jam Lbr</th>
     <th>Gaji Pokok</th>
     <th>Gaji Lembur</th>
-    <th>P.Telat</th>
+    <th>P. Telat</th>
     <th>P. Safety</th>
     <th>P. jam12</th>
     <th>T. Msker </th>
+    <th>T. Resiko</th>
     <th>Subtotal</th>
 </tr>	
     <?php 
@@ -117,32 +118,34 @@ while ($row_posPayroll=mysqli_fetch_assoc($rs_pos_payroll)) {
     $rs_pos_detil= mysqli_query($link, $sql_pos_detil) or die(mysqli_error($link));
     while ($row_posDetil=mysqli_fetch_assoc($rs_pos_detil)) { 		
 ?>
-<tr bgcolor=<?php if ($row_posDetil[tgl_merah]=="libur") echo "red"; ?>>
-    <td><?php echo $row_posDetil[hari];?></td><!-- hari -->
-    <td><?php echo $row_posDetil[tgl];?></td><!-- tanggal -->
-    <td><?php echo $row_posDetil[jam_in]."/".$row_posDetil[jam_out];?></td><!-- Jam -->
-    <td> <?php echo $row_posDetil[g_perjam];?> </td><!-- jam ev -->
-    <td> <?php echo ceil($row_posDetil[jam_ev]);?> </td><!-- GP/ jam -->
-    <td> <?php echo $row_posDetil[ot];?> </td><!-- jam ot -->
-    <td> <?php echo "Rp ".number_format($row_posDetil[gp],2,',','.');?></td><!-- gp -->
-    <td> <?php echo "Rp ".number_format($row_posDetil[gl],2,',','.');?> </td><!-- gl -->
-    <td> <?php echo "Rp ".number_format($row_posDetil[pot_tel],2,',','.');?> </td><!-- Ptelat -->
-    <td> <?php echo "Rp ".number_format($row_posDetil[p_safety],2,',','.');?> </td><!-- p safety -->
-    <td> <?php echo "Rp ".number_format($row_posDetil[t_jam12],2,',','.');?> </td><!-- t. msker  -->
-    <td> <?php echo "Rp ".number_format($row_posDetil[t_msker],2,',','.');?> </td><!-- t. msker  -->
-    <td> <?php echo "Rp ".number_format($row_posDetil[tg],2,',','.');?> </td><!-- Sub Gaji  -->			
+<tr bgcolor=<?php if ($row_posDetil['tgl_merah']=="libur") echo "red"; ?>>
+    <td><?php echo $row_posDetil['hari'];?></td><!-- hari -->
+    <td><?php echo $row_posDetil['tgl'];?></td><!-- tanggal -->
+    <td><?php echo $row_posDetil['jam_in']."/".$row_posDetil['jam_out'];?></td><!-- Jam -->
+    <td> <?php echo $row_posDetil['g_perjam'];?> </td><!-- jam ev -->
+    <td> <?php echo ceil($row_posDetil['jam_ev']);?> </td><!-- GP/ jam -->
+    <td> <?php echo $row_posDetil['ot'];?> </td><!-- jam ot -->
+    <td> <?php echo "Rp ".number_format($row_posDetil['gp'],2,',','.');?></td><!-- gp -->
+    <td> <?php echo "Rp ".number_format($row_posDetil['gl'],2,',','.');?> </td><!-- gl -->
+    <td> <?php echo "Rp ".number_format($row_posDetil['pot_tel'],2,',','.');?> </td><!-- Ptelat -->
+    <td> <?php echo "Rp ".number_format($row_posDetil['p_safety'],2,',','.');?> </td><!-- p safety -->
+    <td> <?php echo "Rp ".number_format($row_posDetil['t_jam12'],2,',','.');?> </td><!-- t. msker  -->
+    <td> <?php echo "Rp ".number_format($row_posDetil['t_msker'],2,',','.');?> </td><!-- t. msker  -->
+    <td> <?php echo "Rp ".number_format($row_posDetil['t_resiko'],2,',','.');?> </td><!-- t. resiko  -->
+    <td> <?php echo "Rp ".number_format($row_posDetil['tg'],2,',','.');?> </td><!-- Sub Gaji  -->			
 </tr>	
 		<?php 
-    $wt=$row_posDetil[jam_ev]+$wt;
-    $pt=$pt+$row_posDetil[jam_ev]+$row_posDetil[ot];
-    $sum_gp=$sum_gp+$row_posDetil[gp];
-    $sum_gl=$sum_gl+$row_posDetil[gl];
+    $wt=$row_posDetil['jam_ev']+$wt;
+    $pt=$pt+$row_posDetil['jam_ev']+$row_posDetil['ot'];
+    $sum_gp=$sum_gp+$row_posDetil['gp'];
+    $sum_gl=$sum_gl+$row_posDetil['gl'];
 
-    $sum_potTel=$sumPotTel+$row_posDetil[pot_tel];
-    $sum_psafety=$sum_psafety+$row_posDetil[p_safety];
-    $sum_tjam12=$sum_tjam12+$row_posDetil[t_jam12];
-    $sum_tmsker=$sum_tmsker+$row_posDetil[t_msker];
-    $sum_tg=$sum_tg+$row_posDetil[tg];
+    $sum_potTel=$sumPotTel+$row_posDetil['pot_tel'];
+    $sum_psafety=$sum_psafety+$row_posDetil['p_safety'];
+    $sum_tjam12=$sum_tjam12+$row_posDetil['t_jam12'];
+    $sum_tmsker=$sum_tmsker+$row_posDetil['t_msker'];
+    $sum_tresiko=$sum_tresiko+$row_posDetil['t_resiko'];
+    $sum_tg=$sum_tg+$row_posDetil['tg'];
 		} ?>
 <tr bgcolor="Yellow">
     <td> </td><!-- hari -->
@@ -157,39 +160,40 @@ while ($row_posPayroll=mysqli_fetch_assoc($rs_pos_payroll)) {
     <td> <?php echo "Rp ".number_format($sum_psafety,2,',','.');?> </td><!-- p safety -->
     <td> <?php echo "Rp ".number_format($sum_tjam12,2,',','.');?> </td><!-- t msker -->
     <td> <?php echo "Rp ".number_format($sum_tmsker,2,',','.');?> </td><!-- t msker -->
+    <td> <?php echo "Rp ".number_format($sum_tresiko,2,',','.');?> </td><!-- t resiko -->
     <td> <?php echo "Rp ".number_format($sum_tg,2,',','.');?> </td><!-- Sub Gaji  -->				
 </tr>
 <tr bgcolor="">			
-            <td colspan="3">  </td>
-            <td colspan="7"> Kasbon : <?php echo "Rp ".number_format($row_posPayroll[kasbon],2,',','.');?> </td>
+            <td colspan="4">  </td>
+            <td colspan="7"> Kasbon : <?php echo "Rp ".number_format($row_posPayroll['kasbon'],2,',','.');?> </td>
             <td colspan="2"> Cicil kasbon</td><!-- Sub Gaji  -->
-            <td><?php echo "Rp ".number_format($row_posPayroll[cicil_kasbon],2,',','.');?> </td>
+            <td><?php echo "Rp ".number_format($row_posPayroll['cicil_kasbon'],2,',','.');?> </td>
 </tr>
 <tr bgcolor="">			
-    <td colspan="3">  </td><!-- pot_tel -->
-    <td colspan="7"> Sisa Kasbon : <?php echo "Rp ".number_format($row_posPayroll[sisa_kasbon],2,',','.');?> </td>
+    <td colspan="4">  </td><!-- pot_tel -->
+    <td colspan="7"> Sisa Kasbon : <?php echo "Rp ".number_format($row_posPayroll['sisa_kasbon'],2,',','.');?> </td>
     <td colspan="2"> Jamsostek</td><!-- Sub Gaji  -->
-    <td><?php echo "Rp ".number_format($row_posPayroll[jamsos],2,',','.');?> </td>
+    <td><?php echo "Rp ".number_format($row_posPayroll['jamsos'],2,',','.');?> </td>
 </tr>		
 <tr bgcolor="">				
-    <td colspan="10"></td>
+    <td colspan="11"></td>
     <td colspan="2"> Kelebihan Gaji</td><!-- Sub Gaji  -->
-    <td><?php echo "Rp ".number_format($row_posPayroll[over_gaji],2,',','.');?> </td>
+    <td><?php echo "Rp ".number_format($row_posPayroll['over_gaji'],2,',','.');?> </td>
 </tr>
 <tr bgcolor="">				
-    <td colspan="10"></td>
+    <td colspan="11"></td>
     <td colspan="2"> Kekurangan Gaji</td><!-- Sub Gaji  -->
-    <td><?php echo "Rp ".number_format($row_posPayroll[def_gaji],2,',','.');?> </td>
+    <td><?php echo "Rp ".number_format($row_posPayroll['def_gaji'],2,',','.');?> </td>
 </tr>	
 
 <tr bgcolor="">				
-    <td colspan="10"></td>
+    <td colspan="11"></td>
     <td colspan="2"> Total Gaji</td><!-- Sub Gaji  -->
-    <td><?php echo "Rp ".number_format($row_posPayroll[tg_all],2,',','.');?> </td>
+    <td><?php echo "Rp ".number_format($row_posPayroll['tg_all'],2,',','.');?> </td>
 </tr -->
 </table><br><br>
 <?php  
-			$gaji_all=$gaji_all+$row_posPayroll[tg_all];
+			$gaji_all=$gaji_all+$row_posPayroll['tg_all'];
 		} 
 		echo "Gaji all = Rp ".number_format($gaji_all,2,',','.');
 		?>		

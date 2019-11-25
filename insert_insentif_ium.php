@@ -67,7 +67,7 @@ ddsmoothmenu.init({
 
 <div id="templatemo_main" class="wrapper">
 	<!-- Tempat Menaruh Tabel ISI -->
-	<h2>Insert insentif Uang Makan <?php echo $row_emp[emp_id].", ".$row_emp[emp_name];?></h2>     
+	<h2>Insert insentif Uang Makan <?php echo $row_emp['emp_id'].", ".$row_emp['emp_name'];?></h2>     
 	    
 		<table class="bordered">
 		<tr>

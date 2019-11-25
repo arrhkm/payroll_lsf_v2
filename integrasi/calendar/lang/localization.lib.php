@@ -5,6 +5,7 @@
 # Language: American English / English US
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
 # Last file update: 29.08.2011
+CONST L_LANG=Null;
 
 if (!function_exists('utf_conv'))
 {
