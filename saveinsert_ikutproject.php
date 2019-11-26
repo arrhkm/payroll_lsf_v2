@@ -3,9 +3,14 @@ require_once('connections/conn_mysqli_procedural.php');
 //mysql_select_db($database_koneksi, $koneksi);
 
 if ($_REQUEST['delete']==1) {
-		$qry_del="DELETE FROM ikut_project WHERE kd_project='$_REQUEST[kd_project]' AND emp_id='$_REQUEST[emp_id]'";
+		$qry_del="DELETE FROM ikut_project WHERE kd_project='$_REQUEST[kd_project]' AND emp_id = '$_REQUEST[emp_id]'";
 		if (mysqli_query($link, $qry_del)){
-		header("location:ikut_project.php?kd_project='$_REQUEST[kd_project]'");
+		//header("location:ikut_project.php?kd_project='$_REQUEST[kd_project]'");
+
+		header("Location:ikut_project.php?kd_project='$_REQUEST[kd_project]'"); /* Redirect browser */
+
+		/* Make sure that code below does not get executed when we redirect. */
+		exit;
 		}
 	
 }

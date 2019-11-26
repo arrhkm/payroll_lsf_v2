@@ -8,12 +8,12 @@ $qry_project="SELECT * FROM project WHERE kd_project='$_REQUEST[kd_project]'";
 $rs_project = mysqli_query($link, $qry_project) or die(mysqli_error($link));
 $row_project=mysqli_fetch_assoc($rs_project);
 
-$qry_project = "SELECT b.emp_id, c.emp_name, a.kd_project
+$sql_emp = "SELECT b.emp_id, c.emp_name, a.kd_project
 FROM project a, ikut_project b, employee c
 WHERE b.kd_project= a.kd_project
 AND c.emp_id=b.emp_id
 AND a.kd_project='$_REQUEST[kd_project]'";
-$rs_project = mysqli_query($link, $qry_project);
+$rs_emp = mysqli_query($link, $sql_emp);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -62,25 +62,53 @@ ddsmoothmenu.init({
 	<!-- Tempat Menaruh Tabel ISI -->
 	    <h2>Group Project <?php echo "No. (".$row_project['kd_project']." ) ".$row_project['nama_project'];?></h2>        		
 		<!-- Awal tabel -->
+		<form name="form1" method="POST" action="delete_ikutproject.php">
 		<table class="bordered" width="700px">
+		
 		<tr align="center">
+		<th>Check List</th>	
 		<th>EMP ID</th>
 		<th>Nama Emp</th>		
-		<th colspan = "3" align=center><a href="insert_ikutproject.php?kd_project=<?=$_REQUEST['kd_project']?>" >Insert</a> | 
+		<th colspan = "4" align=center><a href="insert_ikutproject.php?kd_project=<?=$row_project['kd_project']?>" >Insert</a> | 
 		<a href="m_project.php"> <-Back </a> 
 		</th>		
 		</tr>
-		<?php while($row_rsproject = mysqli_fetch_assoc($rs_project)) { ?>
+		<?php 
+		$no=1;
+		while($row_emp = mysqli_fetch_assoc($rs_emp)) { ?>
+		
 		<tr align="center">
-		<td><?php echo $row_rsproject['emp_id'];?></td>
-		<td align="left"><?php echo $row_rsproject['emp_name'];?></td>	
+		<td><?php echo $row_emp['emp_id'];?>
+		<input type=checkbox name=cek[] value="<?php echo $row_emp['emp_id'];?>" id=<?php echo "id-".$no;?>> 
+		</td>
+		<td><?php echo $row_emp['emp_id'];?></td>
+		<td align="left"><?php echo $row_emp['emp_name'];?></td>	
 		
 		<td>
 		
-		<a href="saveinsert_ikutproject.php?delete=1&kd_project=<?php echo $row_rsproject['kd_project'];?>&emp_id=<?php echo $row_rsproject['emp_id'];?>">Delete</a>
+		<a href="saveinsert_ikutproject.php?delete=1&kd_project=<?php echo $row_project['kd_project'];?>&emp_id=<?php echo $row_emp['emp_id'];?>">Delete</a>
 		</td>		
 		</tr>
-		<?php } ?>
+		
+		<?php 
+		$no++;
+		} 
+		
+		?>
+		<tr>
+			<td colspan="4">
+				<input type=radio name=pilih onClick='for (i=1;i<<?php echo $no; ?>;i++){document.getElementById("id-"+i).checked=true;}'>Check All
+				<input type=radio name=pilih onClick='for (i=1;i<<?php echo $no; ?>;i++){document.getElementById("id-"+i).checked=false;}'> Uncheck All
+				<input type= hidden name= "emp_id" value="<?php echo $row_emp['emp_id'];?>">
+				<input type= hidden name= "kd_project" value="<?php echo $_REQUEST['kd_project'];?>">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<input type='submit' value='Delete Selected' name='btn_tambah' class='bordered' onClick='return confirm("Anda yakin ingin menghapus data yang terpilih???")'>
+				<!-- input type='button' value='Back' name='btn_back' class='bordered' onClick="location='ikut_project.php?kd_project=<?php echo $_REQUEST['kd_project'];?>'"-->
+			</td>
+		</tr>
 		</table>    	
 	<div class="clear"></div>
 	</div>
