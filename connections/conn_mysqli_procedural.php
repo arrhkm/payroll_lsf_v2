@@ -1,14 +1,17 @@
 <?php
 
  $host = "localhost";
- /*$database = "lsf_payroll";
+ $database = "lsf_payroll";
  $user = "lsf";
  $password = "Payrolllsf32#";
-*/
+
+/*
 $database = "lsf_payroll";
  $user = "superhakam";
  $password = "superhakam";
- $port = 3306;
+ */
+
+$port = 3306;
  $socket = 1226;
  //-----------------------------
 
