@@ -64,6 +64,7 @@ ddsmoothmenu.init({
 		<!-- Awal tabel -->
 		<form name="form1" method="POST" action="saveinsert_ikutproject.php">
 		  <table width="600" class="bordered" align="">
+			  
 			<tr>
 			  <td width="111">Employee </td>
 			  
