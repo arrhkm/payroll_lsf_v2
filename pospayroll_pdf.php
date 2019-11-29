@@ -2,6 +2,7 @@
 //define('FPDF_FONTPATH','/fpdf/font');
 require('./fpdf/fpdf.php');
 require_once('connections/conn_mysqli_procedural.php');
+require_once('include_class/foreman/Foreman.php');
 
 
 
@@ -17,13 +18,16 @@ $rs_emp = mysqli_query($link, $sql_emp) or die(mysqli_error($link));
 
 class PDF extends FPDF { }
 
-$pdf=new PDF('P','mm','A4');
-$pdf->SetMargins(5,5,5);
+//Default $pdf=new PDF('P','mm','A4');
+$pdf = new PDF('L', 'mm',array(200, 140));
+$pdf->SetMargins(1,5,1); // default (5,5,5)
 $pdf->SetFillColor(224,224,224);//Grey
 //$pdf->SetTopMargin(10);
 //$pdf->SetButtomMargin(10);
-$t_baris=2.5;//tinggi baris
-$pdf->SetFont('courier','',6);
+$t_baris=6;//tinggi bari default : 2.5
+$t_double = 6;
+//$pdf->SetFont('courier','',6);
+$pdf->SetFont('Arial','', 7);
 $pdf->AddPage();
 $header = [
 	'Hari', 'Tanggal', 'GP/jam', 'EV', 'OT', 
@@ -31,32 +35,45 @@ $header = [
 	'P.Telat', 'P.Safety', 'Total'
 ];
 // Column widths
-$w = [8, 15, 9, 5, 5, 19, 19, 19, 19, 19, 19, 19, 20];
+$w = [10, 15, 10, 5, 5, 19, 19, 19, 19, 19, 19, 19, 19];
 //select attribut payroll
 $qry_attribut=mysqli_query($link, "select * from attribut_payroll");
 $row_attribut=mysqli_fetch_assoc($qry_attribut);
 
 		
-		//:::::::::::::::::::::::    PERULANGAN ALL KARYAWAN  :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::    PERULANGAN ALL KARYAWAN  :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		$page==0;
 		while ($row_emp=mysqli_fetch_assoc($rs_emp)) { 		
 		$emp_id=$row_emp['emp_id'];
+		$Foreman = New Foreman($link, $emp_id);
+		$f_name = $Foreman->name;
+		$f_nik = $Foreman->nik;
+
+		//$pdf->SetFont('','B','');
+		
 		$pdf->SetFont('','B','');
-		$pdf->Cell($w[0]+$w[1],$t_baris,"Nama    : $row_emp[emp_name]",1,0,'L',1);
-		$pdf->SetFont('','B','');
-		$pdf->Cell($w[2]+$w[3]+$w[4]+$w[5]+$w[6]+$w[7]+$w[8]+$w[9]+$w[10],$t_baris+$t_baris,"SLIP GAJI MANPOWER $row_periode[nama_project]",1,0,'C',1);
-		$pdf->SetFont('','B','');
-		$pdf->Cell($w[11]+$w[12],$t_baris,"$row_periode[nama_periode]",1,0,'R',1);
+		$pdf->Cell($w[0]+$w[1]+$w[2]+$w[3]+$w[4]+$w[5]+$w[6]+$w[7]+$w[8]+$w[9]+$w[10]+$w[11]+$w[12],$t_baris,"SLIP GAJI MANPOWER $row_periode[nama_project]",1,0,'C',0);
+		//$pdf->SetFont('','B','');
+		//$pdf->Cell($w[11]+$w[12],$t_baris,"$row_periode[nama_periode]",1,0,'R',1);
 		$pdf->Ln();
-		$pdf->Cell($w[0]+$w[1],$t_baris,"Jabatan : $row_emp[jabatan]",1,0,'L',1);		
-		$pdf->Cell($w[2]+$w[3]+$w[4]+$w[5]+$w[6]+$w[7]+$w[8]+$w[9]+$w[10],0,'',0,0,'C');
-		$pdf->Cell($w[11]+$w[12],$t_baris,"NIK : $row_emp[emp_id]",1,0,'R',1);
+
+		$pdf->SetFont('','B','');
+		$pdf->Cell($w[0]+$w[1]+$w[2]+$w[3]+$w[4]+$w[5],$t_baris,"Employee : $row_emp[emp_name] - $row_emp[emp_id]",1,0,'L',0);
+		$pdf->SetFont('','B','');
+		$pdf->Cell($w[6]+$w[7]+$w[8]+$w[9],$t_baris,'Contract : ',1,0,'C',0);
+		$pdf->SetFont('','B','');
+		$pdf->Cell($w[10]+$w[11]+$w[12],$t_baris,"F-Man : $f_name - $Foreman->nik",1,0,'R',0);
+		$pdf->Ln();
+		$pdf->Cell($w[0]+$w[1]+$w[2]+$w[3]+$w[4]+$w[5],$t_baris,"Jabatan : $row_emp[jabatan]",1,0,'L',0);		
+		$pdf->Cell($w[6]+$w[7]+$w[8]+$w[9],$t_baris,'Project :'.$row_periode['nama_project'],1,0,'C',0);
+		$pdf->Cell($w[10]+$w[11]+$w[12],$t_baris,"Period : $row_periode[tgl_awal] - $row_periode[tgl_akhir]",1,0,'R',0);
 		$pdf->Ln();
 		$pdf->SetFont('','','');
 		for($hi=0;$hi<count($header);$hi++) {
 		$pdf->Cell($w[$hi],$t_baris,$header[$hi],1,0,'C');		
 		}
 		$pdf->Ln();
+
 		
 		//::::::::::::::::::::::::::::::::::::::::::::::  PERULANGAN WAKTU DALAM SATU PERODE :::::::::::::::::::::::::::::::::::::::::::::::::
 		
@@ -92,21 +109,27 @@ $row_attribut=mysqli_fetch_assoc($qry_attribut);
 			$t_msker2=number_format($row_posDetil['t_msker'],2,',','.');
 			$t_resiko = number_format($row_posDetil['t_resiko'],2,',','.');
 			$GT2=number_format($row_posDetil['tg'],2,',','.');
+			
+			
 			$pdf->SetFont('','','');
-			$pdf->Cell($w[0],$t_baris,$row_posDetil['hari'],1,0,'L');
-			$pdf->Cell($w[1],$t_baris,$row_posDetil['tgl'],1,0,'C');
-			$pdf->Cell($w[2],$t_baris,ceil($row_posDetil['g_perjam']),1,0,'R');
-			$pdf->Cell($w[3],$t_baris,$row_posDetil['jam_ev'],1,0,'C');			
-			$pdf->Cell($w[4],$t_baris,$row_posDetil['ot'],1,0,'C');
-			$pdf->Cell($w[5],$t_baris,$GP2,1,0,'R');
-			$pdf->Cell($w[6],$t_baris,$GL2,1,0,'R');
-			$pdf->Cell($w[7],$t_baris,$t_jam12,1,0,'R');
-			$pdf->Cell($w[8],$t_baris,$t_msker2,1,0,'R');
-			$pdf->Cell($w[9],$t_baris,$t_resiko,1,0,'R');
-			$pdf->Cell($w[10],$t_baris,$potongan_telat2,1,0,'R');
-			$pdf->Cell($w[11],$t_baris,$p_safety2,1,0,'R');
-			$pdf->Cell($w[12],$t_baris,$GT2,1,0,'R');
+			
+			$pdf->Cell($w[0],$t_double,$row_posDetil['hari'],1,0,'L',0);
+			$pdf->Cell($w[1],$t_double,$row_posDetil['tgl'],1,0,'L',0);		
+			$pdf->Cell($w[2],$t_double,ceil($row_posDetil['g_perjam']),1,0,'R');
+			$pdf->Cell($w[3],$t_double,$row_posDetil['jam_ev'],1,0,'C');			
+			$pdf->Cell($w[4],$t_double,$row_posDetil['ot'],1,0,'C');
+			$pdf->Cell($w[5],$t_double,$GP2,1,0,'R');
+			$pdf->Cell($w[6],$t_double,$GL2,1,0,'R');
+			$pdf->Cell($w[7],$t_double,$t_jam12,1,0,'R');
+			$pdf->Cell($w[8],$t_double,$t_msker2,1,0,'R');
+			$pdf->Cell($w[9],$t_double,$t_resiko,1,0,'R');
+			$pdf->Cell($w[10],$t_double,$potongan_telat2,1,0,'R');
+			$pdf->Cell($w[11],$t_double,$p_safety2,1,0,'R');
+			$pdf->Cell($w[12],$t_double,$GT2,1,0,'R');
 			$pdf->Ln();
+
+			
+			
 			
 			$WT=$row_posDetil['jam_ev']+$wt;
 			$PT=$pt+$row_posDetil['jam_ev']+$row_posDetil['ot'];
@@ -152,19 +175,20 @@ $row_attribut=mysqli_fetch_assoc($qry_attribut);
 		
 		
 		
-		$pdf->Cell($w[0]+$w[1],$t_baris,'Jumlah',1,0,'L',1);//jumlah
-		$pdf->Cell($w[2],$t_baris,'WT/PT',1,0,'L',1);
-		$pdf->Cell($w[3],$t_baris,$SUM_WT,1,0,'C',1);
+		$pdf->Cell($w[0]+$w[1],$t_baris,'Jumlah',1,0,'L',0);//jumlah
+		$pdf->Cell($w[2],$t_baris,'WT/PT',1,0,'L',0);
+		$pdf->Cell($w[3],$t_baris,$SUM_WT,1,0,'C',0);
 		
-		$pdf->Cell($w[4],$t_baris,$SUM_PT,1,0,'C',1);
-		$pdf->Cell($w[5],$t_baris,$SUM_GP2,1,0,'R',1);
-		$pdf->Cell($w[6],$t_baris,$SUM_GL2,1,0,'R',1);
-		$pdf->Cell($w[7],$t_baris,$SUM_TJAM122,1,0,'R',1);
-		$pdf->Cell($w[8],$t_baris,$SUM_TMSKER2,1,0,'R',1);
-		$pdf->Cell($w[9],$t_baris,$SUM_TRESIKO2,1,0,'R',1);
-		$pdf->Cell($w[10],$t_baris,$SUM_P_TELAT2,1,0,'R',1);
-		$pdf->Cell($w[11],$t_baris,$SUM_P_SAFETY2,1,0,'R',1);		
-		$pdf->Cell($w[12],$t_baris,$SUM_GT2,1,0,'R',1);
+		$pdf->Cell($w[4],$t_baris,$SUM_PT,1,0,'C',0);
+		$pdf->Cell($w[5],$t_baris,$SUM_GP2,1,0,'R',0);
+		$pdf->Cell($w[6],$t_baris,$SUM_GL2,1,0,'R',0);
+		$pdf->Cell($w[7],$t_baris,$SUM_TJAM122,1,0,'R',0);
+		$pdf->Cell($w[8],$t_baris,$SUM_TMSKER2,1,0,'R',0);
+		$pdf->Cell($w[9],$t_baris,$SUM_TRESIKO2,1,0,'R',0);
+		$pdf->Cell($w[10],$t_baris,$SUM_P_TELAT2,1,0,'R',0);
+		$pdf->Cell($w[11],$t_baris,$SUM_P_SAFETY2,1,0,'R',0);		
+		$pdf->Cell($w[12],$t_baris,$SUM_GT2,1,0,'R',0);
+		
 		$pdf->Ln();		
 		$pdf->Cell($w[0]+$w[1]+$w[2]+$w[3]+$w[4]+$w[5]+$w[6]+$w[7],$t_baris,'',0,0,'C');
 		$pdf->Cell($w[8],$t_baris,'Kasbon',1,0,'L');
@@ -192,8 +216,8 @@ $row_attribut=mysqli_fetch_assoc($qry_attribut);
 	
 		
 		$pdf->Cell($w[0]+$w[1]+$w[2]+$w[3]+$w[4]+$w[5]+$w[6]+$w[7]+$w[8]+$w[9],$t_baris,'',0,0,'C');
-		$pdf->Cell($w[10]+$w[11],$t_baris,'Total Gaji',1,0,'L',1);
-		$pdf->Cell($w[12],$t_baris,$GAJI_BERSIH2,1,0,'R',1);
+		$pdf->Cell($w[10]+$w[11],$t_baris,'Total Gaji',1,0,'L',0);
+		$pdf->Cell($w[12],$t_baris,$GAJI_BERSIH2,1,0,'R',0);
 		$pdf->Ln();		
 		$pdf->Ln();
 		$pdf->Ln();
@@ -201,7 +225,7 @@ $row_attribut=mysqli_fetch_assoc($qry_attribut);
 		//Line(float x1, float y1, float x2, float y2);
 		//$pdf->MultiCell( 170, 1,'',1,'');
 		$page++;
-		if ($page%4==0)
+		if ($page%1==0)
 		$pdf->AddPage();		
 		}			
  //------------------

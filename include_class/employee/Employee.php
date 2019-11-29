@@ -63,7 +63,7 @@ Class Employee {
 	}
 
 	public function getForeman($link=NULL, $emp_id){
-		$id = $this->emp_id;
+		//$id = $this->emp_id;
 		$sql = "SELECT a.*, b.leader_id, c.emp_name	FROM child_foreman a JOIN foreman b ON(b.id = a.foreman_id)
 		LEFT JOIN employee c ON (c.emp_id = b.leader_id)
 		WHERE a.employee_emp_id = '$emp_id'";
