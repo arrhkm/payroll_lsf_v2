@@ -185,11 +185,13 @@ ddsmoothmenu.init({
 		//-------------------- SET TUNJANGAN -----------------------
 		//SET TMSKER
 		$Emp->Tunjangan->setTmasakerja(
-                        $Emp->Durasi->getEvectiveHour(), 
-                        $Emp->Durasi->getOverTime(), 
-                        $Emp->tmasakerja, 
-                        $Emp->DayPeriode->logika_periode
-                );
+			$Emp->Durasi->getEvectiveHour(), 
+			$Emp->Durasi->getOverTime(), 
+			$Emp->tmasakerja, 
+			$Emp->DayPeriode->logika_periode,
+			$row_emp['start_work'],
+			$tgl_ini
+	);
 		
 		//SET TJAM12
 		$emp_ijam=$Emp->emp_id;

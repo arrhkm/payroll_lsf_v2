@@ -80,7 +80,7 @@ ddsmoothmenu.init({
 			<th colspan=19>
 			<table border="0" width="100%" bgcolor="" color="Green" class="" align="center"  >
 				<tr>
-				<td align="center" width=100% colspan="3"><?=$row_emp['nama_project']?></td>
+				<td align="center" width=100% colspan="3"><?= "Project :".$row_emp['nama_project']?></td>
 				</tr>
 				<tr>
 					
@@ -211,7 +211,9 @@ ddsmoothmenu.init({
                                 $Emp->Durasi->getEvectiveHour(), 
                                 $Emp->Durasi->getOverTime(), 
                                 $Emp->tmasakerja, 
-                                $Emp->DayPeriode->logika_periode
+								$Emp->DayPeriode->logika_periode,
+								$row_emp['start_work'],
+								$tgl_ini
                         );
 			
 			//SET TJAM12
