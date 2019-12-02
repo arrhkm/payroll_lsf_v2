@@ -45,6 +45,7 @@ $pdf->Cell($w[$hi],6,$header[$hi],1,0,'C',1);
 $pdf->Ln();	  
 
 
+
 //:::::::::::::::::::::::    PERULANGAN ALL KARYAWAN  :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 $GAJI_ALL=0; $WT_ALL=0; $PT_ALL=0;
 while ($row_emp=mysqli_fetch_assoc($rs_emp)) 
