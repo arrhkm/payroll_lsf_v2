@@ -24,8 +24,8 @@ $pdf->SetMargins(1,5,1); // default (5,5,5)
 $pdf->SetFillColor(224,224,224);//Grey
 //$pdf->SetTopMargin(10);
 //$pdf->SetButtomMargin(10);
-$t_baris=6;//tinggi bari default : 2.5
-$t_double = 6;
+$t_baris=4;//tinggi bari default : 2.5
+$t_double = 4;
 //$pdf->SetFont('courier','',6);
 $pdf->SetFont('Arial','', 7);
 $pdf->AddPage();
@@ -49,10 +49,9 @@ $row_attribut=mysqli_fetch_assoc($qry_attribut);
 		$f_name = $Foreman->name;
 		$f_nik = $Foreman->nik;
 
-		//$pdf->SetFont('','B','');
-		
+				
 		$pdf->SetFont('','B','');
-		$pdf->Cell($w[0]+$w[1]+$w[2]+$w[3]+$w[4]+$w[5]+$w[6]+$w[7]+$w[8]+$w[9]+$w[10]+$w[11]+$w[12],$t_baris,"SLIP GAJI MANPOWER $row_periode[nama_project]",1,0,'C',0);
+		$pdf->Cell($w[0]+$w[1]+$w[2]+$w[3]+$w[4]+$w[5]+$w[6]+$w[7]+$w[8]+$w[9]+$w[10]+$w[11]+$w[12],$t_baris,"SLIP GAJI MANPOWER $row_periode[nama_project]",0,1,'C',0);
 		//$pdf->SetFont('','B','');
 		//$pdf->Cell($w[11]+$w[12],$t_baris,"$row_periode[nama_periode]",1,0,'R',1);
 		$pdf->Ln();

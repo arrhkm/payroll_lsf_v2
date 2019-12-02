@@ -65,18 +65,18 @@ ddsmoothmenu.init({
 		<tr align="center">
 		<th>EMP ID</th>
 		<th>Nama Emp</th>		
-		<th colspan = "3" align=center><a href="set_workshift.php?id_workshift=<?php echo $_REQUEST[id_workshift];?>" >Insert</a> | 
+		<th colspan = "3" align=center><a href="set_workshift.php?id_workshift=<?php echo $_REQUEST['id_workshift'];?>" >Insert</a> | 
 		<a href="m_workshift.php"> <-Back </a> 
 		</th>		
 		</tr>
 		<?php while($row_emp = mysqli_fetch_assoc($rs_emp)) { ?>
 		<tr align="center">
-		<td><?php echo $row_emp[emp_id];?></td>
-		<td align="left"><?php echo $row_emp[emp_name];?></td>	
+		<td><?php echo $row_emp['emp_id'];?></td>
+		<td align="left"><?php echo $row_emp['emp_name'];?></td>	
 		
 		<td>
-		<!--<a href="saveset_workshift.php?edit=1&id_workshift=<?php echo $row_emp[id_workshift];?>&emp_id=<?php echo $row_emp[emp_id];?>">Edit</a> |--> 
-		<a href="save_set_workshift.php?delete=1&id_workshift=<?php echo $row_emp[id_workshift];?>&emp_id=<?php echo $row_emp[emp_id];?>">Delete</a>
+		<!--<a href="saveset_workshift.php?edit=1&id_workshift=<?php echo $row_emp['id_workshift'];?>&emp_id=<?php echo $row_emp['emp_id'];?>">Edit</a> |--> 
+		<a href="save_set_workshift.php?delete=1&id_workshift=<?php echo $row_emp['id_workshift'];?>&emp_id=<?php echo $row_emp['emp_id'];?>">Delete</a>
 		</td>		
 		</tr>
 		<?php } ?>

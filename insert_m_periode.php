@@ -10,7 +10,7 @@ $rsPeriode = mysqli_query($link, $query_rsPeriode) or die (mysqli_errno($link));
 $SQLmax="SELECT MAX(kd_periode) as NMAX FROM periode";
 $rsMax= mysqli_query($link, $SQLmax) or die (mysqli_errno($link));
 $row_rsMax= mysqli_fetch_assoc($rsMax);
-$max=$row_rsMax[NMAX]+1;
+$max=$row_rsMax['NMAX']+1;
 
 if ($_REQUEST['edit']==1) {
 $query_rsEditPeriode = "SELECT * FROM periode WHERE kd_periode = '$_REQUEST[kd_periode]'  ORDER BY kd_periode ASC";
