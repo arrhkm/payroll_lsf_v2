@@ -191,10 +191,10 @@ ddsmoothmenu.init({
 		  <td align=left> <?php echo $row_rs_emp['emp_name'];?></td>
 		  <td align=left> <?php echo $row_rs_emp['no_rekening'];?></td>	
 		  <td align=left> <?php echo $row_rs_emp['kd_jabatan'];?></td>
-		  <td align=left> <?php echo $row_rs_emp['gaji_pokok'];?></td>
-		  <td align=left> <?php echo $row_rs_emp['gaji_lembur'];?></td>
-		  <td align=left> <?php echo $row_rs_emp['pot_jamsos'];?></td>
-		  <td align=left> <?php echo $row_rs_emp['uang_makan'];?></td>
+		  <td align=left> <?php echo number_format($row_rs_emp['gaji_pokok'], 2, ',', '.');?></td>
+		  <td align=left> <?php echo number_format($row_rs_emp['gaji_lembur'], 2, ',', '.');?></td>
+		  <td align=left> <?php echo number_format($row_rs_emp['pot_jamsos'], 2, ',', '.');?></td>
+		  <td align=left> <?php echo number_format($row_rs_emp['uang_makan'], 2, ',', '.');?></td>
 		  <td align=left> <?php echo $row_rs_emp['start_work'];?></td>
 		  <td align=left> <?php echo $row_rs_emp['emp_group'];?></td>
 		  </tr>		 

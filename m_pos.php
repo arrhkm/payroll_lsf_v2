@@ -65,7 +65,7 @@ ddsmoothmenu.init({
 
 <div id="templatemo_main" class="wrapper">
 	<!-- Tempat Menaruh Tabel ISI -->
-	    <h2>POS Payroll</h2>        		
+	    <h2>Posting Payroll</h2>        		
 		<!-- Awal tabel -->
 		<table class="bordered" width="100%">
 		<tr text-align: right ="center">

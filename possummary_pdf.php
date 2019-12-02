@@ -33,7 +33,10 @@ $w = array(20, 35, 35, 25, 10, 10, 30);
 
 $pdf->SetFont('','B',10);
 $pdf->SetFillColor(224,224,224);//Grey
+
 $pdf->Cell($w[0]+$w[1]+$w[2]+$w[3]+$w[4]+$w[5]+$w[6],6,"Summary Gaji DW Project $row_project[nama_project]",0,0,'C');
+$pdf->Ln();
+$pdf->Cell($w[0]+$w[1]+$w[2]+$w[3]+$w[4]+$w[5]+$w[6],6,"Periode : $row_archive[tgl_awal] - $row_archive[tgl_akhir]",0,0,'C');
 $pdf->Ln();
 $pdf->SetFont('','',7);		
 for($hi=0;$hi<count($header);$hi++) {

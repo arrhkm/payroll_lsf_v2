@@ -59,7 +59,7 @@ ddsmoothmenu.init({
 
 <div id="templatemo_main" class="wrapper">	
 	<!-- Tempat Menaruh Tabel ISI -->
-	            <h2>Group Project No. <?php echo $_REQUEST[id_workshift]."- $row_workshift[name_shift]";?> </h2>
+	            <h2>Group Project No. <?php echo $_REQUEST['id_workshift']."- $row_workshift[name_shift]";?> </h2>
 		<!-- Awal tabel -->
 		<form name="form1" method="POST" action="save_set_workshift.php">
 		  <table width="600" class="bordered" align="">

@@ -5,7 +5,7 @@
         <div id="templatemo_menu" class="ddsmoothmenu">
             <ul>                
                 <li>
-                	<a href="../payroll_dw_yii/web/index.php" class="<?php if ($_GET['sel']==1) echo "selected";?>">app yii</a>
+                	<a href="../payroll_dw_yii/web/index.php" class="<?php if ($_GET['sel']==1) echo "selected";?>">App AddOn</a>
                 </li>
                 <li>
                 	<a href="#" class="<?php if ($_GET['sel']==1) echo "selected";?>">Master</a>
@@ -21,19 +21,19 @@
 						<li><a href="m_group.php">Group Employee</a></li>
                   	</ul>
                 </li>
-				<li><a href="#" class = <?php if (isset($_GET['sel'])) { if ($_GET['sel']==2) echo "selected";} ?>>Kontrak</a>
+				<!-- li><a href="#" class = <?php if (isset($_GET['sel'])) { if ($_GET['sel']==2) echo "selected";} ?>>Kontrak</a>
 					<ul>
                         <li><a href="contract.php">Kontrak Kerja</a></li>             
 						<li><a href="contract_message.php">Message Kontrak</a></li>     												
 					</ul>
-				</li>
+				</li -->
                 <li><a href="#" class = <?php if (isset($_GET['sel'])) { if($_GET['sel']==3) echo "selected";}?>>Kasbon</a>
 					<ul>
                         <li><a href="create_kasbon.php">Create Cashbon</a></li>                       
 						<li><a href="cicilan_kasbon.php">Cicilan Kasbon</a></li>												
 					</ul>
 				</li>
-					<li><a href="#" class = <?php if (isset($_GET['sel'])){ if ($_GET['sel']==4) echo "selected";}?>>[+] & [-]</a>
+					<li><a href="#" class = <?php if (isset($_GET['sel'])){ if ($_GET['sel']==4) echo "selected";}?>>Reconsile</a>
 					<ul>
                         <li><a href="create_safetytalk.php">Potongan Safety Talk</a></li>
 						<li><a href="create_plusmin.php">PlusMin Gaji</a></li>   
@@ -55,7 +55,7 @@
 				<li><a href="#" class = <?php if (isset($_GET['sel'])){if ($_GET['sel']==7) echo "selected";}?>>Report</a>
 					<ul>
                         <li><a href="pilih_report.php">Payroll</a></li>
-						<li><a href="m_pos.php">POS Payroll</a></li>
+						<li><a href="m_pos.php">Posting Payroll</a></li>
 						<li><a href="report_potongan.php">Potongan</a></li>
 					</ul>
 				</li>
