@@ -10,7 +10,7 @@ class Tunjangan {
 
 	public $kenaikan;
 	
-	public function setTmasakerja($vjamev, $vjamot, $vtmasakerja, $vlogika, $start_work, $tgl_ini) {
+	public function setTmasakerja($vjamev, $vjamot, $vtmasakerja, $vlogika, $start_work, $tgl_ini,$link) {
 		$this->jamev=$vjamev;
 		$this->jamot=$vjamot;
 		$this->tunjangan=$vtmasakerja;
@@ -18,7 +18,9 @@ class Tunjangan {
 		$this->tgl_ini = $tgl_ini;
 		$this->link = $link;
 		$this->start_work = $start_work;
-		$this->kenaikan = 1000;
+		//$this->kenaikan = 1000;
+		
+
 	}
 	public function getTmasakerja() {
 		$logika_ini=$this->logika;
@@ -57,20 +59,36 @@ class Tunjangan {
 		return $tmsker;
 	}
 
-	public function tarikTmasakerja(){
-		$obj_tgl_ini = date_create($this->tgl_ini);
-		$obj_start_work = date_create($this->start_work);
-		$date_diff = date_diff($obj_tgl_ini, $obj_start_work);
-		$tunjnagan_masakerja = $date_diff->y * $this->kenaikan;
-		return $tunjnagan_masakerja;
-
-	}
-
 	public function getLamaKerja(){
 		$obj_tgl_ini = date_create($this->tgl_ini);
 		$obj_start_work = date_create($this->start_work);
-		$date_diff = date_diff($obj_tgl_ini, $obj_start_work);
-		//$tunjnagan_masakerja = $date_diff->y * $this->kenaikan;
+		$date_diff = date_diff($obj_tgl_ini, $obj_start_work);		
 		return $date_diff->y;
 	}
+
+	public function tarikTmasakerja(){
+		$nilai = 0;
+		$lama_kerja = $this->getLamaKerja();
+
+		$query = "SELECT * FROM  tarif_tunjangan_masakerja WHERE masa_kerja = $lama_kerja";
+		$rs = mysqli_query($this->link, $query);
+		
+		$query_max = "SELECT * FROM tarif_tunjangan_masakerja WHERE masa_kerja = (SELECT MAX(masa_kerja) FROM tarif_tunjangan_masakerja)";
+		$rs_max = mysqli_query($this->link, $query_max);
+		$row_max = mysqli_fetch_assoc($rs_max);
+
+		
+		if ($row = mysqli_fetch_assoc($rs)){
+			$nilai = $row['nilai_tunjangan'];
+		}else if ($lama_kerja >=$row_max['masa_kerja']){
+			$nilai = $row_max['nilai_tunjangan'];
+		}else {
+			$nilai = 0;
+		}
+		
+		return $nilai;
+
+	}
+
+	
 }

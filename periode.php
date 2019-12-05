@@ -1,6 +1,14 @@
 <?php 
 require_once('connections/conn_mysqli_procedural.php');
 require_once('include_class/employee/Employee.php');
+require_once('include_class/tunjangan/TarifMasakerja.php');
+
+
+
+//Tarif Masakerja
+//$TarifMasakerja = New TarifMasakerja($link);
+//$list_tarif = $TarifMasakerja->getListTarif();
+
 
 
 // Kd Periode & kd_project 
@@ -48,6 +56,14 @@ ddsmoothmenu.init({
 
 <div id="templatemo_main" class="wrapper">
 	<!-- Tempat Menaruh Tabel ISI -->
+		<?php //="max masakerja = ".$tarif_masakerja->getMaxMasakerja()."<br>"?>
+		<?php 
+
+		//$TarifMasakerja = $tarif_masakerja->getListTarif();
+		//print_r ($tarif);
+		
+		
+		?>
 	    <h2>Periode <?php echo $row_periode['nama_periode']." kd periode :".$kd_periode;?></h2>        		
 		<!-- Awal tabel -->
 		<table border=0 class="hkm-table" >
@@ -91,7 +107,7 @@ ddsmoothmenu.init({
 					<td align="left" width=""><?="JAB. : ".$Emp->jabatan."<br> PERIOD : ".$Emp->Periode->nama_periode?>	</td>
 					<td align="left" width=1/3%>								
 						<?="CONTRACT : START - END"?>
-						<?="<br> PROJ.:"?>
+						<?="<br> Start Work :".$row_emp['start_work']?>
 						<a href="#"
 						onclick="javascript:void window.open('cek_absen.php?<?php echo "emp_id=".$Emp->emp_id."&tgl_start=".$Emp->Periode->tgl_awal."&tgl_end=".$Emp->Periode->tgl_akhir;?>','1395882331015','width=500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=500,top=300');return false;">
 						CEK LOG 
@@ -213,7 +229,8 @@ ddsmoothmenu.init({
                                 $Emp->tmasakerja, 
 								$Emp->DayPeriode->logika_periode,
 								$row_emp['start_work'],
-								$tgl_ini
+								$tgl_ini,
+								$link
                         );
 			
 			//SET TJAM12
@@ -308,7 +325,11 @@ ddsmoothmenu.init({
                             <td><?php echo number_format($Emp->Gaji->gajiLembur(), 2, ',','.');?></td>
                             <td><?php echo $Emp->Durasi->getTolate();?></td>
                             <td><?php echo number_format($Emp->Gaji->gajiTelat(), 2, ',', '.');?></td>
-                            <td><?php echo number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.');?></td>
+							<td><?php 
+								//echo number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.');
+								echo $Emp->Tunjangan->getTmasakerja();
+								
+							?></td>
                             <td><?php echo number_format($Emp->Tjam->getTunjangan(), 2, ',', '.'); //Tunajangan Jam 12?></td> 
                             <td><?php echo number_format($Emp->TunjanganResiko->getTunjanganResiko($tgl_ini), 2, ',', '.'); ?></td> 
                             <td><?php echo number_format($Emp->Safety->getPotongan(), 2, ',', '.');?></td>

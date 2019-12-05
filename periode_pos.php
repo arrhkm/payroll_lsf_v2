@@ -190,7 +190,8 @@ ddsmoothmenu.init({
 			$Emp->tmasakerja, 
 			$Emp->DayPeriode->logika_periode,
 			$row_emp['start_work'],
-			$tgl_ini
+			$tgl_ini,
+			$link
 	);
 		
 		//SET TJAM12
