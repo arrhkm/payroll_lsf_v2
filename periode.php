@@ -211,18 +211,6 @@ ddsmoothmenu.init({
 			$evektive_hour=$Emp->Durasi->getEvectiveHour();
 			
 			//SET VAR GAJI 
-			//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat
-			$Emp->Gaji->setGaji(
-				$Emp->gaji_pokok, 
-				$Emp->Durasi->getEvectiveHour(),
-				$Emp->Durasi->getOverTime(), 			
-				$Emp->Durasi->getTolate(), 
-				$Emp->DayPeriode->logika_periode, 
-				$row_absensi['ket_absen'], 				
-				$Emp->pot_telat
-			); 
-			$jam_kerja_ev = $Emp->Durasi->getEvectiveHour();
-			//-------------------- SET TUNJANGAN -----------------------
 			//SET TMSKER
 			$Emp->Tunjangan->setTmasakerja(
 				$Emp->Durasi->getEvectiveHour(), 
@@ -233,6 +221,21 @@ ddsmoothmenu.init({
 				$link,
 				$row_absensi['ket_absen']
 			);
+
+			//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, tmasakerja
+			$Emp->Gaji->setGaji(
+				$Emp->gaji_pokok, 
+				$Emp->Durasi->getEvectiveHour(),
+				$Emp->Durasi->getOverTime(), 			
+				$Emp->Durasi->getTolate(), 
+				$Emp->DayPeriode->logika_periode, 
+				$row_absensi['ket_absen'], 				
+				$Emp->pot_telat, 
+				$Emp->Tunjangan->getTmasakerja()
+			); 
+			$jam_kerja_ev = $Emp->Durasi->getEvectiveHour();
+			//-------------------- SET TUNJANGAN -----------------------
+			
 			
 			//SET TJAM12
 			$emp_ijam=$Emp->emp_id;
