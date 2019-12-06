@@ -27,24 +27,25 @@ class Tunjangan {
 	public function getTmasakerja() {
 		$logika_ini=$this->logika;
 		if ($logika_ini=="sabtu") {
-			if ($this->jamev >=5) {
-				//$tmsker=$this->tunjangan;		
+			$tmsker = $this->tarikTmasakerja();
+			/*if ($this->jamev >=5) {				
 				$tmsker = $this->tarikTmasakerja();
 			}else {
 				$tmsker=0;
-			}
+			}*/
 		}
 		elseif ($logika_ini=="libur") {
-			if ($this->jamot>0) {
-				//$tmsker=$this->tunjangan;
+			$tmsker = $this->tarikTmasakerja();
+			/*if ($this->jamot>0) {				
 				$tmsker = $this->tarikTmasakerja();			
 			}else {
 				$tmsker=0;
-			}		
+			}*/		
 		}
 		elseif ($logika_ini=="minggu") {
-			if ($this->jamot>=5) {
-				//$tmsker=$this->tunjangan;
+			//if ($this->jamot>=5) {
+			if ($this->jamot>=1){
+				
 				$tmsker = $this->tarikTmasakerja();			
 			}else {
 				$tmsker=0;
@@ -53,9 +54,10 @@ class Tunjangan {
 		elseif($this->absen == 'CT' || $this->absen == "SK"){
 			$tmsker = $this->tarikTmasakerja();	
 		}
+		
 		else { 		
-			if ($this->jamev >=7) {
-				//$tmsker=$this->tunjangan;
+			if ($this->jamev >=1) {
+				
 				$tmsker = $this->tarikTmasakerja();			
 			}else {
 				$tmsker=0;
