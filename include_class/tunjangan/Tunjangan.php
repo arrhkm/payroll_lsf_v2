@@ -29,6 +29,12 @@ class Tunjangan {
 			$tmsker = $this->tarikTmasakerja();
 		}elseif($this->absen == 'CT' || $this->absen == "SK"){
 			$tmsker = $this->tarikTmasakerja();	
+		}elseif($this->logika=="libur" || $this->logika=="minggu") {
+			if ($this->jamot>0){
+				$tmsker = $this->tarikTmasakerja();	
+			}else {
+				$tmsker = 0;
+			}
 		}else {
 			$tmsker = 0;
 		}
