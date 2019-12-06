@@ -74,17 +74,18 @@ ddsmoothmenu.init({
 		$GAJI_ALL=0;
 		While ($row_emp=mysqli_fetch_assoc($rs_emp)) {		
 		//SET EMPLOYEE		
+		//setEmp(1:$vemp_id, 2:$vemp_name, 3:$vjamsos, 4:$vgaji_pokok, 5:$vtjam12, 6:$vjabatan, 7:$vnorekening, 8:$vemp_group, 9:$vpot_telat)
 		$Emp->setEmp(
-                    $row_emp['emp_id'], 
-                    $row_emp['emp_name'], 
-                    $row_emp['pot_jamsos'], 
-                    $row_emp['gaji_pokok'], 
-                    $row_emp['t_insentif'], 
-                    $row_emp['t_masakerja'], 
-                    $row_emp['nama_jabatan'], 
-                    $row_emp['no_rekening'], 
-                    $row_emp['emp_group'], 
-                    $row_emp['pot_telat']
+                    $row_emp['emp_id'], //1
+                    $row_emp['emp_name'], //2
+                    $row_emp['pot_jamsos'], //3
+                    $row_emp['gaji_pokok'], //4
+                    $row_emp['t_insentif'], //5
+                    //$row_emp['t_masakerja'], //6
+                    $row_emp['nama_jabatan'], //7
+                    $row_emp['no_rekening'], //8
+                    $row_emp['emp_group'], //9
+                    $row_emp['pot_telat']//10
                 );
 		$Emp->Periode->setId($kd_periode);
 		$rs_periode=mysqli_query($link, $Emp->Periode->sql_periode);
@@ -210,15 +211,14 @@ ddsmoothmenu.init({
 			$evektive_hour=$Emp->Durasi->getEvectiveHour();
 			
 			//SET VAR GAJI 
-			
+			//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat
 			$Emp->Gaji->setGaji(
 				$Emp->gaji_pokok, 
 				$Emp->Durasi->getEvectiveHour(),
-				$Emp->Durasi->getOverTime(), 
+				$Emp->Durasi->getOverTime(), 			
 				$Emp->Durasi->getTolate(), 
 				$Emp->DayPeriode->logika_periode, 
-				$row_absensi['ket_absen'], 
-				//$Emp->Tunjangan->getTmasakerja(),
+				$row_absensi['ket_absen'], 				
 				$Emp->pot_telat
 			); 
 			$jam_kerja_ev = $Emp->Durasi->getEvectiveHour();
@@ -327,11 +327,7 @@ ddsmoothmenu.init({
                             <td><?php echo number_format($Emp->Gaji->gajiLembur(), 2, ',','.');?></td>
                             <td><?php echo $Emp->Durasi->getTolate();?></td>
                             <td><?php echo number_format($Emp->Gaji->gajiTelat(), 2, ',', '.');?></td>
-							<td><?php 
-								echo number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.');
-								//echo $Emp->Tunjangan->getTmasakerja();
-								
-							?></td>
+							<td><?= number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.')?></td>
                             <td><?php echo number_format($Emp->Tjam->getTunjangan(), 2, ',', '.'); //Tunajangan Jam 12?></td> 
                             <td><?php echo number_format($Emp->TunjanganResiko->getTunjanganResiko($tgl_ini), 2, ',', '.'); ?></td> 
                             <td><?php echo number_format($Emp->Safety->getPotongan(), 2, ',', '.');?></td>

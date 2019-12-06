@@ -94,7 +94,7 @@ while ($row_posPayroll=mysqli_fetch_assoc($rs_pos_payroll)) {
     <th>Jam Lbr</th>
     <th>Gaji Pokok</th>
     <th>Gaji Lembur</th>
-    <th>P. Telat</th>
+    <th>Premi Hadir</th>
     <th>P. Safety</th>
     <th>P. jam12</th>
     <th>T. Msker </th>
