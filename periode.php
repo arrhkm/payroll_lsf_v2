@@ -226,8 +226,7 @@ ddsmoothmenu.init({
 			//SET TMSKER
 			$Emp->Tunjangan->setTmasakerja(
 				$Emp->Durasi->getEvectiveHour(), 
-				$Emp->Durasi->getOverTime(), 
-				//$Emp->tmasakerja, 
+				$Emp->Durasi->getOverTime(), 			
 				$Emp->DayPeriode->logika_periode,
 				$row_emp['start_work'],
 				$tgl_ini,

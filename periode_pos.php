@@ -93,17 +93,16 @@ ddsmoothmenu.init({
 	While ($row_emp=mysqli_fetch_assoc($rs_emp)) {
 	//set employee		
 	$Emp->setEmp(
-            $row_emp['emp_id'], 
-            $row_emp['emp_name'], 
-            $row_emp['pot_jamsos'], 
-            $row_emp['gaji_pokok'], 
-            $row_emp['t_insentif'], 
-            $row_emp['t_masakerja'], 
-            $row_emp['nama_jabatan'], 
-            $row_emp['no_rekening'], 
-            $row_emp['emp_group'],
-            $row_emp['pot_telat']
-        );
+		$row_emp['emp_id'], //1
+		$row_emp['emp_name'], //2
+		$row_emp['pot_jamsos'], //3
+		$row_emp['gaji_pokok'], //4
+		$row_emp['t_insentif'], //5		
+		$row_emp['nama_jabatan'], //6
+		$row_emp['no_rekening'], //7
+		$row_emp['emp_group'], //8
+		$row_emp['pot_telat']//9		
+	);
 	
 	$Emp->Periode->setId($kd_periode);
 	$rs_periode=mysqli_query($link, $Emp->Periode->sql_periode);
@@ -170,14 +169,14 @@ ddsmoothmenu.init({
 		
 		
 		//SET VAR GAJI 
+		
 		$Emp->Gaji->setGaji(
                         $Emp->gaji_pokok, 
                         $Emp->Durasi->getEvectiveHour(), 
                         $Emp->Durasi->getOverTime(), 
                         $Emp->Durasi->getTolate(), 
                         $Emp->DayPeriode->logika_periode, 
-                        $row_absensi['ket_absen'],
-                        //$Emp->tmasakerja,
+                        $row_absensi['ket_absen'],                        
                         $Emp->pot_telat
                 );
 		//Mencari jam evective
@@ -186,14 +185,13 @@ ddsmoothmenu.init({
 		//SET TMSKER
 		$Emp->Tunjangan->setTmasakerja(
 			$Emp->Durasi->getEvectiveHour(), 
-			$Emp->Durasi->getOverTime(), 
-			//$Emp->tmasakerja, 
+			$Emp->Durasi->getOverTime(),
 			$Emp->DayPeriode->logika_periode,
 			$row_emp['start_work'],
 			$tgl_ini,
 			$link,
 			$row_absensi['ket_absen']
-	);
+		);
 		
 		//SET TJAM12
 		$emp_ijam=$Emp->emp_id;
