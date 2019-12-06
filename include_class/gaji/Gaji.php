@@ -1,11 +1,11 @@
 <?php 
 class Gaji {
-	public $ev;
-	public $ot; 
-	public $gaji;	
-	public $logika;
-	public $tolate;
-	public $ket_absen;
+public $ev;
+public $ot; 
+public $gaji;	
+public $logika;
+public $tolate;
+public $ket_absen;
     //public $ms_kerja;//untuk LSF
     public $pot_telat;//LSF
 	
@@ -14,14 +14,14 @@ class Gaji {
 
     //public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen){//LDP
     public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat){//LSF
-            $this->gaji=$vgaji;
-            $this->ot=$vot;
-            $this->ev=$vev;
-            $this->tolate=$vtolate;
-            $this->logika=$vlogika;
-            $this->ket_absen=$vket_absen;
+        $this->gaji=$vgaji;
+        $this->ot=$vot;
+        $this->ev=$vev;
+        $this->tolate=$vtolate;
+        $this->logika=$vlogika;
+        $this->ket_absen=$vket_absen;
         //$this->ms_kerja=$vms_kerja;
-    $this->pot_telat = $vpot_telat;
+        $this->pot_telat = $vpot_telat;
     }
 
 

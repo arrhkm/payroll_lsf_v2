@@ -41,7 +41,6 @@ Class Employee {
 		$this->Jamsostek = New Jamsostek();
 		$this->Plusmin = New Plusmin();
 		$this->Grandtotal = New Grandtotal();
-		//$this->link = $link;
 		$this->TunjanganResiko = New TunjanganResiko();
 		
 	}
