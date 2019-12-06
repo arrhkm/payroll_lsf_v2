@@ -27,12 +27,12 @@ class Tunjangan {
 	public function getTmasakerja() {
 		$logika_ini=$this->logika;
 		if ($logika_ini=="sabtu") {
-			$tmsker = $this->tarikTmasakerja();
-			/*if ($this->jamev >=5) {				
+			
+			if ($this->jamev >=1) {				
 				$tmsker = $this->tarikTmasakerja();
 			}else {
 				$tmsker=0;
-			}*/
+			}
 		}
 		elseif ($logika_ini=="libur") {
 			$tmsker = $this->tarikTmasakerja();
