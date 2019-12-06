@@ -6,21 +6,21 @@ class Gaji {
 	public $logika;
 	public $tolate;
 	public $ket_absen;
-    public $ms_kerja;//untuk LSF
+    //public $ms_kerja;//untuk LSF
     public $pot_telat;//LSF
 	
     private $const_workday_of_month = 26;//untuk LSF 
     //untuk LDP --> //private $const_workday_of_month = 25;
 
     //public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen){//LDP
-    public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vms_kerja, $vpot_telat){//LSF
+    public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat){//LSF
             $this->gaji=$vgaji;
             $this->ot=$vot;
             $this->ev=$vev;
             $this->tolate=$vtolate;
             $this->logika=$vlogika;
             $this->ket_absen=$vket_absen;
-    $this->ms_kerja=$vms_kerja;
+        //$this->ms_kerja=$vms_kerja;
     $this->pot_telat = $vpot_telat;
     }
 

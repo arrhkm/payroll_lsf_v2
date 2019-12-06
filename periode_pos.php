@@ -177,7 +177,7 @@ ddsmoothmenu.init({
                         $Emp->Durasi->getTolate(), 
                         $Emp->DayPeriode->logika_periode, 
                         $row_absensi['ket_absen'],
-                        $Emp->tmasakerja,
+                        //$Emp->tmasakerja,
                         $Emp->pot_telat
                 );
 		//Mencari jam evective
@@ -187,11 +187,12 @@ ddsmoothmenu.init({
 		$Emp->Tunjangan->setTmasakerja(
 			$Emp->Durasi->getEvectiveHour(), 
 			$Emp->Durasi->getOverTime(), 
-			$Emp->tmasakerja, 
+			//$Emp->tmasakerja, 
 			$Emp->DayPeriode->logika_periode,
 			$row_emp['start_work'],
 			$tgl_ini,
-			$link
+			$link,
+			$row_absensi['ket_absen']
 	);
 		
 		//SET TJAM12
@@ -255,9 +256,9 @@ ddsmoothmenu.init({
 		//SET GRAND TOTAL 
 		$Emp->Grandtotal->setGrandtotal(
                     $Emp->Gaji->gajiPokok(),
-                    $Emp->Gaji->gajiLembur(), 
-                    $Emp->Tjam->getTunjangan(), 
-                    $Emp->Tunjangan->getTmasakerja(), 
+					$Emp->Gaji->gajiLembur(),
+					$Emp->Tunjangan->getTmasakerja(), 
+                    $Emp->Tjam->getTunjangan(),                      
                     $Emp->Gaji->gajiTelat(), 
                     $Emp->Safety->getPotongan(),
                     $row_absensi['ket_absen'], 

@@ -2,22 +2,24 @@
 class Tunjangan {
 	public $jamev;
 	public $jamot;
-	public $tunjangan;
+	//public $tunjangan;
 	public $logika;	
 	public $tgl_ini;
 	public $link;
 	public $start_work;
+	public $absen;
 
 	public $kenaikan;
 	
-	public function setTmasakerja($vjamev, $vjamot, $vtmasakerja, $vlogika, $start_work, $tgl_ini,$link) {
+	public function setTmasakerja($vjamev, $vjamot, $vlogika, $start_work, $tgl_ini,$link, $absen) {
 		$this->jamev=$vjamev;
 		$this->jamot=$vjamot;
-		$this->tunjangan=$vtmasakerja;
+		//$this->tunjangan=$vtmasakerja;
 		$this->logika=$vlogika;
 		$this->tgl_ini = $tgl_ini;
 		$this->link = $link;
 		$this->start_work = $start_work;
+		$this->absen = $absen;
 		//$this->kenaikan = 1000;
 		
 
@@ -47,6 +49,9 @@ class Tunjangan {
 			}else {
 				$tmsker=0;
 			}		
+		}
+		elseif($this->absen == 'CT' || $this->absen == "SK"){
+			$tmsker = $this->tarikTmasakerja();	
 		}
 		else { 		
 			if ($this->jamev >=7) {
