@@ -19,7 +19,7 @@ Class Employee {
 	public $gaji_pokok;	
 	public $jamsos;	
 	public $tjam12;
-	public $tmasakerja;
+	//public $tmasakerja;
 	public $jabatan;
 	public $norekening;
 	public $emp_group;
@@ -45,14 +45,14 @@ Class Employee {
 		$this->TunjanganResiko = New TunjanganResiko();
 		
 	}
-	public function setEmp($vemp_id, $vemp_name, $vjamsos, $vgaji_pokok, $vtjam12, $vtmasakerja, $vjabatan, $vnorekening, $vemp_group, $vpot_telat) {
+	public function setEmp($vemp_id, $vemp_name, $vjamsos, $vgaji_pokok, $vtjam12, $vjabatan, $vnorekening, $vemp_group, $vpot_telat) {
 	
 		$this->emp_id=$vemp_id;
 		$this->emp_name=$vemp_name;
 		$this->jamsos=$vjamsos;
 		$this->gaji_pokok=$vgaji_pokok;	
 		$this->tjam12=$vtjam12;	
-		$this->tmasakerja=$vtmasakerja;
+		//$this->tmasakerja=$vtmasakerja;
 		$this->jabatan=$vjabatan;
 		$this->norekening=$vnorekening;
 		$this->emp_group=$vemp_group;

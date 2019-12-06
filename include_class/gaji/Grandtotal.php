@@ -30,9 +30,9 @@ class Grandtotal{
 		if ($ijin=="SK" || $ijin=="CT" || $ijin=="PD"){
 			if ($logikaku=="awal"){	
 				//$grand_total=0;//update 2018
-				$grand_total= $this->gaji_dasar;
+				$grand_total= $this->gaji_dasar + $this->tmasakerja;
 			} else {
-				$grand_total= $this->gaji_dasar; 
+				$grand_total= $this->gaji_dasar + $this->tmasakerja; 
 			}
 		} else {		
                     //LDP //$grand_total=($this->gp+$this->gl+$this->tmasakerja+$this->tjam12) -($this->pottelat+$this->potsafety);
