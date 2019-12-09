@@ -90,6 +90,7 @@ $row_attribut=mysqli_fetch_assoc($qry_attribut);
 			$SUM_P_TELAT= 0;	
 			$SUM_P_SAFETY= 0;				
 			$SUM_TG=0;
+			$SUM_TRESIKO=0;
 			
 		//-------------------------------------------
 		
