@@ -112,6 +112,7 @@ while ($row_posPayroll=mysqli_fetch_assoc($rs_pos_payroll)) {
     $sum_tmsker=0;
     $sum_potTel=0;
     $sum_tg=0;
+    $sum_tresiko=0;
     //-------------------------------------------
     $sql_pos_detil= "SELECT * FROM pos_payroll_day WHERE kd_periode='$_REQUEST[kd_periode]' AND kd_project= '$_REQUEST[kd_project]'
                                     AND emp_id='$row_posPayroll[emp_id]'";
