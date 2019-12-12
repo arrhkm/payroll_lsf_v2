@@ -254,16 +254,27 @@ ddsmoothmenu.init({
 			FROM kasbon a
 			WHERE a.emp_id='$Emp->emp_id' AND a.status=1 
 			";
-                        $rs_kasbon=mysqli_query($link, $sql_kasbon);
+            $rs_kasbon=mysqli_query($link, $sql_kasbon);
 			$row_kasbon=mysqli_fetch_assoc($rs_kasbon);
                         
-                        $sql_kasbon_sisa = "SELECT a.jml_kasbon - SUM(jml_cicilan) as sisa, sum(b.jml_cicilan) as jml_cicilan
-                        FROM kasbon as a, cicilan_kasbon b
-                        WHERE  a.emp_id='$Emp->emp_id' AND a.status=1
-                        AND b.kd_kasbon=a.kd_kasbon 
-                        group by a.kd_kasbon";
-                        $rs_kasbon_sisa = mysqli_query($link, $sql_kasbon_sisa);
-                        $row_kasbon_sisa = mysqli_fetch_assoc($rs_kasbon_sisa);
+			$sql_kasbon_sisa = "SELECT a.jml_kasbon - SUM(jml_cicilan) as sisa, sum(b.jml_cicilan) as jml_cicilan
+			FROM kasbon as a, cicilan_kasbon b
+			WHERE  a.emp_id='$Emp->emp_id' AND a.status=1
+			AND b.kd_kasbon=a.kd_kasbon 
+			group by a.kd_kasbon";
+			$rs_kasbon_sisa = mysqli_query($link, $sql_kasbon_sisa);
+			$row_kasbon_sisa = mysqli_fetch_assoc($rs_kasbon_sisa);
+
+			$sql_cicil="SELECT * FROM cicilan_kasbon 
+			WHERE kd_periode = $kd_periode
+			AND kd_kasbon = $row_kasbon[kd_kasbon]
+			";
+			if($rs_cicil = mysqli_query($link, $sql_cicil)){
+				$row_cicil = mysqli_fetch_assoc($rs_cicil);
+				$cicilan = $row_cicil['jml_cicilan'];
+			}else {
+				$cicilan = 0;
+			}
 			
 			$Emp->Kasbon->setKasbon(
                                 $row_kasbon['kd_kasbon'], 
@@ -273,7 +284,7 @@ ddsmoothmenu.init({
                                 $row_kasbon['jml_kasbon'], 
                                 $row_kasbon['status'], 
                                 $row_kasbon_sisa['sisa'], 
-                                $row_kasbon_sisa['jml_cicilan']
+                                $cicilan 
                         );
 			//---- end Kasbon----------
 			
