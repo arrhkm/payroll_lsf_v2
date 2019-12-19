@@ -31,8 +31,8 @@ $pdf->SetFont('Arial','', 7);
 $pdf->AddPage();
 $header = [
 	'Hari', 'Tanggal', 'GP/jam', 'EV', 'OT', 
-	'Gj.Pokok', 'Gj.Lmbr', 'T. Jam12', 'T. Msker', 'T.Resiko',
-	'P.Telat', 'P.Safety', 'Total'
+	'Gj.Pokok', 'Gj.Lmbr', 'T. Jam12', 'T. Msker', 'T.Bahaya',
+	'Prem.Hadir', 'P.Safety', 'Total'
 ];
 // Column widths
 $w = [10, 15, 10, 5, 5, 19, 19, 19, 19, 19, 19, 19, 19];
