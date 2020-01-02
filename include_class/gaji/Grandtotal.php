@@ -34,7 +34,10 @@ class Grandtotal{
 			} else {
 				$grand_total= $this->gaji_dasar + $this->tmasakerja; 
 			}
-		} else {		
+		} elseif($this->logika=='libur' || $this->logika == 'minggu'){
+			$grand_total = ($this->gl+$this->tmasakerja+$this->tjam12 +$this->pottelat +$this->t_resiko);//LSF
+		}		
+		else {		
                     //LDP //$grand_total=($this->gp+$this->gl+$this->tmasakerja+$this->tjam12) -($this->pottelat+$this->potsafety);
 		
                     $grand_total=($this->gp+$this->gl+$this->tmasakerja+$this->tjam12 +$this->pottelat +$this->t_resiko) -($this->potsafety);//LSF

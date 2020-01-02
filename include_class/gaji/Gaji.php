@@ -41,8 +41,9 @@ class Gaji {
                             $gp=$this->ev*($this->gaji/5);
                             //$gp=1000;
                     }
-                    elseif ($this->logika == "libur") {
-                            $gp=$this->gaji;
+                    elseif ($this->logika == "libur" || $this->logika == 'minggu') {
+                            //$gp=$this->gaji;
+                            $gp = 0;
                     }
                     else {
                             $gp=$this->ev*($this->gaji/7);

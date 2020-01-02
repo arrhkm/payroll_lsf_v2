@@ -40,44 +40,7 @@ class Tunjangan {
 		else {
 			$tmsker = 0;
 		}
-		/*$logika_ini=$this->logika;
-		if ($logika_ini=="sabtu") {
-			
-			if ($this->jamev >=1) {				
-				$tmsker = $this->tarikTmasakerja();
-			}else {
-				$tmsker=0;
-			}
-		}
-		elseif ($logika_ini=="libur") {
-			$tmsker = $this->tarikTmasakerja();
-					
-				$tmsker = $this->tarikTmasakerja();			
-			}else {
-				$tmsker=0;
-				
-		}
-		elseif ($logika_ini=="minggu") {
-			
-			if ($this->jamot>=1){
-				
-				$tmsker = $this->tarikTmasakerja();			
-			}else {
-				$tmsker=0;
-			}		
-		}
-		elseif($this->absen == 'CT' || $this->absen == "SK"){
-			$tmsker = $this->tarikTmasakerja();	
-		}
 		
-		else { 		
-			if ($this->jamev >=1) {
-				
-				$tmsker = $this->tarikTmasakerja();			
-			}else {
-				$tmsker=0;
-			}			
-		}*/
 		return $tmsker;
 	}
 
