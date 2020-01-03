@@ -28,14 +28,14 @@ class Grandtotal{
 		$ijin=$this->ket_absen;
 		$logikaku=$this->logika;
 		if ($ijin=="SK" || $ijin=="CT" || $ijin=="PD"){
-			if ($logikaku=="awal"){	
+			//if ($logikaku=="awal"){	
 				//$grand_total=0;//update 2018
 				$grand_total= $this->gaji_dasar + $this->tmasakerja;
-			} else {
-				$grand_total= $this->gaji_dasar + $this->tmasakerja; 
-			}
+			//} else {
+			//	$grand_total= $this->gaji_dasar + $this->tmasakerja; 
+			//}
 		} elseif($this->logika=='libur' || $this->logika == 'minggu'){
-			$grand_total = ($this->gl+$this->tmasakerja+$this->tjam12 +$this->pottelat +$this->t_resiko);//LSF
+			$grand_total = ($this->gp + $this->gl+$this->tmasakerja+$this->tjam12 +$this->pottelat +$this->t_resiko);//LSF
 		}		
 		else {		
                     //LDP //$grand_total=($this->gp+$this->gl+$this->tmasakerja+$this->tjam12) -($this->pottelat+$this->potsafety);
