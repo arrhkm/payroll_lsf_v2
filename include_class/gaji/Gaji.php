@@ -33,17 +33,25 @@ class Gaji {
             }else {
 
                     if ($this->logika == "awal") {
-                            //$gp=0;		
-                            //update 2018
-                            $gp=$this->ev*($this->gaji/7);	
+                        //$gp=0;		
+                        //update 2018
+                        $gp=$this->ev*($this->gaji/7);	
                     }
                     if ($this->logika =="sabtu") {
                             $gp=$this->ev*($this->gaji/5);
                             //$gp=1000;
                     }
-                    elseif ($this->logika == "libur" || $this->logika == 'minggu') {
+                    elseif ($this->logika == "libur") {
                             //$gp=$this->gaji;
-                            $gp = 0;
+                            if ($this->ot>0){
+                                $gp = 0;
+                            }else {
+                                $gp = $this->gaji;
+                            }
+                            
+                    }
+                    elseif($this->logika == 'minggu'){
+                        $gp = 0;
                     }
                     else {
                             $gp=$this->ev*($this->gaji/7);
