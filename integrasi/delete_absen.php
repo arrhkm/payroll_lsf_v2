@@ -39,10 +39,12 @@ require_once('../connections/conn_mysqli_procedural.php');
                          
                 for($i = 0; $i<count($dt_emp);$i++){
                    
-                    $SQLdel="DELETE from absensi WHERE emp_id='$dt_emp[$i]' AND tgl BETWEEN '$_POST[tgl]' AND '$_POST[tgl2]'";
-                    mysqli_query($link, $sql_del);
+                    $SQLdel="DELETE FROM absensi WHERE emp_id='$dt_emp[$i]'                     
+                    AND tgl BETWEEN '$_POST[tgl]' AND '$_POST[tgl2]'
+                    ";
+                    mysqli_query($link, $SQLdel);
                 }
-                $message = "Ada ".count($dt_emp)." data dihapus.";
+                $message = "Ada ".count($dt_emp)." data dihapus dari tagggal $_POST[tgl] s/d $_POST[tgl2].";
             }else {
                 $message = "Tanggal 1 dan Tanggal 2 belum di isi";
             }    
@@ -50,14 +52,14 @@ require_once('../connections/conn_mysqli_procedural.php');
             $message = "emp id Belum di isi";
         }
     }else {
-        echo $message = "kosong";
+        $message = "kosong";
     }
-    if (isset($_POST['tgl'])){
+    /*if (isset($_POST['tgl'])){
         echo "tgl1 : ".$_POST['tgl']."<br>";
     }
     if (isset($_POST['tgl2'])){
         echo "Tgl2 :".$_POST['tgl2'];
-    }
+    }*/
 ?>
 
 <div class="mainHeading"><h2>Delete absen Employee</h2></div>
@@ -78,13 +80,13 @@ require_once('../connections/conn_mysqli_procedural.php');
           <td>Tanggal</td>
           <td>&nbsp;</td>
           <td>
-          <input name="tgl" type="text" size="10" maxlength="10" id="tgl" value="<?php if (isset($_REQUEST['edit']) && $_REQUEST['edit']==1){ echo $ROWedit['start_kontrak'];}?>"
+          From <input name="tgl" type="text" size="10" maxlength="10" id="tgl" value="<?php if (isset($_REQUEST['edit']) && $_REQUEST['edit']==1){ echo $ROWedit['start_kontrak'];}?>"
           onClick="if(self.gfPop)gfPop.fPopCalendar(document.form1.tgl);return false;"/>
           <a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.form1.tgl);return false;">
           <img name="popcal" align="absmiddle" style="border:none" src="calender/calender.jpeg" width="34" height="29" border="0"alt="">
           </a>	
 
-                <input name="tgl2" type="text" size="10" maxlength="10" id="tgl2" value=""
+                To <input name="tgl2" type="text" size="10" maxlength="10" id="tgl2" value=""
           onClick="if(self.gfPop)gfPop.fPopCalendar(document.form1.tgl2);return false;"/>
           <a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.form1.tgl2);return false;">
           <img name="popcal" align="absmiddle" style="border:none" src="calender/calender.jpeg" width="34" height="29" border="0"alt="">
@@ -94,18 +96,15 @@ require_once('../connections/conn_mysqli_procedural.php');
 
         <tr>			  
           <td colspan=2 align="center">
-              <input type="submit" name="btn_del" >
+              <input type="submit" name="btn_del" value="Delete" >
           <input name = "btn_back" type="button" value= "Back"  id="btn_back" Onclick="location='delete_absen.php'">
           </td>
           <td>
                
               <?php 
-                echo "Message : ".$message;  
-               
-               
-              
-               
-              
+                if (isset($message)){
+                    echo "Message : ".$message;    
+                }
               ?>
           </td>
 
