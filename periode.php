@@ -231,7 +231,9 @@ ddsmoothmenu.init({
 				$Emp->DayPeriode->logika_periode, 
 				$row_absensi['ket_absen'], 				
 				$Emp->pot_telat, 
-				$Emp->Tunjangan->getTmasakerja()
+				$Emp->Tunjangan->getTmasakerja(),
+				$Emp->emp_id,
+				$link
 			); 
 			$jam_kerja_ev = $Emp->Durasi->getEvectiveHour();
 			//-------------------- SET TUNJANGAN -----------------------

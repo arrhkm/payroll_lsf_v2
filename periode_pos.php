@@ -181,15 +181,17 @@ ddsmoothmenu.init({
 		//SET VAR GAJI 
 		
 		$Emp->Gaji->setGaji(
-                        $Emp->gaji_pokok, 
-                        $Emp->Durasi->getEvectiveHour(), 
-                        $Emp->Durasi->getOverTime(), 
-                        $Emp->Durasi->getTolate(), 
-                        $Emp->DayPeriode->logika_periode, 
-                        $row_absensi['ket_absen'],                        
-						$Emp->pot_telat,
-						$Emp->Tunjangan->getTmasakerja()
-				);
+			$Emp->gaji_pokok, 
+			$Emp->Durasi->getEvectiveHour(), 
+			$Emp->Durasi->getOverTime(), 
+			$Emp->Durasi->getTolate(), 
+			$Emp->DayPeriode->logika_periode, 
+			$row_absensi['ket_absen'],                        
+			$Emp->pot_telat,
+			$Emp->Tunjangan->getTmasakerja(),
+			$Emp->emp_id,
+			$link
+		);
 				
 
 		//Mencari jam evective
