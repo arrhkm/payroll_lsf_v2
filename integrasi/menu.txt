@@ -16,5 +16,6 @@
     <!-- a href="list_rpt_day3.php">Lihat Download Absensi3 |</a -->
     <!-- a href="setup_pulang.php">Set Pulang jam "15:00" |</a -->
     <a href="absensi_periode.php">Absensi Periode |</a>
-    <a href="../index.php">Back Home</a>
+    <a href="../index.php">Back Home |</a>
+    <a href="delete_absen.php">delete_absen |</a>
 </div>

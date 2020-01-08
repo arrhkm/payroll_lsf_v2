@@ -8,12 +8,14 @@ class Gaji {
         public $ket_absen;
         public $ms_kerja;//untuk LSF
         public $pot_telat;//LSF
+        public $emp_id;
+        public $link;
 	
     private $const_workday_of_month = 26;//untuk LSF 
     //untuk LDP --> //private $const_workday_of_month = 25;
 
     //public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen){//LDP
-    public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja){//LSF
+    public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $link){//LSF
         $this->gaji=$vgaji;
         $this->ot=$vot;
         $this->ev=$vev;
@@ -22,6 +24,19 @@ class Gaji {
         $this->ket_absen=$vket_absen;        
         $this->pot_telat = $vpot_telat;
         $this->ms_kerja=$masakerja;
+        $this->emp_id = $emp_id;
+        $this->link = $link;
+    }
+
+    public function getLamakerja(){
+        $query = "SELECT * FROM  employee WHERE emp_id = '$this->emp_id'";
+        $rs = mysqli_query($this->link, $query);
+        $row = mysqli_fetch_assoc($rs);
+        $start_work =  $row['start_work'];
+        $obj_tgl_ini = date_create($this->tgl_ini);
+		$obj_start_work = date_create($start_work);
+		$date_diff = date_diff($obj_tgl_ini, $obj_start_work);		
+		return $date_diff->y;
     }
 
 
@@ -46,7 +61,12 @@ class Gaji {
                             if ($this->ot>0){
                                 $gp = 0;
                             }else {
-                                $gp = $this->gaji;
+                                if ($this->getLamakerja()>=1){
+                                    $gp = $this->gaji;
+                                }else {
+                                    $gp = 0;
+                                }
+                                
                             }
                             
                     }

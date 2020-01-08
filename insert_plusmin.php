@@ -5,7 +5,7 @@ require_once('connections/conn_mysqli_procedural.php');
 $SQLmax="SELECT MAX(kd_plusmin) as NMAX FROM plusmin_gaji";
 $rsMax= mysqli_query($link, $SQLmax) or die (mysqli_error($link));
 $row_rsMax= mysqli_fetch_assoc($rsMax);
-$max=$row_rsMax[NMAX]+1;
+$max=$row_rsMax['NMAX']+1;
 
 $sql_periode="SELECT * FROM periode ORDER BY kd_periode DESC limit 0,10";
 $rs_periode=mysqli_query($link, $sql_periode) or die (mysqli_error($link));
@@ -79,7 +79,7 @@ ddsmoothmenu.init({
 					<input name="kd_plusmin" type="hidden" value="<?php if ($_REQUEST['edit']==1) echo $row_editplusmin['kd_plusmin']; else echo $max;?>">
 					<select name="emp_id">
 					<?php while($row_emp=mysqli_fetch_assoc($rs_emp)) {?>
-					<option value="<?php echo $row_emp[emp_id];?>" <?php if ($row_emp[emp_id]==$row_editplusmin[emp_id]) echo 'selected="selected"';?>><?php echo $row_emp[emp_id]." .::. ".$row_emp[emp_name]; ?></options>
+					<option value="<?php echo $row_emp['emp_id'];?>" <?php if ($row_emp['emp_id']==$row_editplusmin['emp_id']) echo 'selected="selected"';?>><?php echo $row_emp['emp_id']." .::. ".$row_emp['emp_name']; ?></options>
 					<?php } ?>
 					</select>					
 			</tr>
@@ -89,7 +89,7 @@ ddsmoothmenu.init({
 			  <td>			  
 			  <select name="kd_periode">
 			  <?php while ($row_periode=mysqli_fetch_assoc($rs_periode)) {?>
-					<option value="<?php echo $row_periode[kd_periode];?>"<?php if ($row_periode[kd_periode]==$row_editplusmin[kd_periode]) echo 'selected="selected"';?>><?php echo $row_periode['nama_periode'];?></option>
+					<option value="<?php echo $row_periode['kd_periode'];?>"<?php if ($row_periode['kd_periode']==$row_editplusmin['kd_periode']) echo 'selected="selected"';?>><?php echo $row_periode['nama_periode'];?></option>
 			  <?php } ?>
 			  </select>
 			  Jumlah record yang ditampilkan hanya 10 row DESC

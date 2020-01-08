@@ -1,48 +1,24 @@
 <?php 
 # Koneksi 
 
-require_once('connections/conn_mysqli_procedural.php');
+require_once('../connections/conn_mysqli_procedural.php');
 
 ?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>PT. Lintech</title>
-<meta name="keywords" content="orando template, blog page, website template, CSS, HTML, drop down menu" />
-<meta name="description" content="Orando Template, Blog Page, Free Template with Drop Down menu, designed by templatemo.com" />
-<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
 
-<link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
-
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/ddsmoothmenu.js">
-
-/***********************************************
-* Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
-* This notice MUST stay intact for legal use
-* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
-***********************************************/
-
-</script>
-
-<script type="text/javascript">
-
-ddsmoothmenu.init({
-	mainmenuid: "templatemo_menu", //menu DIV id
-	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
-	classname: 'ddsmoothmenu', //class added to menu's outer DIV
-	customtheme: ["#", "#"],
-	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
-})
-
-</script>
-
-<link rel="stylesheet" href="css/slimbox2.css" type="text/css" media="screen" /> 
-<script type="text/JavaScript" src="js/slimbox2.js"></script> 
+<link href="../themes/orange/css/style.css" rel="stylesheet" type="text/css" />
+<script src="../includes/jquery-1.3.2.min.js" type="text/javascript"></script>    	
+<script type="text/javascript" src="../includes/scripts-pack.js"></script>   
 </head>
-<body>
+<body></body>
+<div class="outerbox">
+<?php include ("menu.txt"); ?>
+
 <!-- Header Menu -->
-<?php require_once('header.inc'); ?>
+<?php //require_once('header.inc'); ?>
 <?php 
     $sql_emp1 = "SELECT distinct(b.emp_id)as id FROM  absensi as b JOIN employee as c ON (b.emp_id = c.emp_id)";
     $record_emp = mysqli_query($link, $sql_emp1);
@@ -84,10 +60,8 @@ ddsmoothmenu.init({
     }
 ?>
 
-<div id="templatemo_main" class="wrapper">	
-<!-- Tempat Menaruh Tabel ISI -->
-<h2>Delete absen Employee</h2>
-<!-- Awal tabel -->
+<div class="mainHeading"><h2>Delete absen Employee</h2></div>
+
 <form name="form1" method="POST" action="delete_absen.php">
     <table class="" width="700" border="0" align="center">			
         <tr>
@@ -146,7 +120,7 @@ ddsmoothmenu.init({
 <iframe width=174 height=189 name="gToday:normal:calender/agenda.js" id="gToday:normal:calender/agenda.js" src="calender/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;"></iframe>
 			
 <!-- Tabel isi selesai -->      	
-<div class="clear"></div>
+
 </div>
 <!--Footer-->
 </body>

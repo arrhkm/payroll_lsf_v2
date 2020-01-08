@@ -73,17 +73,17 @@ ddsmoothmenu.init({
 		</tr>
 		<?php while($row_plusmin = mysqli_fetch_assoc($rs_plusmin)) { ?>
 		<tr align="center">
-		<td align="rigt"><?php echo $row_plusmin[kd_plusmin];?></td>
-		<td align="rigt"><?php echo $row_plusmin[nama_periode];?></td>
-		<td align="rigt"><?php echo $row_plusmin[emp_id];?></td>
-		<td align="left"><?php echo $row_plusmin[emp_name];?></td>
-		<td align="left"><?php echo $row_plusmin[tgl_plusmin];?></td>
-		<td align="right"><?php echo "Rp ".number_format($row_plusmin[jml_plus],2,',','.');?></td>
-		<td align="right"><?php echo "Rp ".number_format($row_plusmin[jml_min],2,',','.');?></td>
+		<td align="rigt"><?php echo $row_plusmin['kd_plusmin'];?></td>
+		<td align="rigt"><?php echo $row_plusmin['nama_periode'];?></td>
+		<td align="rigt"><?php echo $row_plusmin['emp_id'];?></td>
+		<td align="left"><?php echo $row_plusmin['emp_name'];?></td>
+		<td align="left"><?php echo $row_plusmin['tgl_plusmin'];?></td>
+		<td align="right"><?php echo "Rp ".number_format($row_plusmin['jml_plus'],2,',','.');?></td>
+		<td align="right"><?php echo "Rp ".number_format($row_plusmin['jml_min'],2,',','.');?></td>
 		<td align="left"><?php echo "$row_plusmin[ket]";?></td>
 		<td>
-		<a href="insert_plusmin.php?edit=1&kd_plusmin=<?php echo $row_plusmin[kd_plusmin];?>">Edit</a> | 
-		<a href="saveinsert_plusmin.php?delete=1&kd_plusmin=<?php echo $row_plusmin[kd_plusmin];?>">Delete</a>
+		<a href="insert_plusmin.php?edit=1&kd_plusmin=<?php echo $row_plusmin['kd_plusmin'];?>">Edit</a> | 
+		<a href="saveinsert_plusmin.php?delete=1&kd_plusmin=<?php echo $row_plusmin['kd_plusmin'];?>">Delete</a>
 		</td>		
 		</tr>
 		<?php } ?>
