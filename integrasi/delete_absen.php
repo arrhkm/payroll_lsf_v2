@@ -13,7 +13,7 @@ require_once('../connections/conn_mysqli_procedural.php');
 <script src="../includes/jquery-1.3.2.min.js" type="text/javascript"></script>    	
 <script type="text/javascript" src="../includes/scripts-pack.js"></script>   
 </head>
-<body></body>
+<body>
 <div class="outerbox">
 <?php include ("menu.txt"); ?>
 
@@ -39,8 +39,8 @@ require_once('../connections/conn_mysqli_procedural.php');
                          
                 for($i = 0; $i<count($dt_emp);$i++){
                    
-                    $SQLdel="DELETE from absensi WHERE emp_id='$dt_emp[$i]' AND tgl ='$_POST[tgl]'";
-                    //mysqli_query($link, $sql_del);
+                    $SQLdel="DELETE from absensi WHERE emp_id='$dt_emp[$i]' AND tgl BETWEEN '$_POST[tgl]' AND '$_POST[tgl2]'";
+                    mysqli_query($link, $sql_del);
                 }
                 $message = "Ada ".count($dt_emp)." data dihapus.";
             }else {
