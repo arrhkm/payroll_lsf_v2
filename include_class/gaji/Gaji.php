@@ -137,6 +137,9 @@ class Gaji {
                                 $gp = 0;
                                 $ot = $this->ot;
                             }else{
+                                
+
+                                
                                 $gp = $this->gp;
                                 $ot = 0;
                             }
@@ -154,7 +157,7 @@ class Gaji {
                     //update 2018
                     $gp=$this->ev*($this->gaji/7);	
                 }
-                if ($this->logika =="sabtu") {
+                elseif ($this->logika =="sabtu") {
                         $gp=$this->ev*($this->gaji/5);
                         
                 }
