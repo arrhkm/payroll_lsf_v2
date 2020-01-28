@@ -150,24 +150,27 @@ class Gaji {
                         
                     }
                     
+                }else {
+                    if ($this->logika == "awal") {
+                        //$gp=0;		
+                        //update 2018
+                        $gp=$this->ev*($this->gaji/7);	
+                    }
+                    elseif ($this->logika =="sabtu") {
+                            $gp=$this->ev*($this->gaji/5);
+                            
+                    }
+                    
+                    elseif($this->logika == 'minggu'){
+                        $gp = 0;
+                    }
+                    else {
+                            $gp=$this->ev*($this->gaji/7);
+                    }			
+
                 }                    
 
-                elseif ($this->logika == "awal") {
-                    //$gp=0;		
-                    //update 2018
-                    $gp=$this->ev*($this->gaji/7);	
-                }
-                elseif ($this->logika =="sabtu") {
-                        $gp=$this->ev*($this->gaji/5);
-                        
-                }
                 
-                elseif($this->logika == 'minggu'){
-                    $gp = 0;
-                }
-                else {
-                        $gp=$this->ev*($this->gaji/7);
-                }			
             }
             return round($gp);
     }	
