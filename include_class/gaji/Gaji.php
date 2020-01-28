@@ -9,13 +9,14 @@ class Gaji {
         public $ms_kerja;//untuk LSF
         public $pot_telat;//LSF
         public $emp_id;
+        public $period_id;
         public $link;
 	
     private $const_workday_of_month = 26;//untuk LSF 
     //untuk LDP --> //private $const_workday_of_month = 25;
 
     //public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen){//LDP
-    public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $link){//LSF
+    public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $link){//LSF
         $this->gaji=$vgaji;
         $this->ot=$vot;
         $this->ev=$vev;
@@ -25,6 +26,7 @@ class Gaji {
         $this->pot_telat = $vpot_telat;
         $this->ms_kerja=$masakerja;
         $this->emp_id = $emp_id;
+        $this->period_id = $period_id;
         $this->link = $link;
     }
 
@@ -38,6 +40,78 @@ class Gaji {
 		$date_diff = date_diff($obj_tgl_ini, $obj_start_work);		
 		return $date_diff->y;
     }
+    
+    
+    //-------------------------------tunjangan tidak tetap--------------------------------------------------
+    public function getListTunjanganTidakTetap(){
+        $query_period = "SELECT * FROM periode WHERE kd_periode = $this->period_id";
+        $rs_period = mysqli_query($this->link, $query_period);
+        $row_period = mysqli_fetch_assoc($rs_period);
+
+        $query = " SELECT a.employee_emp_id, a.jenis_tunjangan_id,  count(a.tanggal) as jml_tunjangan, b.nama_jenis, b.nilai_tunjangan
+            FROM tunjangan a
+            LEFT JOIN jenis_tunjangan b ON(b.id = a.jenis_tunjangan_id)
+            WHERE employee_emp_id ='$this->emp_id'
+            AND tanggal BETWEEN '$row_period[tgl_awal]' AND '$row_period[tgl_akhir]'
+            group By (jenis_tunjangan_id);
+
+        ";
+        $rs = mysqli_query($this->link, $query);
+        $dt_arr = [];
+
+        while ($row_tj = mysqli_fetch_assoc($rs)) {
+        //while ($row_tj = mysqli_fetch_assoc($rs)){
+            array_push($dt_arr, [
+                'emp_id' => $row_tj['employee_emp_id'],
+                'jenis_tunjangan_id'=> $row_tj['jenis_tunjangan_id'],
+                'jml_tunjangan' => $row_tj['jml_tunjangan'],
+                'nilai_tunjangan'=>$row_tj['nilai_tunjangan'],
+                'nama_tunjangan'=>$row_tj['nama_jenis'],
+            ]);
+        }
+        return $dt_arr;
+
+    }
+
+    public function getKetTunjanganTidakTetap(){
+        $string_tj = "";
+        foreach ($this->getListTunjanganTidakTetap() as $dttj){
+            $string_tj  .= ' ' . $dttj['nama_tunjangan']."(".$dttj['jml_tunjangan'].")";
+        }
+        return $string_tj;
+    }
+    
+
+    public function getTotalTunjanganTidakTetap(){
+        $tunjangan = $this->getListTunjanganTidakTetap();
+        $jml = 0;
+        foreach ($tunjangan as $dt){
+            $jml = $jml + ($dt['nilai_tunjangan']*$dt['jml_tunjangan']);
+        }
+
+       
+        /*if ($this->ket_absen=="SK" || $this->ket_absen=="CT" || $this->ket_absen=="PD"){
+            $nilai = 0;
+        }elseif ($this->ket_absen == "libur" || $this->ket_absen == "minggu") {
+       
+            if ($this->ot>0){
+                $nilai = $jml;
+            }else {
+                $nilai = 0;
+            }
+            
+        }*/
+        if($this->logika=="normal") {
+            if ($this->ev > 1){
+                $nilai = $jml;
+            }else {
+                $nilai =0;
+            }
+        }
+        
+        return $jml;
+    }
+    //END TUNJANGAN TIDAK TETAP 
 
 
 
@@ -46,36 +120,51 @@ class Gaji {
             if ($ijin=="SK" || $ijin=="CT" || $ijin=="PD"){
                     $gp=$this->gaji;
             }else {
-
-                    if ($this->logika == "awal") {
-                        //$gp=0;		
-                        //update 2018
-                        $gp=$this->ev*($this->gaji/7);	
-                    }
-                    if ($this->logika =="sabtu") {
-                            $gp=$this->ev*($this->gaji/5);
-                            //$gp=1000;
-                    }
-                    elseif ($this->logika == "libur") {
-                            //$gp=$this->gaji;
-                            if ($this->ot>0){
-                                $gp = 0;
-                            }else {
-                                if ($this->getLamakerja()>=1){
-                                    $gp = $this->gaji;
-                                }else {
-                                    $gp = 0;
-                                }
-                                
-                            }
-                            
-                    }
-                    elseif($this->logika == 'minggu'){
+                if ($this->logika == "libur") {
+                    //$gp=$this->gaji;
+                    if ($this->ot>0){
                         $gp = 0;
+                    }else {
+                        /*if ($this->getLamakerja()>=1){
+                            $gp = $this->gaji;
+                        }else {
+                            $gp = 0;
+                        }*/
+                        /*
+                        Logika GP 
+                        if (libur nasional selain minggu ){
+                            if (masuk){
+                                $gp = 0;
+                                $ot = $this->ot;
+                            }else{
+                                $gp = $this->gp;
+                                $ot = 0;
+                            }
+                        }
+
+                        */
+                        $gp = $this->gaji;//Update 2020
+                        
                     }
-                    else {
-                            $gp=$this->ev*($this->gaji/7);
-                    }			
+                    
+                }                    
+
+                elseif ($this->logika == "awal") {
+                    //$gp=0;		
+                    //update 2018
+                    $gp=$this->ev*($this->gaji/7);	
+                }
+                if ($this->logika =="sabtu") {
+                        $gp=$this->ev*($this->gaji/5);
+                        
+                }
+                
+                elseif($this->logika == 'minggu'){
+                    $gp = 0;
+                }
+                else {
+                        $gp=$this->ev*($this->gaji/7);
+                }			
             }
             return round($gp);
     }	

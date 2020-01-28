@@ -72,7 +72,7 @@ ddsmoothmenu.init({
 		$Emp= New Employee();
 		$GAJI_BERSIH=0;
 		$GAJI_ALL=0;
-		While ($row_emp=mysqli_fetch_assoc($rs_emp)) {		
+		while ($row_emp=mysqli_fetch_assoc($rs_emp)) {		
 		//SET EMPLOYEE		
 		//setEmp(1:$vemp_id, 2:$vemp_name, 3:$vjamsos, 4:$vgaji_pokok, 5:$vtjam12, 6:$vjabatan, 7:$vnorekening, 8:$vemp_group, 9:$vpot_telat)
 		$Emp->setEmp(
@@ -222,7 +222,7 @@ ddsmoothmenu.init({
 				$row_absensi['ket_absen']
 			);
 
-			//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, tmasakerja
+			//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $link
 			$Emp->Gaji->setGaji(
 				$Emp->gaji_pokok, 
 				$Emp->Durasi->getEvectiveHour(),
@@ -233,9 +233,11 @@ ddsmoothmenu.init({
 				$Emp->pot_telat, 
 				$Emp->Tunjangan->getTmasakerja(),
 				$Emp->emp_id,
+				$kd_periode,
 				$link
-			); 
+			); 			
 			$jam_kerja_ev = $Emp->Durasi->getEvectiveHour();
+
 			//-------------------- SET TUNJANGAN -----------------------
 			
 			
@@ -279,15 +281,15 @@ ddsmoothmenu.init({
 			}
 			
 			$Emp->Kasbon->setKasbon(
-                                $row_kasbon['kd_kasbon'], 
-                                $row_kasbon['emp_id'], 
-                                $row_kasbon['tgl'], 
-                                $row_kasbon['keterangan'],
-                                $row_kasbon['jml_kasbon'], 
-                                $row_kasbon['status'], 
-                                $row_kasbon_sisa['sisa'], 
-                                $cicilan 
-                        );
+				$row_kasbon['kd_kasbon'], 
+				$row_kasbon['emp_id'], 
+				$row_kasbon['tgl'], 
+				$row_kasbon['keterangan'],
+				$row_kasbon['jml_kasbon'], 
+				$row_kasbon['status'], 
+				$row_kasbon_sisa['sisa'], 
+				$cicilan 
+			);
 			//---- end Kasbon----------
 			
 			//---- Safety Talk -----
@@ -305,17 +307,17 @@ ddsmoothmenu.init({
 			}			
 			//SET GRAND TOTAL 
 			$Emp->Grandtotal->setGrandtotal(
-                            $Emp->Gaji->gajiPokok(),
-                            $Emp->Gaji->gajiLembur(),                             
-							$Emp->Tunjangan->getTmasakerja(),
-							$Emp->Tjam->getTunjangan(),  
-                            $Emp->Gaji->gajiTelat(), 
-                            $Emp->Safety->getPotongan(),
-                            $row_absensi['ket_absen'], 
-							$Emp->gaji_pokok, 
-							$Emp->TunjanganResiko->getTunjanganResiko($tgl_ini),
-                            $Emp->DayPeriode->logika_periode
-                        );
+				$Emp->Gaji->gajiPokok(),
+				$Emp->Gaji->gajiLembur(),                             
+				$Emp->Tunjangan->getTmasakerja(),
+				$Emp->Tjam->getTunjangan(),  
+				$Emp->Gaji->gajiTelat(), 
+				$Emp->Safety->getPotongan(),
+				$row_absensi['ket_absen'], 
+				$Emp->gaji_pokok, 
+				$Emp->TunjanganResiko->getTunjanganResiko($tgl_ini),
+				$Emp->DayPeriode->logika_periode
+			);
 			
 			$GT=$Emp->Grandtotal->getGrandtotal();
 			$SUM_GT=$SUM_GT+$GT;
@@ -328,26 +330,26 @@ ddsmoothmenu.init({
 			$SUM_SAFETY=$SUM_SAFETY+$Emp->Safety->getPotongan();
 			?>		
 			<tr class="<?php if ($Emp->DayPeriode->logika_periode=="libur" OR $Emp->DayPeriode->logika_periode=="minggu") echo "hkm_td_libur";?>">
-                            <td><?php echo $Emp->Periode->tgl_ini[$i];?></td> 
-                            <td><?php echo $Emp->DayPeriode->getDay();?></td>
-                            <td><?php echo $Emp->DayPeriode->logika_periode;?></td> 
-                            <td><?php echo "Rp.".number_format($gp, 2, '.', ',');?></td> 
-                            <td><?php echo $row_absensi['jam_in'];?></td> 
-                            <td><?php echo $row_absensi['jam_out'];?></td>
-                            <td><?php echo $office_in;//$Emp->Durasi->must_in;?></td> 
-                            <td><?php echo $office_out;//$Emp->Durasi->must_out;?></td> 
-                            <td><?php echo $Emp->Durasi->getEvectiveHour();?></td>
-                            <td><?php echo $Emp->Durasi->getOverTime();?></td>
-                            <td><?php echo number_format($Emp->Gaji->gajiPokok(), 2, ',','.');?></td>
-                            <td><?php echo number_format($Emp->Gaji->gajiLembur(), 2, ',','.');?></td>
-                            <td><?php echo $Emp->Durasi->getTolate();?></td>
-                            <td><?php echo number_format($Emp->Gaji->gajiTelat(), 2, ',', '.');?></td>
-							<td><?= number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.')?></td>
-                            <td><?php echo number_format($Emp->Tjam->getTunjangan(), 2, ',', '.'); //Tunajangan Jam 12?></td> 
-                            <td><?php echo number_format($Emp->TunjanganResiko->getTunjanganResiko($tgl_ini), 2, ',', '.'); ?></td> 
-                            <td><?php echo number_format($Emp->Safety->getPotongan(), 2, ',', '.');?></td>
+				<td><?php echo $Emp->Periode->tgl_ini[$i];?></td> 
+				<td><?php echo $Emp->DayPeriode->getDay();?></td>
+				<td><?php echo $Emp->DayPeriode->logika_periode;?></td> 
+				<td><?php echo "Rp.".number_format($gp, 2, '.', ',');?></td> 
+				<td><?php echo $row_absensi['jam_in'];?></td> 
+				<td><?php echo $row_absensi['jam_out'];?></td>
+				<td><?php echo $office_in;//$Emp->Durasi->must_in;?></td> 
+				<td><?php echo $office_out;//$Emp->Durasi->must_out;?></td> 
+				<td><?php echo $Emp->Durasi->getEvectiveHour();?></td>
+				<td><?php echo $Emp->Durasi->getOverTime();?></td>
+				<td><?php echo number_format($Emp->Gaji->gajiPokok(), 2, ',','.');?></td>
+				<td><?php echo number_format($Emp->Gaji->gajiLembur(), 2, ',','.');?></td>
+				<td><?php echo $Emp->Durasi->getTolate();?></td>
+				<td><?php echo number_format($Emp->Gaji->gajiTelat(), 2, ',', '.');?></td>
+				<td><?= number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.')?></td>
+				<td><?php echo number_format($Emp->Tjam->getTunjangan(), 2, ',', '.'); //Tunajangan Jam 12?></td> 
+				<td><?php echo number_format($Emp->TunjanganResiko->getTunjanganResiko($tgl_ini), 2, ',', '.'); ?></td> 
+				<td><?php echo number_format($Emp->Safety->getPotongan(), 2, ',', '.');?></td>
 
-                            <td><?php if ($row_absensi['ket_absen']) echo $row_absensi['ket_absen']." - "; echo number_format($GT, 2, ',', '.');?></td>	
+				<td><?php if ($row_absensi['ket_absen']) echo $row_absensi['ket_absen']." - "; echo number_format($GT, 2, ',', '.');?></td>	
 			</tr>		
 			<?php
 			
@@ -362,7 +364,7 @@ ddsmoothmenu.init({
 		$Emp->Plusmin->setdbPlusmin($link, $sql_plusmin);
 		//----- End Plusmin -----
 		$SUM_GT = $SUM_GT;
-		$GAJI_BERSIH=($SUM_GT + $Emp->Plusmin->getPlus())-($Emp->Kasbon->jml_cicil + $Emp->Jamsostek->getPotongan() + $Emp->Plusmin->getMin());
+		$GAJI_BERSIH=($SUM_GT + $Emp->Plusmin->getPlus()+$Emp->Gaji->getTotalTunjanganTidakTetap())-($Emp->Kasbon->jml_cicil + $Emp->Jamsostek->getPotongan() + $Emp->Plusmin->getMin());
 		?>
 		<tr class="hkm_td">
 			<td colspan=7>Grand Total</td>
@@ -387,7 +389,15 @@ ddsmoothmenu.init({
 			<td><?php echo number_format($Emp->Kasbon->jml_cicil,2, ',', '.');?></td>
 		</tr>
 		<tr>
-			<td colspan=15></td>
+			<td colspan=15>
+				<?php
+				/* 
+				$string_tj = "";
+				foreach ($Emp->Gaji->getListTunjanganTidakTetap() as $dttj){
+					$string_tj  .= ' ' . $dttj['nama_tunjangan']."(".$dttj['jml_tunjangan'].")";
+				}*/
+				echo "Tunjangan :".$Emp->Gaji->getKetTunjanganTidakTetap();?>
+			</td>
 			<td colspan=3>Potongan Jamsostek </td>
 			<td colspan=0>
 				<?php echo "Rp. ".number_format($Emp->Jamsostek->getPotongan(), 2, '.', '.');// echo $Emp->Jamsostek->getPotongan();?>
@@ -409,11 +419,22 @@ ddsmoothmenu.init({
 		</tr>
 		<tr>
 			<td colspan=15></td>
+			<td colspan=3>Tunjangan Tidak Tetap </td>
+			<td colspan=0>
+				<?php			
+				echo "Rp. ".number_format($Emp->Gaji->getTotalTunjanganTidakTetap(), 2, ',','.');
+				
+				?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan=15></td>
 			<td colspan=3>TOTAL </td>
 			<td colspan=0>
 				<?php echo "Rp. ".number_format($GAJI_BERSIH,2, ',', '.');?>
 			</td>
 		</tr>
+		
 		<?php
 		
 		$GAJI_ALL=$GAJI_ALL + $GAJI_BERSIH;

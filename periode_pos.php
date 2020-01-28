@@ -180,18 +180,20 @@ ddsmoothmenu.init({
 
 		//SET VAR GAJI 
 		
+		//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $link
 		$Emp->Gaji->setGaji(
 			$Emp->gaji_pokok, 
-			$Emp->Durasi->getEvectiveHour(), 
-			$Emp->Durasi->getOverTime(), 
+			$Emp->Durasi->getEvectiveHour(),
+			$Emp->Durasi->getOverTime(), 			
 			$Emp->Durasi->getTolate(), 
 			$Emp->DayPeriode->logika_periode, 
-			$row_absensi['ket_absen'],                        
-			$Emp->pot_telat,
+			$row_absensi['ket_absen'], 				
+			$Emp->pot_telat, 
 			$Emp->Tunjangan->getTmasakerja(),
 			$Emp->emp_id,
+			$kd_periode,
 			$link
-		);
+		); 			
 				
 
 		//Mencari jam evective
