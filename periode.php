@@ -205,7 +205,7 @@ ddsmoothmenu.init({
 			
 			
 			//setting durasi
-			$Emp->Durasi->setTime($office_in, $office_out, $row_absensi['jam_in'], $row_absensi['jam_out'], $Emp->DayPeriode->logika_periode);
+			$Emp->Durasi->setTime($office_in, $office_out, $row_absensi['jam_in'], $row_absensi['jam_out'], $Emp->DayPeriode->logika_periode, $row_absensi['tgl']);
 			//Mencari jam evective
 			
 			$evektive_hour=$Emp->Durasi->getEvectiveHour();
@@ -222,7 +222,7 @@ ddsmoothmenu.init({
 				$row_absensi['ket_absen']
 			);
 
-			//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $link
+			//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $tgl_ini, $link
 			$Emp->Gaji->setGaji(
 				$Emp->gaji_pokok, 
 				$Emp->Durasi->getEvectiveHour(),
@@ -234,10 +234,11 @@ ddsmoothmenu.init({
 				$Emp->Tunjangan->getTmasakerja(),
 				$Emp->emp_id,
 				$kd_periode,
+				$tgl_ini,
 				$link
 			); 			
 			$jam_kerja_ev = $Emp->Durasi->getEvectiveHour();
-
+			
 			//-------------------- SET TUNJANGAN -----------------------
 			
 			

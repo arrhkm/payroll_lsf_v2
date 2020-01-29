@@ -15,16 +15,17 @@ class Durasi
 	public $office_out;	
 	public $logika;
 	public $tolate;
+	public $tgl_ini;
 
 
 	
-	public function setTime($vmust_in, $vmust_out, $vtime_in, $vtime_out, $vlogika) {
+	public function setTime($vmust_in, $vmust_out, $vtime_in, $vtime_out, $vlogika, $tgl_ini) {
 		$this->must_in=$vmust_in;
 		$this->must_out=$vmust_out;	
 		$this->time_in=$vtime_in;
 		$this->time_out=$vtime_out;
 		$this->logika=$vlogika;
-		
+		$this->tgl_ini = $tgl_ini;		
 	}
 		
 	public function getEvectiveHour() {
@@ -110,12 +111,29 @@ class Durasi
 				if ($ot<0) $ot=0;
 			}
 			elseif ($logikaku=="libur" OR $logikaku=="minggu") {
-				if ((int)$person_out[0]>=13) {
-					$ot=$sio-($si+1);// 1 jam istirahat jam 12:00
-					if ($ot<0) $ot=0;
-				}else {//lembur sampai di bawah jam 13:00
-					$ot=$sio-($si);
-					if ($ot<0) $ot=0;				
+				$today = date_create($this->tgl_ini);
+				if($today->format('w')==6){ //Jika hari ini = 6 (harisabtu)
+					if ((int)$person_out[0]>=13) {
+						$ot=$sio-($si+1);// 1 jam istirahat jam 12:00
+						
+					}else {//lembur sampai di bawah jam 13:00
+						$ot=$sio-($si);
+									
+					}
+					if ($ot>0){
+						
+					}else {
+						$ot = 0;
+					}
+				}else {
+				
+					if ((int)$person_out[0]>=13) {
+						$ot=$sio-($si+1);// 1 jam istirahat jam 12:00
+						if ($ot<0) $ot=0;
+					}else {//lembur sampai di bawah jam 13:00
+						$ot=$sio-($si);
+						if ($ot<0) $ot=0;				
+					}
 				}
 			}
 			elseif ($logikaku=="sabtu") {
