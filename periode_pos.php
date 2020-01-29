@@ -165,7 +165,7 @@ ddsmoothmenu.init({
 		$row_absensi=mysqli_fetch_assoc($rs_absensi);				
 		
 		//setting durasi
-		$Emp->Durasi->setTime($office_in, $office_out, $row_absensi['jam_in'], $row_absensi['jam_out'], $Emp->DayPeriode->logika_periode);
+		$Emp->Durasi->setTime($office_in, $office_out, $row_absensi['jam_in'], $row_absensi['jam_out'], $Emp->DayPeriode->logika_periode, $tgl_ini);
 		
 		//SET TMSKER
 		$Emp->Tunjangan->setTmasakerja(
@@ -180,10 +180,10 @@ ddsmoothmenu.init({
 
 		//SET VAR GAJI 
 		
-		//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $link
+		//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $tgl_ini, $link
 		$Emp->Gaji->setGaji(
 			$Emp->gaji_pokok, 
-			$Emp->Durasi->getEvectiveHour(),
+			$Emp->F->getEvectiveHour(),
 			$Emp->Durasi->getOverTime(), 			
 			$Emp->Durasi->getTolate(), 
 			$Emp->DayPeriode->logika_periode, 
@@ -192,6 +192,7 @@ ddsmoothmenu.init({
 			$Emp->Tunjangan->getTmasakerja(),
 			$Emp->emp_id,
 			$kd_periode,
+			$tgl_ini,
 			$link
 		); 			
 				

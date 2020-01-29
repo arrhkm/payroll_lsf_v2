@@ -11,12 +11,13 @@ class Gaji {
         public $emp_id;
         public $period_id;
         public $link;
+        public $tgl_ini;
 	
     private $const_workday_of_month = 26;//untuk LSF 
     //untuk LDP --> //private $const_workday_of_month = 25;
 
     //public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen){//LDP
-    public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $link){//LSF
+    public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $tgl_ini,  $link){//LSF
         $this->gaji=$vgaji;
         $this->ot=$vot;
         $this->ev=$vev;
@@ -28,6 +29,7 @@ class Gaji {
         $this->emp_id = $emp_id;
         $this->period_id = $period_id;
         $this->link = $link;
+        $this->tgl_ini = $tgl_ini;
     }
 
     public function getLamakerja(){
@@ -40,6 +42,7 @@ class Gaji {
 		$date_diff = date_diff($obj_tgl_ini, $obj_start_work);		
 		return $date_diff->y;
     }
+    
     
     
     //-------------------------------tunjangan tidak tetap--------------------------------------------------
@@ -177,17 +180,42 @@ class Gaji {
     public function gajiPengaliLembur() {
         //return ($this->gaji * $this->const_workday_of_month)/173; //LDP const_workday_of_month = 25 hari
         //RUMUS LSF gaji pengali lembur = ((GP 1 hari * 26) + (Tmasakerja*26))/173
+
         return (($this->gaji * $this->const_workday_of_month)+($this->ms_kerja*$this->const_workday_of_month))/173;
+        //return $this->ms_kerja;
+
     }
 
 
     public function gajiLembur(){
         $v_gajilembur = $this->gajiPengaliLembur();
-
+        $today = date_create($this->tgl_ini);
+        $w_day = $today->format('w');
+        $num_day = (int)$w_day;
+        /*if ($num_day = 6){
+            $gaji_ot = $num_day;
+        }*/
         if ($this->logika=="libur" OR $this->logika=="minggu") {
                 $ot=$this->ot;
                 //$gaji_ot=2*($this->gaji/7)*$this->ot;
-                if ($this->ot==8){
+                if ($num_day == 6){
+                    if ($this->ot>0 && $this->ot<=5){
+                        $gaji_ot = 2*5*($v_gajilembur);
+                        //$gaji_ot = $v_gajilembur;
+
+                    }elseif ($this->ot ==6){   
+                        $gj1 = 2*5*($v_gajilembur);
+                        $gj2 = 3*($v_gajilembur);
+                        $gaji_ot = $gj1+$gj2;             
+                     
+                    }elseif ($this->ot>=7){
+                        $gj1 = 4*($this->ot-6)*($v_gajilembur);
+                        $gj2 = 3*($v_gajilembur);
+                        $gj3 = 2*5*($v_gajilembur);
+                        $gaji_ot = $gj1+$gj2+$gj3;
+                    }
+                }
+                elseif ($this->ot==8){
                         //$gaji_ot=3*($this->gaji/7)*$this->ot;
                         $gj1=2*($v_gajilembur)*($this->ot-1);
                         $gj2=3*($v_gajilembur)*1;
