@@ -183,7 +183,7 @@ ddsmoothmenu.init({
 		//$vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $tgl_ini, $link
 		$Emp->Gaji->setGaji(
 			$Emp->gaji_pokok, 
-			$Emp->F->getEvectiveHour(),
+			$Emp->Durasi->getEvectiveHour(),
 			$Emp->Durasi->getOverTime(), 			
 			$Emp->Durasi->getTolate(), 
 			$Emp->DayPeriode->logika_periode, 
