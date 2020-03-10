@@ -205,7 +205,7 @@ ddsmoothmenu.init({
 			
 			
 			//setting durasi
-			$Emp->Durasi->setTime($office_in, $office_out, $row_absensi['jam_in'], $row_absensi['jam_out'], $Emp->DayPeriode->logika_periode, $row_absensi['tgl']);
+			$Emp->Durasi->setTime($office_in, $office_out, $row_absensi['jam_in'], $row_absensi['jam_out'], $Emp->DayPeriode->logika_periode, $row_absensi['tgl'],$Emp->emp_id, $link);
 			//Mencari jam evective
 			
 			$evektive_hour=$Emp->Durasi->getEvectiveHour();
@@ -226,7 +226,8 @@ ddsmoothmenu.init({
 			$Emp->Gaji->setGaji(
 				$Emp->gaji_pokok, 
 				$Emp->Durasi->getEvectiveHour(),
-				$Emp->Durasi->getOverTime(), 			
+				$Emp->Durasi->getOverTime(), 	
+				//$Emp->Durasi->getOverTimeSpkl(),		
 				$Emp->Durasi->getTolate(), 
 				$Emp->DayPeriode->logika_periode, 
 				$row_absensi['ket_absen'], 				
@@ -340,9 +341,9 @@ ddsmoothmenu.init({
 				<td><?php echo $office_in;//$Emp->Durasi->must_in;?></td> 
 				<td><?php echo $office_out;//$Emp->Durasi->must_out;?></td> 
 				<td><?php echo $Emp->Durasi->getEvectiveHour();?></td>
-				<td><?php echo $Emp->Durasi->getOverTime();?></td>
+				<td><?php echo "actual:".$Emp->Durasi->getOverTime()."<br>Spkl:".$Emp->Durasi->getOverTimeSpkl();?></td>
 				<td><?php echo number_format($Emp->Gaji->gajiPokok(), 2, ',','.');?></td>
-				<td><?php echo number_format($Emp->Gaji->gajiLembur(), 2, ',','.');?></td>
+				<td><?php echo "pengali:".number_format($Emp->Gaji->gajiPengaliLembur(),2,',','.')."<br>Nilai OT:".number_format($Emp->Gaji->gajiLembur(), 2, ',','.');?></td>
 				<td><?php echo $Emp->Durasi->getTolate();?></td>
 				<td><?php echo number_format($Emp->Gaji->gajiTelat(), 2, ',', '.');?></td>
 				<td><?= number_format($Emp->Tunjangan->getTmasakerja(), 2, ',', '.')?></td>

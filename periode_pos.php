@@ -165,7 +165,7 @@ ddsmoothmenu.init({
 		$row_absensi=mysqli_fetch_assoc($rs_absensi);				
 		
 		//setting durasi
-		$Emp->Durasi->setTime($office_in, $office_out, $row_absensi['jam_in'], $row_absensi['jam_out'], $Emp->DayPeriode->logika_periode, $tgl_ini);
+		$Emp->Durasi->setTime($office_in, $office_out, $row_absensi['jam_in'], $row_absensi['jam_out'], $Emp->DayPeriode->logika_periode, $tgl_ini, $Emp->emp_id, $link);
 		
 		//SET TMSKER
 		$Emp->Tunjangan->setTmasakerja(

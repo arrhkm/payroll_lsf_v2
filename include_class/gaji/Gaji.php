@@ -19,6 +19,7 @@ class Gaji {
     //public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen){//LDP
     public function setGaji($vgaji, $vev, $vot, $vtolate, $vlogika, $vket_absen, $vpot_telat, $masakerja, $emp_id, $period_id, $tgl_ini,  $link){//LSF
         $this->gaji=$vgaji;
+        
         $this->ot=$vot;
         $this->ev=$vev;
         $this->tolate=$vtolate;
@@ -91,19 +92,8 @@ class Gaji {
         foreach ($tunjangan as $dt){
             $jml = $jml + ($dt['nilai_tunjangan']*$dt['jml_tunjangan']);
         }
-
        
-        /*if ($this->ket_absen=="SK" || $this->ket_absen=="CT" || $this->ket_absen=="PD"){
-            $nilai = 0;
-        }elseif ($this->ket_absen == "libur" || $this->ket_absen == "minggu") {
        
-            if ($this->ot>0){
-                $nilai = $jml;
-            }else {
-                $nilai = 0;
-            }
-            
-        }*/
         if($this->logika=="normal") {
             if ($this->ev > 1){
                 $nilai = $jml;
@@ -128,27 +118,7 @@ class Gaji {
                     if ($this->ot>0){
                         $gp = 0;
                     }else {
-                        /*if ($this->getLamakerja()>=1){
-                            $gp = $this->gaji;
-                        }else {
-                            $gp = 0;
-                        }*/
-                        /*
-                        Logika GP 
-                        if (libur nasional selain minggu ){
-                            if (masuk){
-                                $gp = 0;
-                                $ot = $this->ot;
-                            }else{
-                                
-
-                                
-                                $gp = $this->gp;
-                                $ot = 0;
-                            }
-                        }
-
-                        */
+                       
                         $gp = $this->gaji;//Update 2020
                         
                     }
@@ -188,6 +158,21 @@ class Gaji {
 
 
     public function gajiLembur(){
+        //----------SPL---------
+        $query_spl = "SELECT * FROM spl WHERE date_spl = '$this->tgl_ini' AND employee_emp_id ='$this->emp_id'";
+        $rs_spl = mysqli_query($this->link, $query_spl);
+        $row_spl = mysqli_fetch_assoc($rs_spl);
+
+
+        $ot_spl = $row_spl['overtime_value'];
+        if ($this->ot > $ot_spl){
+            $this->ot = $ot_spl;
+        }else if (empty($ot_spl)){
+            $this->ot = 0;
+        }
+        
+        //--------end SPL------- 
+
         $v_gajilembur = $this->gajiPengaliLembur();
         $today = date_create($this->tgl_ini);
         $w_day = $today->format('w');
@@ -197,8 +182,8 @@ class Gaji {
         }*/
         if ($this->logika=="libur" OR $this->logika=="minggu") {
                 $ot=$this->ot;
-                //$gaji_ot=2*($this->gaji/7)*$this->ot;
-                if ($num_day == 6){
+                
+                if ($num_day == 6){//jika sabtu
                     if ($this->ot>0 && $this->ot<=5){
                         $gaji_ot = 2*5*($v_gajilembur);
                         //$gaji_ot = $v_gajilembur;
@@ -249,8 +234,9 @@ class Gaji {
                         $gaji_ot=0;
                 }
         }		
-        //return round($gaji_ot);
+        
         return $gaji_ot;
+        //return $ot_spl;
     }
     public function gajiTelat() {
             //if ($this->tolate>=1 and $this->tolate <=25) {
