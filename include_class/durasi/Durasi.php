@@ -16,16 +16,21 @@ class Durasi
 	public $logika;
 	public $tolate;
 	public $tgl_ini;
+	//---------------------
+	public $emp_id;
+	public $link;
 
 
 	
-	public function setTime($vmust_in, $vmust_out, $vtime_in, $vtime_out, $vlogika, $tgl_ini) {
+	public function setTime($vmust_in, $vmust_out, $vtime_in, $vtime_out, $vlogika, $tgl_ini, $emp_id, $link) {
 		$this->must_in=$vmust_in;
 		$this->must_out=$vmust_out;	
 		$this->time_in=$vtime_in;
 		$this->time_out=$vtime_out;
 		$this->logika=$vlogika;
-		$this->tgl_ini = $tgl_ini;		
+		$this->tgl_ini = $tgl_ini;	
+		$this->emp_id = $emp_id;
+		$this->link = $link;	
 	}
 		
 	public function getEvectiveHour() {
@@ -153,6 +158,19 @@ class Durasi
 			}						
 		}
 		return $ot;		
+	}
+
+	public function getOverTimeSpkl(){
+		$query_spl = "SELECT * FROM spl WHERE date_spl = '$this->tgl_ini' AND employee_emp_id ='$this->emp_id'";
+        $rs_spl = mysqli_query($this->link, $query_spl);
+        $row_spl = mysqli_fetch_assoc($rs_spl);
+        if (empty($row_spl['overtime_value'])){
+        	$nilai = 0;
+        }else 
+        {
+        	$nilai = $row_spl['overtime_value'];
+        }
+        return $nilai;
 	}
 	
 	public function fSio()
