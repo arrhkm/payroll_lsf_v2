@@ -163,13 +163,16 @@ class Gaji {
         $rs_spl = mysqli_query($this->link, $query_spl);
         $row_spl = mysqli_fetch_assoc($rs_spl);
 
-
+        ///--------execution SPKL -----------/
+        /*
         $ot_spl = $row_spl['overtime_value'];
         if ($this->ot > $ot_spl){
             $this->ot = $ot_spl;
         }else if (empty($ot_spl)){
             $this->ot = 0;
         }
+        //-----ende execution SPKL------------/
+        */
         
         //--------end SPL------- 
 
