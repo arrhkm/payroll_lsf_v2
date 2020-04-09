@@ -69,7 +69,7 @@ Class Employee {
 		if ($rs = mysqli_query($link, $sql)){
 		
 		$row = mysqli_fetch_assoc($rs);
-		$foreman = $row['emp_name']." : ".$row['leader_id'];
+		$foreman = $row['emp_name'];//." : ".$row['leader_id'];
 		
 				return $foreman;
 		
