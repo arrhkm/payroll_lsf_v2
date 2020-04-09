@@ -159,12 +159,12 @@ class Gaji {
 
     public function gajiLembur(){
         //----------SPL---------
-        $query_spl = "SELECT * FROM spl WHERE date_spl = '$this->tgl_ini' AND employee_emp_id ='$this->emp_id'";
+        /*$query_spl = "SELECT * FROM spl WHERE date_spl = '$this->tgl_ini' AND employee_emp_id ='$this->emp_id'";
         $rs_spl = mysqli_query($this->link, $query_spl);
         $row_spl = mysqli_fetch_assoc($rs_spl);
 
         ///--------execution SPKL -----------/
-        /*
+        
         $ot_spl = $row_spl['overtime_value'];
         if ($this->ot > $ot_spl){
             $this->ot = $ot_spl;
@@ -172,10 +172,11 @@ class Gaji {
             $this->ot = 0;
         }
         //-----ende execution SPKL------------/
-        */
+        
         
         //--------end SPL------- 
-
+        */
+        
         $v_gajilembur = $this->gajiPengaliLembur();
         $today = date_create($this->tgl_ini);
         $w_day = $today->format('w');

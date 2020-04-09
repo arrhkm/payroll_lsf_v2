@@ -107,6 +107,7 @@ $row_attribut=mysqli_fetch_assoc($qry_attribut);
 			$potongan_telat2=number_format($row_posDetil['pot_tel'],2,',','.');
 			$p_safety2=number_format($row_posDetil['p_safety'],2,',','.');
 			$t_msker2=number_format($row_posDetil['t_msker'],2,',','.');
+			$t_jam12 = number_format($row_posDetil['t_jam12'], 2, ',','.');
 			$t_resiko = number_format($row_posDetil['t_resiko'],2,',','.');
 			$GT2=number_format($row_posDetil['tg'],2,',','.');
 			
@@ -137,7 +138,7 @@ $row_attribut=mysqli_fetch_assoc($qry_attribut);
 			$SUM_PT=$SUM_PT+$PT;
 			$SUM_GP=$SUM_GP+$row_posDetil['gp'];
 			$SUM_GL=$SUM_GL+$row_posDetil['gl'];
-			$SUM_TJAM12=$SUM_JAM12+$row_posDetil['t_jam12'];
+			$SUM_TJAM12=$SUM_TJAM12+$row_posDetil['t_jam12'];
 			$SUM_TMSKER=$SUM_TMSKER+$row_posDetil['t_msker'];
 			$SUM_TRESIKO=$SUM_TRESIKO+$row_posDetil['t_resiko'];
 			$SUM_P_TELAT= $SUM_P_TELAT+$row_posDetil['pot_tel'];	
@@ -229,6 +230,6 @@ $row_attribut=mysqli_fetch_assoc($qry_attribut);
 		$pdf->AddPage();		
 		}			
  //------------------
-$pdf->Output("$row_periode[nama_periode].pdf",'D');
+$pdf->Output("$row_periode[nama_periode].pdf",'I');
 
 ?>

@@ -31,14 +31,26 @@ if (!empty($_FILES["filecsv"]["tmp_name"]))
         //ini_set("auto_detect_line_endings", 1);
         $jml=0;
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {                                
-            echo $data[0]." , ".$data[1]." , ".$data[2]." , ". $data[3]."<br>";           
-            $qry_input = "REPLACE INTO absensi (tgl, emp_id, jam_in, jam_out)
-                VALUES ('$data[0]','$data[1]', '$data[2]', '$data[3]')";
+            echo $data[0]." , ".$data[1]." , ".$data[2]." , ". $data[3]."<br>";  
+            $tgl = $data[0];
+            $emp_id = $data[1];
+            $jam_in = $data[2];
+            $jam_out = $data[3];         
+            /*$qry_input = "REPLACE INTO absensi (tgl, emp_id, jam_in, jam_out)
+                VALUES ($data[0], $data[1],  $data[2], $data[3])";
             mysqli_query($link, $qry_input);            
-
+          */
             echo "--------------------------------<br>";
             $jml++;
+            if (mysqli_query($link, "REPLACE INTO absensi (tgl, emp_id, jam_in, jam_out) VALUES ('$tgl', '$emp_id', '$jam_in', '$jam_out')")){
+              echo "success";
+
+            }else { 
+              echo "Gagal";
+            }
         }
+        //mysqli_query($link, "REPLACE INTO absensi (tgl, emp_id, jam_in, jam_out) VALUES ('2020-03-30', 'POB012', '08:01:06', '24:00:00')");
+        
         fclose($handle);
 
     }

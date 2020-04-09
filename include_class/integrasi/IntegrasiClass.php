@@ -41,9 +41,7 @@ class IntegrasiClass {
         foreach ($this->log as $vlog){
            if (($vlog['id']==$this->card_id)){ //Jika id log mesin sama dengan id log employee
                 $x = $this->timestampTodate($vlog['timestamp']);// conversi log time ke date
-                //$dtime1 = $vlog['timestamp'];
-                //$dtime2 = strtotime($dtime1);// konversi log ke time
-                //$dtime3 = $this->timeInToDateTime($dtime2);
+              
                 if ($x==$this->date_integration){
                     if (strtotime($vlog['timestamp'])>=$DayStartTime && (strtotime($vlog['timestamp'])< $DayNextTime)){
                        

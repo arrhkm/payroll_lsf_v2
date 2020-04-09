@@ -172,6 +172,16 @@ class Durasi
         }
         return $nilai;
 	}
+
+	public function getOverTimeDecition(){
+		if ($this->getOverTimeSpkl() < $this->getOverTime()){
+			return $this->getOverTimeSpkl();
+
+		}elseif($this->getOverTime() < $this->getOverTimeSpkl()){
+			return $this->getOverTime();
+		}
+		else return 0;
+	}
 	
 	public function fSio()
 	{
