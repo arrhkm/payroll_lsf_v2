@@ -226,7 +226,7 @@ ddsmoothmenu.init({
 			$Emp->Gaji->setGaji(
 				$Emp->gaji_pokok, 
 				$Emp->Durasi->getEvectiveHour(),
-				$Emp->Durasi->getOverTimeDecition(),//$Emp->Durasi->getOverTime(),//$Emp->Durasi->getOverTimeSpkl(),		
+				$Emp->Durasi->getOverTimeActual(),//$Emp->Durasi->getOverTime(),//$Emp->Durasi->getOverTimeSpkl(),$Emp->getOverTimeActual		
 				$Emp->Durasi->getTolate(), 
 				$Emp->DayPeriode->logika_periode, 
 				$row_absensi['ket_absen'], 				

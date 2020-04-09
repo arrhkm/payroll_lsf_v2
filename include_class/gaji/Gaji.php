@@ -158,34 +158,14 @@ class Gaji {
 
 
     public function gajiLembur(){
-        //----------SPL---------
-        /*$query_spl = "SELECT * FROM spl WHERE date_spl = '$this->tgl_ini' AND employee_emp_id ='$this->emp_id'";
-        $rs_spl = mysqli_query($this->link, $query_spl);
-        $row_spl = mysqli_fetch_assoc($rs_spl);
-
-        ///--------execution SPKL -----------/
-        
-        $ot_spl = $row_spl['overtime_value'];
-        if ($this->ot > $ot_spl){
-            $this->ot = $ot_spl;
-        }else if (empty($ot_spl)){
-            $this->ot = 0;
-        }
-        //-----ende execution SPKL------------/
-        
-        
-        //--------end SPL------- 
-        */
-        
+               
         $v_gajilembur = $this->gajiPengaliLembur();
         $today = date_create($this->tgl_ini);
         $w_day = $today->format('w');
         $num_day = (int)$w_day;
-        /*if ($num_day = 6){
-            $gaji_ot = $num_day;
-        }*/
+       
         if ($this->logika=="libur" OR $this->logika=="minggu") {
-                $ot=$this->ot;
+                //$ot=$this->ot;
                 
                 if ($num_day == 6){//jika sabtu
                     if ($this->ot>0 && $this->ot<=5){
@@ -210,7 +190,7 @@ class Gaji {
                         $gj2=3*($v_gajilembur)*1;
                         $gaji_ot=$gj1+$gj2;
                 }
-                //elseif ($ot>=9) {
+               
                 elseif ($this->ot >=9) {
                         //$gaji_ot=4*($this->gaji/7)*$this->ot;
                         $gj1=2*($v_gajilembur)*7;
@@ -240,7 +220,7 @@ class Gaji {
         }		
         
         return $gaji_ot;
-        //return $ot_spl;
+        
     }
     public function gajiTelat() {
             //if ($this->tolate>=1 and $this->tolate <=25) {
