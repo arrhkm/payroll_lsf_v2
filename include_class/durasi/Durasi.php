@@ -173,7 +173,7 @@ class Durasi
         return $nilai;
 	}
 
-	public function getOverTimeDecition(){
+	public function getOverTimeDecition(){ //overtime dengan keputusan AI
 		if ($this->getOverTimeSpkl() < $this->getOverTime()){
 			return $this->getOverTimeSpkl();
 
@@ -181,6 +181,16 @@ class Durasi
 			return $this->getOverTime();
 		}
 		else return 0;
+	}
+
+	public function getOverTimeActual(){ //overtime dengan AKTUAL Saja
+
+		if ($this->getOverTime() > 0 ){
+			return $this->getOverTime();
+		}
+		else {
+			return 0;
+		}
 	}
 	
 	public function fSio()
