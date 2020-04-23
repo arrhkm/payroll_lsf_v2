@@ -113,7 +113,8 @@ class Durasi
 			
 			if ($logikaku=="normal") {
 				$ot=(int)$person_out[0]-(int)$office_out[0];
-				if ($ot<0){
+				//if ($ot<){
+				if ($ot<1){
 					$ot=0;
 				} 
 				else {
