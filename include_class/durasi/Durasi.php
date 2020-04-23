@@ -113,7 +113,13 @@ class Durasi
 			
 			if ($logikaku=="normal") {
 				$ot=(int)$person_out[0]-(int)$office_out[0];
-				if ($ot<0) $ot=0;
+				if ($ot<0){
+					$ot=0;
+				} 
+				else {
+					$ot = $ot-1;
+				}
+
 			}
 			elseif ($logikaku=="libur" OR $logikaku=="minggu") {
 				$today = date_create($this->tgl_ini);
