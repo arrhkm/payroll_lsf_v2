@@ -114,7 +114,7 @@ class Durasi
 			if ($logikaku=="normal") {
 				if ($person_out[0]>=18){
 					$ot=(int)$person_out[0]-(int)$office_out[0] - 1;
-				}else if ($person_out[0]<=17 && $person_out[0]>=16) {
+				}else if ($person_out[0]<=17 && $person_out[0]>16) {
 					$ot=1;
 
 				}else 
