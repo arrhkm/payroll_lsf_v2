@@ -125,7 +125,7 @@ class Durasi
 					if ($person_out[0] <= $office_out[0]+1){
 						$ot = 1;
 					}else {
-						$ot = $person_out[0] - ($office_out[0] -1);
+						$ot = $person_out[0] - ($office_out[0]+1);
 					}
 
 				}else {
