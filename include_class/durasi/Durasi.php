@@ -112,7 +112,7 @@ class Durasi
 			$so=(int)$person_out[0]-(int)$office_out[0];
 			
 			if ($logikaku=="normal") {
-				if ($person_out[0]>=18){
+				/*if ($person_out[0]>=18){
 					$ot=(int)$person_out[0]-(int)$office_out[0] - 1;
 				}else if ($person_out[0]<=17 && $person_out[0]>16) {
 					$ot=1;
@@ -120,17 +120,18 @@ class Durasi
 				}else 
 				{
 					$ot=0;
+				}*/
+				if ($person_out[0] >$office_out[0]){
+					if ($person_out[0] <= $office_out[0]+1){
+						$ot = 1;
+					}else {
+						$ot = $person_out[0] - ($office_out[0] -1);
+					}
+
+				}else {
+					$ot = 0;
 				}
-				/*
-				$ot=(int)$person_out[0]-(int)$office_out[0];
-				//if ($ot<){
-				if ($ot<1){
-					$ot=0;
-				} 
-				else {
-					$ot = $ot-1;
-				}
-				*/
+				
 			}
 			elseif ($logikaku=="libur" OR $logikaku=="minggu") {
 				$today = date_create($this->tgl_ini);
