@@ -49,6 +49,9 @@ class DayPeriode
 		elseif ($this->liburan>0) { // Jika logika hari liburan tanggal merah
 			$this->logika_periode="libur";		
 		}
+		elseif ( date("N", strtotime($this->tgl_ini)) == 5) {
+			$this->logika_periode = 'jumat';
+		}
 		elseif ( date("N", strtotime($this->tgl_ini)) == 6) {
 			$this->logika_periode="sabtu";
 		} else {		

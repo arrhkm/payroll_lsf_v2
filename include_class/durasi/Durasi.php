@@ -58,7 +58,7 @@ class Durasi
 			$office_out=(int)$hm_out_array[0];
 			
 			
-			if ($this->logika=="normal" OR $this->logika=="akhir" OR $this->logika=="sabtu") { //logika normal /akhir /sabtu
+			if ($this->logika=="normal" OR $this->logika=="jumat" OR $this->logika=="akhir" OR $this->logika=="sabtu") { //logika normal /akhir /sabtu
 				
 				$fsi=$office_in - $person_in; //SELISIH IN		
 				//var_dump($office_in);
@@ -132,6 +132,18 @@ class Durasi
 					$ot = 0;
 				}
 				
+			}
+			elseif ($logikaku=="jumat"){
+				if ($person_out[0] >$office_out[0]){
+					if ($person_out[0]>17){
+						$ot = $person_out[0]-($office_out[0]+1);
+					}else {
+                                    		$ot = $person_out[0] - ($office_out[0]);
+					}
+                                }else {
+                                       	$ot = 0;
+                                }
+
 			}
 			elseif ($logikaku=="libur" OR $logikaku=="minggu") {
 				$today = date_create($this->tgl_ini);
