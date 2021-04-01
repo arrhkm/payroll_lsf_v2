@@ -58,8 +58,8 @@ class Durasi
 			$office_out=(int)$hm_out_array[0];
 			
 			
-			if ($this->logika=="normal" OR $this->logika=="jumat" OR $this->logika=="akhir" OR $this->logika=="sabtu") { //logika normal /akhir /sabtu
-				
+			//if ($this->logika=="normal" OR $this->logika=="jumat" OR $this->logika=="akhir" OR $this->logika=="sabtu") { //logika normal /akhir /sabtu
+			if (in_array($this->logika, ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'])){	
 				$fsi=$office_in - $person_in; //SELISIH IN		
 				//var_dump($office_in);
 				//var_dump($office_out);	
@@ -92,6 +92,7 @@ class Durasi
 	
 	public function getOverTime() {
 		$logikaku=$this->logika;
+		
 		if ($this->time_in==Null OR $this->time_out == Null) {
 			$ot=0;
 		}	
@@ -101,91 +102,45 @@ class Durasi
 			$office_in= explode (":", $this->must_in);
 			$person_out= explode (":", $this->time_out);
 			$office_out= explode (":", $this->must_out);
-			
-			$sio=(int)$person_out[0]-(int)$person_in[0];
-			if ((int)$office_in[0]>(int)$person_in[0]) {
-				$si=(int)$office_in[0]-(int)$person_in[0];
-			}
-			else {
-				$si=(int)$person_in[0]-(int)$office_in[0];
-			}
-			$so=(int)$person_out[0]-(int)$office_out[0];
-			
-			if ($logikaku=="normal") {
-				/*if ($person_out[0]>=18){
-					$ot=(int)$person_out[0]-(int)$office_out[0] - 1;
-				}else if ($person_out[0]<=17 && $person_out[0]>16) {
-					$ot=1;
 
-				}else 
-				{
-					$ot=0;
-				}*/
-				if ($person_out[0] >$office_out[0]){
-					if ($person_out[0] <= $office_out[0]+1){
-						$ot = 1;
+			$p_out = (int)$person_out[0];
+			$o_out = (int)$office_out[0];
+			$o_in =  (int)$office_in[0];
+			
+			//Jika sabtu mulai lembur = 14:00:00, pulang jam 12:00:00
+			
+			if ($logikaku == 'sabtu'){
+			
+				if ($p_out > 13){
+					if ($p_out <= 18){
+						$ot = ($p_out-$o_out)-1;
 					}else {
-						$ot = $person_out[0] - ($office_out[0]+1);
+						$ot = ($p_out-$o_out)-2;
 					}
-
-				}else {
-					$ot = 0;
-				}
+				}					
 				
 			}
-			elseif ($logikaku=="jumat"){
-				if ($person_out[0] >$office_out[0]){
-					if ($person_out[0]>17){
-						$ot = $person_out[0]-($office_out[0]+1);
+			elseif ($logikaku == 'minggu'){
+				if ($p_out >12){
+					if ($p_out >=18){
+						$ot = ($p_out - $o_in) - 2;
 					}else {
-                                    		$ot = $person_out[0] - ($office_out[0]);
+						$ot = ($p_out - $o_in) -1;
 					}
-                                }else {
-                                       	$ot = 0;
-                                }
-
-			}
-			elseif ($logikaku=="libur" OR $logikaku=="minggu") {
-				$today = date_create($this->tgl_ini);
-				if($today->format('w')==6){ //Jika hari ini = 6 (harisabtu)
-					if ((int)$person_out[0]>=13) {
-						$ot=$sio-($si+1);// 1 jam istirahat jam 12:00
-						
-					}else {//lembur sampai di bawah jam 13:00
-						$ot=$sio-($si);
 									
-					}
-					if ($ot>0){
-						
-					}else {
-						$ot = 0;
-					}
 				}else {
+					$ot = $p_out - $o_in;
+				}
 				
-					if ((int)$person_out[0]>=13) {
-						$ot=$sio-($si+1);// 1 jam istirahat jam 12:00
-						if ($ot<0) $ot=0;
-					}else {//lembur sampai di bawah jam 13:00
-						$ot=$sio-($si);
-						if ($ot<0) $ot=0;				
-					}
+			}else {// Jika Normal hari biasa
+				if ($p_out >=18){
+					$ot = ($p_out-$o_out) -1;
+				}else {
+					$ot = $p_out-$o_out;
 				}
-			}
-			elseif ($logikaku=="sabtu") {
-				if ((int)$person_out[0]>=13) {
-					$ot=(int)$person_out[0]-(int)$office_out[0]-1;//(-1 = istirahat 1 jam)
-					if ($ot<0) $ot=0;
-				} else {
-					$ot=0;
-				}
-			}
-			elseif ($logikaku=="awal") {
-				$ot=(int)$person_out[0]-(int)$office_out[0];
-				if ($ot<0) $ot=0;
-			}
-			else{
-				$ot=0;
-			}						
+			}		
+			
+			
 		}
 		return $ot;		
 	}
@@ -193,13 +148,15 @@ class Durasi
 	public function getOverTimeSpkl(){
 		$query_spl = "SELECT * FROM spl WHERE date_spl = '$this->tgl_ini' AND employee_emp_id ='$this->emp_id'";
         $rs_spl = mysqli_query($this->link, $query_spl);
-        $row_spl = mysqli_fetch_assoc($rs_spl);
-        if (empty($row_spl['overtime_value'])){
-        	$nilai = 0;
-        }else 
-        {
-        	$nilai = $row_spl['overtime_value'];
-        }
+       
+		if ($rs_spl){
+			$row_spl = mysqli_fetch_assoc($rs_spl);
+			$nilai = $row_spl['overtime_value'];
+
+		}else {
+			$nilai = 0;
+		}
+		
         return $nilai;
 	}
 
@@ -269,13 +226,7 @@ class Durasi
 			else{			
 				if ((int)$person_in[0]==(int)$office_in[0]) { //Jika jam in emp = jam masuk kantor  maka diuji menit nya
 					$tolate=(int)$person_in[1]-(int)$office_in[1];				
-					/*if ($tolate>5) {
-						//$tolate=$tolate-5; //telat adalah 5 menit 
-						$tolate=$tolate-4; //Potongan telat ketika masuk 5 menit
-					}else {
-						$tolate=0;
-					}
-					*/
+					
 					if ($tolate == 6) {	//tolate in minut											
 						if ((int)$person_in[2]>=1){
 							$tolate=1;
@@ -297,12 +248,7 @@ class Durasi
 			}
 		}
 		return $tolate;
-		/*if ($tolate>=1) {
-			return $tolate;
-		} else {
-			return 0;
-		}
-		*/
+		
 	}
 }
 ?>

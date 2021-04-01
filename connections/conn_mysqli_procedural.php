@@ -1,12 +1,13 @@
 <?php
 
  $host = "localhost";
+ 
  $database = "lsf_payroll";
  $user = "lsf";
  $password = "Payrolllsf32#";
 
-/*
-$database = "lsf_payroll";
+
+/*$database = "lsf_payroll";
  $user = "superhakam";
  $password = "superhakam";
  */

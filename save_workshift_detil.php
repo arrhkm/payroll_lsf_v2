@@ -37,7 +37,8 @@ if (isset($_POST["btn_save"]))  {
 					   GetSQLValueString($_POST['id_workshift'], "int"),
                        GetSQLValueString($_POST['logika'], "text"),
 					   GetSQLValueString($_POST['office_in'], "text"),
-					   GetSQLValueString($_POST['office_out'], "text"));
+					   GetSQLValueString($_POST['office_out'], "text"),
+					   GetSQLValueString($_POST['rehat'], "text"));
                        
              
 
@@ -52,10 +53,11 @@ if (isset($_POST["btn_save"]))  {
   header(sprintf("Location: %s", $insertGoTo));
 }
 else if (isset($_POST["btn_edit"])) {
-	$updateSQL= sprintf("UPDATE workshift_detil SET logika=%s, office_in=%s, office_out=%s WHERE id_workshift=%s  AND num_day=%s", 						
+	$updateSQL= sprintf("UPDATE workshift_detil SET logika=%s, office_in=%s, office_out=%s, rehat=%s WHERE id_workshift=%s  AND num_day=%s", 						
 						GetSQLValueString($_POST['logika'], "text"),
 						GetSQLValueString($_POST['office_in'], "text"),
 						GetSQLValueString($_POST['office_out'], "text"),
+						GetSQLValueString($_POST['rehat'], "text"),
 						GetSQLValueString($_POST['id_workshift'], "int"),						
 						GetSQLValueString($_POST['num_day'], "int"));
 	

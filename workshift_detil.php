@@ -94,6 +94,10 @@ ddsmoothmenu.init({
 			  <td>office_out</td>			 
 			  <td><input name="office_out" type="text" id="office_out" value="<?php if (isset($_REQUEST['edit']) && $_REQUEST['edit']==1) echo $row_editworkshift_detil['office_out'];?>"></td>
 			</tr>
+			<tr>
+			  <td>rehat</td>			 
+			  <td><input name="rehat" type="text" id="rehat" value="<?php if (isset($_REQUEST['edit']) && $_REQUEST['edit']==1) echo $row_editworkshift_detil['rehat'];?>"></td>
+			</tr>
 			<tr>			  
 			  <td>&nbsp;</td>
 			  <td><input name ="<?php if (isset($_REQUEST['edit']) && $_REQUEST['edit']==1) echo "btn_edit"; else echo "btn_save";?>" type="submit" id="<?php if (isset($_REQUEST['edit']) && $_REQUEST['edit']==1) echo "btn_edit"; else echo "btn_save";?>" value="<?php if (isset($_REQUEST['edit']) && $_REQUEST['edit']==1) echo "btn_edit"; else echo "btn_save";?>">
@@ -101,6 +105,7 @@ ddsmoothmenu.init({
 			  
 			  </td>
 			</tr>
+			
 		  </table>
 		  <table class="bordered" width=600 align = "center">
 		  <tr align="center">
@@ -109,6 +114,7 @@ ddsmoothmenu.init({
 			<td width=50 align=center>logika</td>
 			<td align=center> office In</td>			
 			<td align=center> Office Out</td>
+			<td align=center> rehat</td>
 			<td colspan=""></td>
 		  
 		  </tr>
@@ -119,6 +125,7 @@ ddsmoothmenu.init({
 			<td align=center> <?php echo $row_rs_workshift_detil['logika'];?></td>
 			<td align=center> <?php echo $row_rs_workshift_detil['office_in'];?></td>
 			<td align=left> <?php echo $row_rs_workshift_detil['office_out'];?></td>			
+			<td align=left> <?php echo $row_rs_workshift_detil['rehat'];?></td>			
 			<td align=center> 
 				<a href="workshift_detil.php?edit=1&id_workshift=<?php echo $row_rs_workshift_detil['id_workshift'];?>&num_day=<?php echo $row_rs_workshift_detil['num_day'];?>">Edit</a> | 
 				<a href="save_workshift_detil.php?delete=1&id_workshift=<?php echo $row_rs_workshift_detil['id_workshift'];?>&num_day=<?php echo $row_rs_workshift_detil['num_day'];?>">Delete</a> 						  

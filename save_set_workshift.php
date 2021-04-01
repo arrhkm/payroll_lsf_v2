@@ -2,7 +2,7 @@
 require_once('connections/conn_mysqli_procedural.php');
 
 
-if ($_REQUEST[delete]==1) {
+if ($_REQUEST['delete']==1) {
 		$qry_del="DELETE FROM set_workshift WHERE id_workshift=$_REQUEST[id_workshift] AND emp_id='$_REQUEST[emp_id]'";
 		if (mysqli_query($link, $qry_del)){
 		header("location:set_workshift_insert.php?id_workshift=$_REQUEST[id_workshift]");
@@ -34,7 +34,7 @@ else
 		//$kd_ijam++;
 		}
 		?>
-		<meta http-equiv='refresh' content='0; url=<?php echo "set_workshift_insert.php?emp_id=".$emp_id."&id_workshift=".$_POST[id_workshift];?>'>
+		<meta http-equiv='refresh' content='0; url=<?php echo "set_workshift_insert.php?emp_id=".$emp_id."&id_workshift=".$_POST['id_workshift'];?>'>
 		<script type="text/javascript">
 			alert("Data yang terpilih berhasil ditambah..!!!");
 		</script>	

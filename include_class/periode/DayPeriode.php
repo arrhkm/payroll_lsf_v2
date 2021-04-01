@@ -43,18 +43,31 @@ class DayPeriode
 		return $this->name_of_day=$name;
 	}
 	public function logikaPeriode(){
-		if (date("N", strtotime($this->tgl_ini))==7) {// Jika Logika hari = hari Minggu
+		if ($this->liburan>0 || date("N", strtotime($this->tgl_ini))==7) { // Jika logika hari liburan tanggal merah
 			$this->logika_periode="minggu";		
 		}
-		elseif ($this->liburan>0) { // Jika logika hari liburan tanggal merah
-			$this->logika_periode="libur";		
+		/*elseif (date("N", strtotime($this->tgl_ini))==7) {// Jika Logika hari = hari Minggu
+			$this->logika_periode="minggu";		
+		}*/
+		elseif ( date("N", strtotime($this->tgl_ini)) == 1) {
+			$this->logika_periode="senin";
+		} 	
+		elseif ( date("N", strtotime($this->tgl_ini)) == 2) {
+			$this->logika_periode="selasa";
 		}
+		elseif ( date("N", strtotime($this->tgl_ini)) == 3) {
+			$this->logika_periode="rabu";
+		} 	 	
+		elseif ( date("N", strtotime($this->tgl_ini)) == 4) {
+			$this->logika_periode="kamis";
+		} 	
 		elseif ( date("N", strtotime($this->tgl_ini)) == 5) {
-			$this->logika_periode = 'jumat';
-		}
+			$this->logika_periode="jumat";
+		} 	
 		elseif ( date("N", strtotime($this->tgl_ini)) == 6) {
 			$this->logika_periode="sabtu";
-		} else {		
+		}
+		/* else {		
 			if ($this->tgl_ini == $this->awal) {
 				//$this->logika_periode="awal";
 				//update 2018
@@ -68,7 +81,7 @@ class DayPeriode
 			{
 				$this->logika_periode="normal";			
 			}
-		}
+		}*/
 	}
 }
 ?>
