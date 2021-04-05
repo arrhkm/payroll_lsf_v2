@@ -44,6 +44,17 @@ class Gaji {
 		return $date_diff->y;
     }
     
+    public function isDayOff(){
+        $query = "
+        SELECT * FROM tanggal_libur WHERE tgl_libur = '{$this->tgl_ini}' 
+        ";
+        $rs = mysqli_query($this->link, $query);
+        if ($rs->num_rows >0){
+            return TRUE;
+        }else {
+            return false;
+        }
+    }
     
     
     //-------------------------------tunjangan tidak tetap--------------------------------------------------
@@ -113,7 +124,8 @@ class Gaji {
             if ($ijin=="SK" || $ijin=="CT" || $ijin=="PD"){
                     $gp=$this->gaji;
             }else {
-                if ($this->logika == "libur") {
+                //if ($this->logika == "libur") {
+                if ($this->isDayOff()){
                     //$gp=$this->gaji;
                     if ($this->ot>0){
                         $gp = 0;

@@ -24,10 +24,24 @@ class Tunjangan {
 		
 
 	}
+
+	public function isDayOff(){
+        $query = "
+        SELECT * FROM tanggal_libur WHERE tgl_libur = '{$this->tgl_ini}' 
+        ";
+        $rs = mysqli_query($this->link, $query);
+        if ($rs->num_rows >0){
+            return TRUE;
+        }else {
+            return false;
+        }
+    }
+
 	public function getTmasakerja() {
 		if ($this->jamev>0){
 			$tmsker = $this->tarikTmasakerja();
-		}elseif($this->absen == 'CT' || $this->absen == "SK" || $this->logika=="libur"){
+		//}elseif($this->absen == 'CT' || $this->absen == "SK" || $this->logika=="libur"){
+		}elseif($this->absen == 'CT' || $this->absen == "SK" || $this->isDayOff()){
 			$tmsker = $this->tarikTmasakerja();	
 		}elseif($this->logika=="minggu") {
 			if ($this->jamot>0){
