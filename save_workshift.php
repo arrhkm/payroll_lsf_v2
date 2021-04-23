@@ -60,15 +60,15 @@ else if (isset($_POST["btn_edit"])) {
 	}
 	header(sprintf("Location:%s", $updateGoTo));
 }
-else if ($_REQUEST["delete"]==1) {
-			
+else if ($_REQUEST["delete"]==1) {	
 	$deleteSQL= sprintf("DELETE FROM workshift WHERE id_workshift=%s",
 						GetSQLValueString($_REQUEST['id_workshift'], "int"));
-	$deleteSQL2= sprintf("DELETE FROM detil_workshift WHERE id_workshift=%s",
+	$deleteSQL2= sprintf("DELETE FROM workshift_detil WHERE id_workshift=%s",
 						GetSQLValueString($_REQUEST['id_workshift'], "int"));
 	
-	$result1= mysqli_query($link, $deleteSQL);
-	$result2= mysqli_query($link, $deleteSQL2);
+  mysqli_query($link, $deleteSQL2);
+	mysqli_query($link, $deleteSQL);
+	
 	$deleteGoTo .="m_workshift.php";
 	if (isset($_SERVER['QUERY_STRING'])) {
 		$deleteGoTo .= (strpos($deleteGoTo, '?')) ? "&" : "?";

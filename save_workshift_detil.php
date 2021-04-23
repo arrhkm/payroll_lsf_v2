@@ -32,19 +32,19 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if (isset($_POST["btn_save"]))  {
-  $insertSQL = sprintf("INSERT INTO workshift_detil (num_day, id_workshift, logika, office_in, office_out) VALUES (%s, %s, %s, %s, %s)",
-                       GetSQLValueString($_POST['num_day'], "int"),
-					   GetSQLValueString($_POST['id_workshift'], "int"),
-                       GetSQLValueString($_POST['logika'], "text"),
-					   GetSQLValueString($_POST['office_in'], "text"),
-					   GetSQLValueString($_POST['office_out'], "text"),
-					   GetSQLValueString($_POST['rehat'], "text"));
+  $insertSQL = sprintf("INSERT INTO workshift_detil (num_day, id_workshift, logika, office_in, office_out, rehat)  VALUES (%s, %s, %s, %s, %s, %s)",
+          GetSQLValueString($_POST['num_day'], "int"),
+          GetSQLValueString($_POST['id_workshift'], "int"),
+          GetSQLValueString($_POST['logika'], "text"),
+          GetSQLValueString($_POST['office_in'], "text"),
+          GetSQLValueString($_POST['office_out'], "text"),
+          GetSQLValueString($_POST['rehat'], "text"));
                        
              
 
  
   mysqli_query($link, $insertSQL);
-
+  //var_dump($_POST);
   $insertGoTo = "workshift_detil.php?add=1&edit=0&id_workshift=$_POST[id_workshift]";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
